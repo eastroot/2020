@@ -1,0 +1,1426 @@
+<html lang="en" class="perfect-scrollbar-on"><!-- begin::Head --><head>
+	<meta charset="utf-8">
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>KAIT 클린 인터넷</title>
+
+
+     <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!--  Paper Dashboard core CSS    -->
+    <link href="assets/css/paper-dashboard.css" rel="stylesheet">
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet">
+
+		<link href="assets/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css">
+    <!--  Fonts and icons     -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,300" rel="stylesheet" type="text/css">
+    <link href="assets/css/themify-icons.css" rel="stylesheet">
+
+		<link href="assets/css/perfect-scrollbar.css" rel="stylesheet" type="text/css">
+		<link href="assets/vendors/custom/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css">
+		<!--<link href="assets/css/line-awesome.css" rel="stylesheet" type="text/css" />-->
+
+
+
+	<!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
+	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	
+	
+	
+	<script src="assets/js/jquery.form.min.js" type="text/javascript"></script>
+	<script src="assets/js/lib.js" type="text/javascript"></script>
+	<script src="assets/js/jquery.input.js" type="text/javascript"></script>
+	<script src="assets/js/repeater.js" type="text/javascript"></script>
+
+	<!--  Forms Validations Plugin -->
+	<script src="assets/js/jquery.validate.min.js"></script>
+
+	<!-- Sliders Plugin -->
+	<script src="assets/js/nouislider.min.js"></script>
+
+	<!-- Promise Library for SweetAlert2 working on IE -->
+	<script src="assets/js/es6-promise-auto.min.js"></script>
+
+	<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+	<script src="assets/js/moment.min.js"></script>
+
+
+	<!-- Circle Percentage-chart -->
+	<script src="assets/js/jquery.easypiechart.min.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="assets/js/chartist.min.js"></script>
+
+	<!--  Notifications Plugin    -->
+	<script src="assets/js/bootstrap-notify.js"></script>
+
+	<!-- Sweet Alert 2 plugin -->
+	<script src="assets/js/sweetalert2.js"></script>
+
+	<!-- Vector Map plugin -->
+	<script src="assets/js/jquery-jvectormap.js"></script>
+
+	<!-- Wizard Plugin    -->
+	<script src="assets/js/jquery.bootstrap.wizard.min.js"></script>
+
+	<!--  Bootstrap Table Plugin    -->
+	<script src="assets/js/bootstrap-table.js"></script>
+
+	<!--  Plugin for DataTables.net  -->
+	<script src="assets/js/jquery.datatables.js"></script>
+
+	<!--  Full Calendar Plugin    -->
+	<script src="assets/js/fullcalendar.min.js"></script>
+
+	<!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
+	<script src="assets/js/paper-dashboard.js"></script>
+
+<!-- 191109 이동근 - 메인 화면 원형 그래프 표시를 위한 demo.js 추가 -->
+	<script src="assets/js/demo.js"></script>
+	
+	<!--  Date Time Picker Plugin is included in this js file -->
+	<script src="assets/js/bootstrap-datetimepicker.js"></script>
+
+	<!--  Select Picker Plugin -->
+	<script src="assets/js/bootstrap-selectpicker.js"></script>
+
+	<!--  Switch and Tags Input Plugins -->
+	<script src="assets/js/bootstrap-switch-tags.js"></script>
+	
+	<!--datepicker-->
+  <script src="assets/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+  
+  <script type="text/javascript" src="assets/js/global.js"></script>
+  <script src="assets/vendors/custom/bootstrap-multiselect/bootstrap-multiselect.js" type="text/javascript"></script>
+  <script src="assets/js/perfect-scrollbar.js" type="text/javascript"></script>
+  
+	<script src="assets/vendors/general/js-cookie/src/js.cookie.js" type="text/javascript"></script>
+
+    <script>
+      $(document).ready(function() {
+          //App.init();
+      });
+
+      function logout() {
+          $.ajax({
+              type:"POST"
+              ,async:false
+              ,dataType:"json"
+              ,data: $("#loginForm").serialize()
+              ,url:"http://kaitclean.itbob.co.kr/login/logOut/"
+              ,success:function(args) {
+                  if (args.status == "OK")
+                  {
+                      alert(args.msg);
+                      document.location.href = "/main";
+                  }
+                  else
+                  {
+                      alert(args.msg);
+                  }
+              }
+              ,beforeSend:null
+              ,error: function(e) {
+                  alert(e.responseText);
+              }
+          });
+      }
+
+      function top_show_info(f_seq)
+      {
+          window.open('/inspect/file_slide/?f_seq='+f_seq,'_blank','height='+screen.height+', width='+screen.width+', scrollbars=yes');
+      }
+
+      function top_show_info_auto(f_seq)
+      {
+          window.open('/evidence/file_auto_slide/?f_seq='+f_seq,'_blank','height='+screen.height+', width='+screen.width+', scrollbars=yes');
+      }
+
+			/*
+			* 카테고리 조회 및 셀렉트 박스 생성 관련
+		 	*/
+
+	    //리스트에 카테고리 출력
+	    function display_category_list(data, tablelist_id)
+	    {
+	        $('#'+tablelist_id+' tbody').empty();
+	        var list_html = "";
+	        for(i=0; i<data.length; i++){
+	            list_html += "<tr>";
+	            list_html +=     " <td>"+data[i].F_NAME+"</td>";
+	            list_html +=     "<td>"+data[i].F_ORDER+"</td>";
+	            list_html +=    "<td>";
+	            list_html +=     "<button type=\"button\" class=\"btn btn-warning btn-sm\" id=\"\"  onclick=\"set_category_data('"+data[i].F_SEQ+"|" +data[i].F_NAME+"|" + data[i].F_ORDER+"|" + data[i].F_PARENT_SEQ + "')\">수정</button>";
+	            list_html +=     "<button type=\"button\" class=\"btn btn-danger btn-sm\" id=\"\"  onclick=\"delete_data('"+data[i].F_SEQ+"|" +data[i].F_NAME+"|" + data[i].F_ORDER +"|" + data[i].F_PARENT_SEQ + "')\">삭제</button>";
+	            list_html +=     "</td>";
+	            list_html +=     "</tr>";
+	        }
+	        $('#'+tablelist_id+' tbody').append(list_html);
+	    } 
+
+	    //카테고리 데이터 가져오기
+	    function get_category(f_parent_seq, f_level, selectbox_id, tablelist_id)
+	    {
+	        $.ajax({
+	            type:"POST"
+	            ,async:false
+	            ,dataType:"json"
+	            ,data: {'f_parent_seq':f_parent_seq, 'f_level':f_level, 'csrf_kait_name':'600535e4fab56f4824fe06c1968a3492'}
+	            ,url:"/Inspect_category/get_category"
+	            ,success:function(args) {
+	                if (args['status']=="OK")
+	                {
+	                    if(tablelist_id) display_category_list(args.data, tablelist_id);//점검항목관리 > 분류등록 모달에서 사용
+	                    if(selectbox_id) display_select_option(args.data, selectbox_id);
+	                    if($('#category_path').length > 0) modal_category_path(); //점검항목관리 > 분류등록 모달에서 사용
+	                }
+	                else
+	                    alert(args['msg']);
+	            }
+	            ,beforeSend:null
+	            ,error: function(e) {
+	                alert(e.responseText);
+	            }
+	        });
+	    }
+
+	    //셀렉트박스에 카테고리 옵션 설정
+	    function display_select_option(data, selectbox_id)
+	    {
+	        $('#'+selectbox_id + ' option').remove();
+	        $('#'+selectbox_id ).append("<option value='' selected='true' >선택안함</option>");
+	        for(i=0; i<data.length; i++){
+	            $('#'+selectbox_id ).append("<option value='"+data[i].F_SEQ+"'>"+data[i].F_NAME+"</option>");
+	        }
+	    }
+  
+			function set_site_select() {
+				
+	        $.ajax({
+	            type: "POST"
+	            , async: false
+	            , dataType: "json"
+	            , data: {'csrf_kait_name':'600535e4fab56f4824fe06c1968a3492'}
+	            , url: "/site/select_site"
+	            , success: function (args) {
+	                if (args['status'] == "OK") {
+	                    
+										var f_sitename = args.data;   
+										for(i=0; i<f_sitename.length;i++)
+											{ 
+											$("#f_sitename").append("<option value='"+f_sitename[i]['f_seq']+"'>"+f_sitename[i]['f_sitename']+"</option>") 
+						
+										}                    
+	                } else {
+	                    alert(args['msg']);
+	                }
+	            }
+	            , beforeSend: null
+	            , error: function (e) {
+	                alert(e.responseText);
+	            }
+	        });			
+			}
+
+      //임시 업로드 파일명에 밀리초 사용을 위한 func 2019.10.30
+      function top_addZero(x,n) {
+          while (x.toString().length < n) {
+              x = "0" + x;
+          }
+          return x;
+      }
+      function top_get_date_milisecond() {
+          var d = new Date();
+          var x = document.getElementById("demo");
+          var h = top_addZero(d.getHours(), 2);
+          var m = top_addZero(d.getMinutes(), 2);
+          var s = top_addZero(d.getSeconds(), 2);
+          var ms = top_addZero(d.getMilliseconds(), 3);
+          
+          var mm = ((d.getMonth() + 1) > 9 ? '' : '0')  + (d.getMonth() + 1);
+          var dd = ((d.getDate()) > 9 ? '' : '0')  + (d.getDate());
+          var yyyymmdd = d.getFullYear() + '' + mm + '' + dd;
+          return yyyymmdd + '' + h +''+ m +''+ s +''+ ms;
+      }
+    
+    </script>
+<style>
+	
+.sidebar .logo, .off-canvas-sidebar .logo {
+    padding: 10px 0px;
+    margin: 0;
+    box-shadow: inset -1px 0px 0px 0px #cfcfca;
+    height: 75px;
+    position: relative;
+    z-index: 4;
+    display: block;	
+  }
+	
+	.modal-dialog{
+		width: 1000px;
+	}
+	.modal-header{
+		display: flex;
+	}
+	.modal-header .close{
+		padding-right:1.25rem; padding-bottom:1.25rem; margin:-1.25rem -1.25rem -1.25rem auto;
+	}
+	.modal-content{
+		width:100%;
+	}
+	
+	/*
+	@media (min-width: 1200px) {
+	  .wrapper {
+	    min-width: 1170px;
+	    overflow: scrollbar;
+	  }
+	}
+	*/
+
+
+</style>	
+</head>
+
+<body class="k-header--fixed k-header-mobile--fixed k-aside--enabled k-aside--fixed k-aside--offcanvas-default">
+
+	<div class="wrapper">
+		
+		<div class="sidebar" data-background-color="brown" data-active-color="danger">
+	   
+			<div class="logo" style="text-align:center">
+				<a href="http://kaitclean.itbob.co.kr" class="simple-text logo-normal">
+					<img alt="Logo" src="assets/media/logos/kaitclean_logo.png">
+				</a>
+			</div>
+	    <div class="sidebar-wrapper ps ps--active-x">
+				<div class="user">
+          <div class="info">
+	          <div class="photo">
+	              <img src="assets/img/faces/face-0.jpg">
+	          </div>	                	
+						<a data-toggle="collapse" href="#collapseExample" class="collapsed">
+	           	<span style="color:#ffffff;">&nbsp;아이티밥 님<b class="caret"></b></span>
+						</a>
+						<div class="clearfix"></div>
+            <div class="collapse" id="collapseExample">
+              <ul class="nav">
+                <li>
+									<a href="javascript:void(0)" onclick="logout()">
+										<span class="sidebar-mini">-</span>
+										<span class="sidebar-normal">로그아웃</span>
+									</a>
+								</li>
+
+              </ul>
+            </div>
+         	</div>
+	      </div>
+	      <ul class="nav">
+
+          
+          
+                         
+						<li class="">
+	            <a data-toggle="collapse" href="#1">
+	              <i class="ti-bell"></i>
+	              <p>점검항목관리	                 <b class="caret"></b>
+	              </p>
+	            </a>
+	            <div class="collapse  점검항목관리" id="1">
+								<ul class="nav">
+										<li class="">
+												<a href="/inspect_category/list">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">점검항목등록관리</span>
+												</a>
+											</li>								</ul>
+							</div>
+	          </li>
+          
+          
+          
+          
+                         
+						<li class="">
+	            <a data-toggle="collapse" href="#2">
+	              <i class="ti-pencil-alt"></i>
+	              <p>점검	                 <b class="caret"></b>
+	              </p>
+	            </a>
+	            <div class="collapse  점검" id="2">
+								<ul class="nav">
+										<li class="">
+												<a href="/inspect/insert">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">점검등록</span>
+												</a>
+											</li>	<li class="">
+												<a href="/inspect/list">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">등록현황</span>
+												</a>
+											</li>								</ul>
+							</div>
+	          </li>
+          
+          
+                         
+						<li class="">
+	            <a data-toggle="collapse" href="#4">
+	              <i class="ti-eye"></i>
+	              <p>검수	                 <b class="caret"></b>
+	              </p>
+	            </a>
+	            <div class="collapse in 검수" id="4">
+								<ul class="nav">
+										<li class="active">
+												<a href="/verify/report">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">점검항목검수</span>
+												</a>
+											</li>								</ul>
+							</div>
+	          </li>
+          
+          
+          
+          
+                         
+						<li class="">
+	            <a data-toggle="collapse" href="#5">
+	              <i class="ti-pie-chart"></i>
+	              <p>통계	                 <b class="caret"></b>
+	              </p>
+	            </a>
+	            <div class="collapse  통계" id="5">
+								<ul class="nav">
+										<li class="">
+												<a href="/stat/total_present">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">종합 점검 현황</span>
+												</a>
+											</li>	<li class="">
+												<a href="/stat/total">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">사이트별 통계</span>
+												</a>
+											</li>								</ul>
+							</div>
+	          </li>
+          
+          
+                         
+						<li class="">
+	            <a data-toggle="collapse" href="#7">
+	              <i class="ti-bag"></i>
+	              <p>업체정보관리	                 <b class="caret"></b>
+	              </p>
+	            </a>
+	            <div class="collapse  업체정보관리" id="7">
+								<ul class="nav">
+										<li class="">
+												<a href="/company/list">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">업체 리스트</span>
+												</a>
+											</li>								</ul>
+							</div>
+	          </li>
+          
+          
+          
+          
+                         
+						<li class="">
+	            <a data-toggle="collapse" href="#8">
+	              <i class="ti-link"></i>
+	              <p>사이트 정보관리	                 <b class="caret"></b>
+	              </p>
+	            </a>
+	            <div class="collapse  사이트 정보관리" id="8">
+								<ul class="nav">
+										<li class="">
+												<a href="/site/site_list">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">사이트 등록관리</span>
+												</a>
+											</li>	<li class="">
+												<a href="/site/bj_list">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">BJ 등록관리</span>
+												</a>
+											</li>								</ul>
+							</div>
+	          </li>
+          
+          
+          
+          
+                         
+						<li class="">
+	            <a data-toggle="collapse" href="#10">
+	              <i class="ti-user"></i>
+	              <p>모니터링요원	                 <b class="caret"></b>
+	              </p>
+	            </a>
+	            <div class="collapse  모니터링요원" id="10">
+								<ul class="nav">
+										<li class="">
+												<a href="/member/list">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">요원 목록</span>
+												</a>
+											</li>	<li class="">
+												<a href="/member/task_stat">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">요원별 업무 현황</span>
+												</a>
+											</li>								</ul>
+							</div>
+	          </li>
+          
+          
+                         
+						<li class="">
+	            <a data-toggle="collapse" href="#12">
+	              <i class="ti-bell"></i>
+	              <p>공지사항	                 <b class="caret"></b>
+	              </p>
+	            </a>
+	            <div class="collapse  공지사항" id="12">
+								<ul class="nav">
+										<li class="">
+												<a href="/bbs/list">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">공지사항 목록</span>
+												</a>
+											</li>								</ul>
+							</div>
+	          </li>
+	        </ul>
+	    	<div class="ps__rail-x" style="width: 260px; left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 259px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+	    </div>
+
+<script type="text/javascript">
+    $(function () {
+    	get_category(null,1,'f_seq_code1','f_seq_code1');
+	
+        $('#f_start_evidence').datepicker({
+            autoclose: true,
+            format : 'yyyymmdd',
+            language: "kr"
+        });
+
+        $('#f_end_evidence').datepicker({
+            autoclose: true,
+            format : 'yyyymmdd',
+            language: "kr"
+        });
+
+        $('#f_all_check').click(function(){
+            $(":checkbox").prop('checked',$("#f_all_check").is(":checked"));
+        });
+
+      
+        $('#k_content').css('visibility','visible');
+
+        //수정으로 리로딩시 수정항목의 위치로 이동
+        if($('#scroll_pos').val()){
+            $("#sidebar_contents").scrollTop($('#scroll_pos').val());
+            $('#scroll_pos').val('');
+        }
+
+        // 스크롤 수정
+        $('#sidebar_contents').scroll(function() {
+            if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+                $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+            }
+        });
+
+    });
+
+    
+    function show_image(f_seq, f_order, obj)
+    {
+        $.ajax({
+            type:"POST"
+            ,async:false
+            ,dataType:"text"
+            ,data: { "f_seq" : f_seq, "f_order"  : f_order}
+            ,url:"/evidence/file_slide/"
+            ,success:function(args) {
+                $("#viewImage").html(args);
+                $("#drag_div").draggable();
+                $("#drag_div").resizable();
+            }
+            ,beforeSend:null
+            ,error: function(e) {
+                alert(e.responseText);
+            }
+        });
+    }
+
+    function div_close()
+    {
+        $("#drag_div").hide();
+    }
+
+    function seach()
+    {
+    		$('#search_form').attr('action','');
+        $("#search_form").submit();
+        
+    }
+
+    function delete_data(f_seq)
+    {
+        $.ajax({
+            type:"POST"
+            ,async:false
+            ,dataType:"json"
+            ,data: { "f_seq" : f_seq}
+            ,url:"/evidence/delete/"
+            ,success:function(args) {
+                if (args.status == "OK")
+                {
+                    alert(args.msg);
+                    self.location.reload();
+                }
+                else
+                {
+                    alert(args.msg);
+                }
+            }
+            ,beforeSend:null
+            ,error: function(e) {
+                alert(e.responseText);
+            }
+        });
+    }
+
+    function show_image(f_seq, f_order, obj)
+    {
+        $.ajax({
+            type:"POST"
+            ,async:false
+            ,dataType:"text"
+            ,data: { "f_seq" : f_seq, "f_order"  : f_order}
+            ,url:"/evidence/file_slide/"
+            ,success:function(args) {
+                $("#viewImage").html(args);
+                $("#drag_div").draggable();
+                $("#drag_div").resizable();
+            }
+            ,beforeSend:null
+            ,error: function(e) {
+                alert(e.responseText);
+            }
+        });
+    }
+
+    function check_delete()
+    {
+        if( $(":checkbox[name='f_seq[]']:checked").length==0 ){
+            alert("삭제할 항목을 체크해주세요.");
+            return;
+        }
+
+        $.ajax({
+            type:"POST"
+            ,async:false
+            ,dataType:"json"
+            ,data: $("#delete_form").serialize()
+            ,url:"/evidence/check_delete/"
+            ,success:function(args) {
+                if (args.status == "OK")
+                {
+                    alert(args.msg);
+                    self.location.reload();
+                }
+                else
+                {
+                    alert(args.msg);
+                }
+            }
+            ,beforeSend:null
+            ,error: function(e) {
+                alert(e.responseText);
+            }
+        });
+    }
+
+    
+    function change_image(f_filepath)
+    {
+        
+        $("#content_sshot").css("width", "100%");
+        $("#content_sshot").css("height", "800px");
+        $("#content_sshot").prop("src", f_filepath);
+    }
+
+
+    function deleteData(f_seq, F_INSPECT_STATUS){
+        if(!confirm("삭제하시겠습니까?")){
+            return;
+        }
+
+        $.ajax({
+            type:"POST"
+            ,async:false
+            ,dataType:"json"
+            ,data: { "f_seq" : f_seq, "F_INSPECT_STATUS" : F_INSPECT_STATUS}
+            ,url:"/pys/changeStatus/"
+            ,success:function(args) {
+                if (args.status=="OK")
+                {
+                    alert(args.msg);
+                    self.location.reload();
+                }
+                else
+                {
+                    alert(args.msg);
+                }
+            }
+            ,beforeSend:null
+            ,error: function(e) {
+                alert(e.responseText);
+            }
+        });
+    }
+
+	
+    function change_status(f_seq, f_field, F_INSPECT_STATUS)
+    {
+        var str = "";
+
+        str = status_to_str(f_field, F_INSPECT_STATUS);
+
+        if (!confirm(str + "하시겠습니까?"))
+            return;
+        $('#scroll_pos').val($("#sidebar_contents").scrollTop());
+        var f_comment = $('#f_comment_'+f_seq).val();
+
+        $.ajax({
+            type:"POST"
+            ,async:false
+            ,dataType:"json"
+            ,data: { "f_seq" : f_seq, "f_field" : f_field, "F_INSPECT_STATUS" : F_INSPECT_STATUS,"f_comment" : f_comment, "csrf_kait_name" : "600535e4fab56f4824fe06c1968a3492"}
+            ,url:"/Verify/change_status/"
+            ,success:function(args) {
+                if (args.status=="OK")
+                {
+                    alert(args.msg);
+                    var pathURL = window.location.pathname ; //부모창의 URL
+                    var pathValue = window.location.search; // 부모창의 search 값
+                    var fullPath = pathURL + pathValue;
+                    if(fullPath.indexOf('?') != -1) {
+                        window.location = fullPath + "&scroll_pos=" + $('#scroll_pos').val();
+                    }else{
+                        window.location = fullPath + "?scroll_pos=" + $('#scroll_pos').val();
+                    }
+                }
+                else
+                {
+                    alert(args.msg);
+                }
+            }
+            ,beforeSend:null
+            ,error: function(e) {
+                alert(e.responseText);
+            }
+            
+        });
+        self.location.reload();
+    }
+    
+    function tab_change(F_INSPECT_STATUS) {		
+    	
+			$("#F_INSPECT_STATUS").val(F_INSPECT_STATUS);
+    	if(F_INSPECT_STATUS==''){
+    		$('#search_form').attr('action','');
+        $("#search_form").submit();
+    	}else{
+        $("#withdraw").val(F_INSPECT_STATUS);
+        $('#search_form').attr('action','');
+        $("#search_form").submit();
+      }
+		}	
+   
+    function status_to_str(f_field, F_INSPECT_STATUS)
+    {
+        if (f_field=="F_INSPECT_STATUS" && F_INSPECT_STATUS=="S") return "미검수";
+        if (f_field=="F_INSPECT_STATUS" && F_INSPECT_STATUS=="Y") return "완료";
+        if (f_field=="F_INSPECT_STATUS" && F_INSPECT_STATUS=="R") return "반려";
+
+
+        return "";
+    }
+
+    function set_search_time(arg_gubun)
+    {
+        var tmp_time	= '';
+        if(arg_gubun == 'start'){
+            tmp_time	= $("#f_start_hour option:selected").val() + '' + $("#f_start_minute option:selected").val();
+            $('#f_start_time').val(tmp_time);
+        } else if(arg_gubun == 'end'){
+            tmp_time	= $("#f_end_hour option:selected").val() + '' + $("#f_end_minute option:selected").val();
+            $('#f_end_time').val(tmp_time);
+        }
+    }
+    function change_category(level) 
+  	{
+			
+			if(level==2) {
+			var f_seq = $("#f_seq_code1 option:selected").val();
+			get_category(f_seq, 2, "f_seq_code2", "f_seq_code2");
+			
+			} else if (level==3) {
+			var f_seq = $("#f_seq_code2 option:selected").val();
+			get_category(f_seq, 3, "f_seq_code3", "f_seq_code3");				
+			}
+			
+		}
+		function select_list_withdraw(F_INSPECT_STATUS) {
+				$('#search_form').attr('action','');
+        $("#withdraw").val(F_INSPECT_STATUS);
+        $("#search_form").submit();
+    }
+    function print_excel()
+    {
+        $('#search_form').attr('action','/Verify/excel');
+        $("#search_form").submit();
+    }
+    
+    function open_popup_insert(f_seq)
+		{
+			window.open("/inspect/insert?f_seq="+f_seq+"&open_gubun=pop&scroll_pos="+$('#sidebar_contents').scrollTop(), "popup", "width=1300, height=950, toolbar=no, menubar=no, scrollbars=yes, resizable=yes" ); 
+		}
+    
+</script>
+
+<!-- begin:: Content -->
+<div class="main-panel ps">
+    <nav class="navbar navbar-default">
+	        <div>
+					<div class="navbar-minimize">
+						<button id="minimizeSidebar" class="btn btn-fill btn-icon"><i class="ti-more-alt"></i></button>
+					</div>
+	                <div class="navbar-header" style="margin-left:0px;">
+	                    <button type="button" class="navbar-toggle">
+	                        <span class="sr-only">Toggle navigation</span>
+	                        <span class="icon-bar bar1"></span>
+	                        <span class="icon-bar bar2"></span>
+	                        <span class="icon-bar bar3"></span>
+	                    </button>
+	                    <a class="navbar-brand">&nbsp; 점검항목검수</a>
+	                </div>
+	                <div class="collapse navbar-collapse">
+											<div class="navbar-form navbar-left" style="margin-top:25px;"> 
+                                   <a href="#" class="k-content__head-breadcrumb-home"><i class="flaticon2-shelter"></i></a>
+                <span class="k-content__head-breadcrumb-separator">검수</span>
+                <a href="#" class="k-content__head-breadcrumb-link k-content__head-breadcrumb-link--active">점검항목검수 </a>
+                      </div>
+
+	                </div>
+	            </div>
+	        </nav>
+    <!-- begin:: Content Body -->
+   	<div class="content">
+        <!-- begin::검색항목 -->
+                 <div class="">
+        <form action="http://kaitclean.itbob.co.kr/verify/report" class="k-form k-form--label-right" id="search_form" method="get" accept-charset="utf-8">
+        <input type="hidden" id="withdraw" name="withdraw" value="">
+        <input type="hidden" id="F_INSPECT_STATUS" name="F_INSPECT_STATUS" value="S">
+        <input type="hidden" id="f_webhard_seq" name="f_webhard_seq" value="">
+        <input type="hidden" id="f_video_type" name="f_video_type" value="">
+        <input type="hidden" id="scroll_pos" name="scroll_pos" value="">
+
+         <div class="col-md-12">
+						<div class="card" style="margin:0px;">
+							<div class="card-content" style="padding-bottom: 0px;">
+            	<div class=" row form-group-marginless k-margin-t-20">
+                <div class="col-lg-6">
+                   
+                    <div class="input-daterange input-group" style="display: flex;" id="k_datepicker_5" data-date-format="yyyymmdd">
+                        <input type="text" class="form-control" id="f_start_evidence" name="f_start_evidence" value="" autocomplete="off" placeholder="Date Start">
+                        
+                        <div class="input-group-append">
+                                <span class="input-group-text" style="line-height: 2;"><i>……</i></span>
+                            </div>
+                        <input type="text" class="form-control" id="f_end_evidence" name="f_end_evidence" value="" autocomplete="off" placeholder="Date End">
+                       
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                	<div class="input-group" style="display: flex;">
+                        <select class="form-control" name="f_seq_code1" id="f_seq_code1" onchange="change_category(2)">
+                                    
+                        <option value="" selected="true">선택안함</option><option value="45">청소년보호</option><option value="51">유료후원아이템 결제피해 방지</option></select>&nbsp;
+                        <select class="form-control" name="f_seq_code2" id="f_seq_code2" onchange="change_category(3)">
+                                    <option value="">중분류</option>
+                        </select>&nbsp;
+                        <select class="form-control" name="f_seq_code3" id="f_seq_code3">
+                                    <option value="">소분류</option>
+                        </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class=" row form-group-marginless k-margin-t-20">
+                <div class="col-lg-6">
+                    <div class="input-group" style="display: flex;">
+                        <select class="form-control" name="f_status" id="f_status">
+                            <option value="">이행여부</option>
+                            <option value="Y">이행</option>
+                            <option value="N">미이행</option>
+                        </select> &nbsp;
+                      
+                        <select class="form-control" name="sch_field" id="sch_field">
+                            <option value="f_sitename">사이트명
+                            </option>
+                        </select> &nbsp;
+                        <input type="text" class="form-control" id="sch_val" name="sch_val" value="" placeholder="키워드를 입력하세요"> &nbsp;
+                    </div>
+                </div>
+                <div class="col-lg-6" style="display: flex;">
+                	<button type="button" class="btn btn-success" onclick="seach()">검색</button>&nbsp;
+                  <button type="button" class="btn btn-success" onclick="print_excel()">엑셀다운로드</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+        </form>
+          </div>
+        <!-- end::검색항목 -->
+    
+    <!-- end:: Content Body -->
+
+    <!-- begin:: Content Body -->
+    <div class="k-content__body	k-grid__item k-grid__item--fluid">
+                        <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+									
+									<li class="nav-item active show">
+										<a class="nav-link" data-toggle="tab" href="#k_tabs_1_1" role="tab" aria-selected="true" onclick="tab_change('S')">미검수(43)</a>
+									</li>
+									<li class="nav-item ">
+										<a class="nav-link" data-toggle="tab" href="#k_tabs_1_1" role="tab" aria-selected="false" onclick="tab_change('Y')">완료(17111)</a>
+									</li>	
+									<li class="nav-item ">
+										<a class="nav-link" data-toggle="tab" href="#k_tabs_1_1" role="tab" aria-selected="false" onclick="tab_change('R')">반려(239)</a>
+									</li>								
+								</ul>		
+               
+            <div class="col-sm-4" style="z-index:9999;">
+               <div class="card">
+	               <div class="card-content">
+                <!--begin::Portlet-->
+                <div class="k-portlet">
+                    <div class="k-portlet__body">
+                    	
+                        <div data-scroll="true" style="height: 959px; overflow: auto;" id="sidebar_contents">
+                            <div id="k_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                <div class="row" style="margin-right:0px;margin-left:0px;">
+                                    <div class="col-sm-12">
+                                    	
+                                        <!-- begin::채증정보 1 -->
+                                                                                    <div class="k-portlet">
+                                                <div class="k-portlet__head">
+                                                    <div class="k-portlet__head-label">
+                                                        <label class="k-checkbox k-checkbox--bold k-checkbox--brand" style="font-size:14px;padding-left:5px;">
+                                                            성인용품 판매점/사이트 광고                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="k-portlet__body">
+                                                    <!--begin: Datatable -->
+                                                    <table class="table table-striped- table-bordered table-checkable">
+                                                        <tbody><tr>
+                                                            <th>사이트명</th>
+                                                            <td>유튜브</td>
+                                                            <th rowspan="6" style="text-align:center;width:60px;">
+                                                                                                                                    <img style="width:50px;margin-bottom:5px; border:1px solid #e2e7eb;cursor:hand;cursor:pointer;" onclick="top_show_info('18378')" onmouseover="change_image('assets/img/sample.jpg')" src="assets/img/sample.jpg" alt="User profile picture"><br>
+                                                                                                                                </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>분류</th>
+                                                            <td>청소년보호<br>2.청소년유해정보 접근 제한 여부<br>① 청소년유해매체물이 청소년에게 노출되지 않도록 차단하고 있는가?</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>내용</th>
+                                                            <td>성인용품 판매점/사이트 광고</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검자</th>
+                                                            <td>배유정</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검일시</th>
+                                                            <td>2020-09-14 </td>
+                                                        </tr>   
+                                                       <tr>
+                                                            <th>등록일</th>
+                                                            <td>2020-09-14 18:08:17</td>
+                                                        </tr>                                                                                                             
+                                                        <tr>
+                                                            <th>이행 여부</th>
+                                                            <td>미이행</td>
+                                                        </tr>                                                        
+                                                        <tr>
+                                                            <th>전달사항</th>
+                                                            <td>
+                                                                <textarea class="form-control" id="f_comment_18378" name="f_comment_18378"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="change_status_button" colspan="6">
+                                                                <div class="form-inline">
+
+							<button class="btn btn-primary" onclick="change_status(18378,'F_INSPECT_STATUS', 'Y')">완료</button>&nbsp;
+							<button class="btn btn-primary" onclick="change_status(18378,'F_INSPECT_STATUS', 'R')">반려</button>&nbsp;
+							<button class="btn btn-success" onclick="open_popup_insert('18378')">수정</button>
+				
+                                                                </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </div>
+                                            </div>
+                                            <!-- end::채증정보 1 -->
+                                                                                        <div class="k-portlet">
+                                                <div class="k-portlet__head">
+                                                    <div class="k-portlet__head-label">
+                                                        <label class="k-checkbox k-checkbox--bold k-checkbox--brand" style="font-size:14px;padding-left:5px;">
+                                                            성인용품 판매점/사이트 광고                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="k-portlet__body">
+                                                    <!--begin: Datatable -->
+                                                    <table class="table table-striped- table-bordered table-checkable">
+                                                        <tbody><tr>
+                                                            <th>사이트명</th>
+                                                            <td>유튜브</td>
+                                                            <th rowspan="6" style="text-align:center;width:60px;">
+                                                                                                                                    <img style="width:50px;margin-bottom:5px; border:1px solid #e2e7eb;cursor:hand;cursor:pointer;" onclick="top_show_info('18379')" onmouseover="change_image('assets/img/sample.jpg')" src="assets/img/sample.jpg" alt="User profile picture"><br>
+                                                                                                                                </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>분류</th>
+                                                            <td>청소년보호<br>2.청소년유해정보 접근 제한 여부<br>① 청소년유해매체물이 청소년에게 노출되지 않도록 차단하고 있는가?</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>내용</th>
+                                                            <td>성인용품 판매점/사이트 광고</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검자</th>
+                                                            <td>배유정</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검일시</th>
+                                                            <td>2020-09-14 </td>
+                                                        </tr>   
+                                                       <tr>
+                                                            <th>등록일</th>
+                                                            <td>2020-09-14 18:08:17</td>
+                                                        </tr>                                                                                                             
+                                                        <tr>
+                                                            <th>이행 여부</th>
+                                                            <td>미이행</td>
+                                                        </tr>                                                        
+                                                        <tr>
+                                                            <th>전달사항</th>
+                                                            <td>
+                                                                <textarea class="form-control" id="f_comment_18379" name="f_comment_18379"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="change_status_button" colspan="6">
+                                                                <div class="form-inline">
+
+							<button class="btn btn-primary" onclick="change_status(18379,'F_INSPECT_STATUS', 'Y')">완료</button>&nbsp;
+							<button class="btn btn-primary" onclick="change_status(18379,'F_INSPECT_STATUS', 'R')">반려</button>&nbsp;
+							<button class="btn btn-success" onclick="open_popup_insert('18379')">수정</button>
+				
+                                                                </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </div>
+                                            </div>
+                                            <!-- end::채증정보 1 -->
+                                                                                        <div class="k-portlet">
+                                                <div class="k-portlet__head">
+                                                    <div class="k-portlet__head-label">
+                                                        <label class="k-checkbox k-checkbox--bold k-checkbox--brand" style="font-size:14px;padding-left:5px;">
+                                                            성인용품 판매점/사이트 광고                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="k-portlet__body">
+                                                    <!--begin: Datatable -->
+                                                    <table class="table table-striped- table-bordered table-checkable">
+                                                        <tbody><tr>
+                                                            <th>사이트명</th>
+                                                            <td>페이스북</td>
+                                                            <th rowspan="6" style="text-align:center;width:60px;">
+                                                                                                                                    <img style="width:50px;margin-bottom:5px; border:1px solid #e2e7eb;cursor:hand;cursor:pointer;" onclick="top_show_info('18380')" onmouseover="change_image('assets/img/sample.jpg')" src="assets/img/sample.jpg" alt="User profile picture"><br>
+                                                                                                                                        <img style="width:50px;margin-bottom:5px; border:1px solid #e2e7eb;cursor:hand;cursor:pointer;" onclick="top_show_info('18380')" onmouseover="change_image('assets/img/sample.jpg')" src="assets/img/sample.jpg" alt="User profile picture"><br>
+                                                                                                                                </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>분류</th>
+                                                            <td>청소년보호<br>2.청소년유해정보 접근 제한 여부<br>① 청소년유해매체물이 청소년에게 노출되지 않도록 차단하고 있는가?</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>내용</th>
+                                                            <td>성인용품 판매점/사이트 광고</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검자</th>
+                                                            <td>배유정</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검일시</th>
+                                                            <td>2020-09-14 </td>
+                                                        </tr>   
+                                                       <tr>
+                                                            <th>등록일</th>
+                                                            <td>2020-09-14 18:09:26</td>
+                                                        </tr>                                                                                                             
+                                                        <tr>
+                                                            <th>이행 여부</th>
+                                                            <td>미이행</td>
+                                                        </tr>                                                        
+                                                        <tr>
+                                                            <th>전달사항</th>
+                                                            <td>
+                                                                <textarea class="form-control" id="f_comment_18380" name="f_comment_18380"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="change_status_button" colspan="6">
+                                                                <div class="form-inline">
+
+							<button class="btn btn-primary" onclick="change_status(18380,'F_INSPECT_STATUS', 'Y')">완료</button>&nbsp;
+							<button class="btn btn-primary" onclick="change_status(18380,'F_INSPECT_STATUS', 'R')">반려</button>&nbsp;
+							<button class="btn btn-success" onclick="open_popup_insert('18380')">수정</button>
+				
+                                                                </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </div>
+                                            </div>
+                                            <!-- end::채증정보 1 -->
+                                                                                        <div class="k-portlet">
+                                                <div class="k-portlet__head">
+                                                    <div class="k-portlet__head-label">
+                                                        <label class="k-checkbox k-checkbox--bold k-checkbox--brand" style="font-size:14px;padding-left:5px;">
+                                                            성인용품 판매점/사이트 광고                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="k-portlet__body">
+                                                    <!--begin: Datatable -->
+                                                    <table class="table table-striped- table-bordered table-checkable">
+                                                        <tbody><tr>
+                                                            <th>사이트명</th>
+                                                            <td>페이스북</td>
+                                                            <th rowspan="6" style="text-align:center;width:60px;">
+                                                                                                                                    <img style="width:50px;margin-bottom:5px; border:1px solid #e2e7eb;cursor:hand;cursor:pointer;" onclick="top_show_info('18381')" onmouseover="change_image('assets/img/sample.jpg')" src="assets/img/sample.jpg" alt="User profile picture"><br>
+                                                                                                                                </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>분류</th>
+                                                            <td>청소년보호<br>2.청소년유해정보 접근 제한 여부<br>① 청소년유해매체물이 청소년에게 노출되지 않도록 차단하고 있는가?</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>내용</th>
+                                                            <td>성인용품 판매점/사이트 광고</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검자</th>
+                                                            <td>배유정</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검일시</th>
+                                                            <td>2020-09-14 </td>
+                                                        </tr>   
+                                                       <tr>
+                                                            <th>등록일</th>
+                                                            <td>2020-09-14 18:09:26</td>
+                                                        </tr>                                                                                                             
+                                                        <tr>
+                                                            <th>이행 여부</th>
+                                                            <td>미이행</td>
+                                                        </tr>                                                        
+                                                        <tr>
+                                                            <th>전달사항</th>
+                                                            <td>
+                                                                <textarea class="form-control" id="f_comment_18381" name="f_comment_18381"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="change_status_button" colspan="6">
+                                                                <div class="form-inline">
+
+							<button class="btn btn-primary" onclick="change_status(18381,'F_INSPECT_STATUS', 'Y')">완료</button>&nbsp;
+							<button class="btn btn-primary" onclick="change_status(18381,'F_INSPECT_STATUS', 'R')">반려</button>&nbsp;
+							<button class="btn btn-success" onclick="open_popup_insert('18381')">수정</button>
+				
+                                                                </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </div>
+                                            </div>
+                                            <!-- end::채증정보 1 -->
+                                                                                        <div class="k-portlet">
+                                                <div class="k-portlet__head">
+                                                    <div class="k-portlet__head-label">
+                                                        <label class="k-checkbox k-checkbox--bold k-checkbox--brand" style="font-size:14px;padding-left:5px;">
+                                                            (실시간방송) 기능 적용                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="k-portlet__body">
+                                                    <!--begin: Datatable -->
+                                                    <table class="table table-striped- table-bordered table-checkable">
+                                                        <tbody><tr>
+                                                            <th>사이트명</th>
+                                                            <td>아프리카TV</td>
+                                                            <th rowspan="6" style="text-align:center;width:60px;">
+                                                                                                                                    <img style="width:50px;margin-bottom:5px; border:1px solid #e2e7eb;cursor:hand;cursor:pointer;" onclick="top_show_info('18382')" onmouseover="change_image('assets/img/sample.jpg')" src="assets/img/sample.jpg" alt="User profile picture"><br>
+                                                                                                                                </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>분류</th>
+                                                            <td>청소년보호<br>4.피해상담 및 고충처리 수단 운영 여부<br>1.불법·유해정보에 대한 신고기능을 마련하고 있는가?(방송, 게시물 등)</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>내용</th>
+                                                            <td>(실시간방송) 기능 적용</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검자</th>
+                                                            <td>배유정</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>점검일시</th>
+                                                            <td>2020-09-14 </td>
+                                                        </tr>   
+                                                       <tr>
+                                                            <th>등록일</th>
+                                                            <td>2020-09-14 18:23:22</td>
+                                                        </tr>                                                                                                             
+                                                        <tr>
+                                                            <th>이행 여부</th>
+                                                            <td>이행</td>
+                                                        </tr>                                                        
+                                                        <tr>
+                                                            <th>전달사항</th>
+                                                            <td>
+                                                                <textarea class="form-control" id="f_comment_18382" name="f_comment_18382"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="change_status_button" colspan="6">
+                                                                <div class="form-inline">
+
+							<button class="btn btn-primary" onclick="change_status(18382,'F_INSPECT_STATUS', 'Y')">완료</button>&nbsp;
+							<button class="btn btn-primary" onclick="change_status(18382,'F_INSPECT_STATUS', 'R')">반려</button>&nbsp;
+							<button class="btn btn-success" onclick="open_popup_insert('18382')">수정</button>
+				
+                                                                </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </div>
+                                            </div>
+                                            <!-- end::채증정보 1 -->
+                                            
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-7 dataTables_pager">
+                                                <div class="dataTables_paginate paging_simple_numbers" id="k_table_1_paginate">
+                                                    <ul class="pagination"><li class="paginate_button page-item active"><a href="/verify/report?now_page=1&amp;f_start_evidence=&amp;f_end_evidence=&amp;sch_field=&amp;sch_val=&amp;F_INSPECT_STATUS=S&amp;f_seq_code1=&amp;f_seq_code2=&amp;f_seq_code3=&amp;f_status=" aria-controls="k_table_1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li> <li class="paginate_button page-item "><a href="/verify/report?now_page=2&amp;f_start_evidence=&amp;f_end_evidence=&amp;sch_field=&amp;sch_val=&amp;F_INSPECT_STATUS=S&amp;f_seq_code1=&amp;f_seq_code2=&amp;f_seq_code3=&amp;f_status=" aria-controls="k_table_1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li> <li class="paginate_button page-item "><a href="/verify/report?now_page=3&amp;f_start_evidence=&amp;f_end_evidence=&amp;sch_field=&amp;sch_val=&amp;F_INSPECT_STATUS=S&amp;f_seq_code1=&amp;f_seq_code2=&amp;f_seq_code3=&amp;f_status=" aria-controls="k_table_1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li> <li class="paginate_button page-item "><a href="/verify/report?now_page=4&amp;f_start_evidence=&amp;f_end_evidence=&amp;sch_field=&amp;sch_val=&amp;F_INSPECT_STATUS=S&amp;f_seq_code1=&amp;f_seq_code2=&amp;f_seq_code3=&amp;f_status=" aria-controls="k_table_1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li> <li class="paginate_button page-item "><a href="/verify/report?now_page=5&amp;f_start_evidence=&amp;f_end_evidence=&amp;sch_field=&amp;sch_val=&amp;F_INSPECT_STATUS=S&amp;f_seq_code1=&amp;f_seq_code2=&amp;f_seq_code3=&amp;f_status=" aria-controls="k_table_1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li> <li class="paginate_button page-item "><a href="/verify/report?now_page=6&amp;f_start_evidence=&amp;f_end_evidence=&amp;sch_field=&amp;sch_val=&amp;F_INSPECT_STATUS=S&amp;f_seq_code1=&amp;f_seq_code2=&amp;f_seq_code3=&amp;f_status=" aria-controls="k_table_1" data-dt-idx="6" tabindex="0" class="page-link">6</a></li> <li class="paginate_button page-item "><a href="/verify/report?now_page=7&amp;f_start_evidence=&amp;f_end_evidence=&amp;sch_field=&amp;sch_val=&amp;F_INSPECT_STATUS=S&amp;f_seq_code1=&amp;f_seq_code2=&amp;f_seq_code3=&amp;f_status=" aria-controls="k_table_1" data-dt-idx="7" tabindex="0" class="page-link">7</a></li> <li class="paginate_button page-item "><a href="/verify/report?now_page=8&amp;f_start_evidence=&amp;f_end_evidence=&amp;sch_field=&amp;sch_val=&amp;F_INSPECT_STATUS=S&amp;f_seq_code1=&amp;f_seq_code2=&amp;f_seq_code3=&amp;f_status=" aria-controls="k_table_1" data-dt-idx="8" tabindex="0" class="page-link">8</a></li> <li class="paginate_button page-item "><a href="/verify/report?now_page=9&amp;f_start_evidence=&amp;f_end_evidence=&amp;sch_field=&amp;sch_val=&amp;F_INSPECT_STATUS=S&amp;f_seq_code1=&amp;f_seq_code2=&amp;f_seq_code3=&amp;f_status=" aria-controls="k_table_1" data-dt-idx="9" tabindex="0" class="page-link">9</a></li> </ul>                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                              </div>
+                                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__t&quot;humb-x&quot;" tabindex="0" style="left: 0px; width: 0px;"></div></div>
+                            		<div class="ps__rail-y" style="top: 0px; height: 959px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 45px;"></div></div>
+                    
+                            </div>
+                            </div>
+                    </div>
+                </div>
+</div>
+</div>
+
+
+                <!--end::Portlet-->
+            </div>
+            <div class="col-lg-8">
+							<div class="card">
+	               <div class="card-content">
+                <!--begin::Portlet-->
+                <div class="k-portlet">
+                    <div class="k-portlet__body" style="height:1008px;">
+                    	
+                        <img id="content_sshot" src="">
+                      </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!--end::Portlet-->
+            </div>
+        
+
+    </div>
+    <!-- end:: Content Body -->
+  
+	
+<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+<!-- end:: Content -->
+					<!-- begin:: Footer -->
+				
+				<footer class="footer" style="background-color:#f4f3ef;">
+          <div class="container-fluid">
+						<div class="copyright pull-left" style="margin-top:0px; margin-left:250px; padding-top:0px;">
+               2019 &nbsp;©&nbsp;<a href="/main" class="k-link"> © 클린인터넷방송 기술적조치 관리시스템</a>
+            </div>
+            <div class="copyright pull-right" style="margin-top:0px; padding-top:0px;">
+               								사용가능용량 / 전체용량 : 63T / 66T            </div>
+          </div>
+	      </footer>
+					<!-- end:: Footer -->
+				<!--</div>-->
+		</div>
+		
+	
+		<!-- end:: Page -->
+
+		
+	<!-- end::웹하드검색 Modal -->						
+	
+	<!-- begin :: alert Modal -->
+	
+	<!-- end :: alert Modal -->
+	
+	<script type="text/javascript">
+    	$(document).ready(function(){
+				//demo.initOverviewDashboard(); 2019.
+				//demo.initCirclePercentage();
+
+    	});
+	</script>	
+<div class="modal fade" id="modal-webhard" tabindex="-1" role="dialog" aria-labelledby="modal-webhard-title" aria-hidden="true">
+		 <div class="content" role="document" style="max-width:900px; max-height:600px; margin:30px auto">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal-webhard-title">웹하드 검색</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="k-portlet">
+						<!--begin::Form-->
+						<form class="k-form k-form--label-right">
+							<div class="k-portlet__body">
+								<div class="k-portlet__foot" style="border-top:none;text-align:center;">
+									<div class="k-form__actions">													
+										<button type="button" class="btn btn-info" onclick="webhard_search('가')">가</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('나')">나</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('다')">다</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('라')">라</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('마')">마</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('바')">바</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('사')">사</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('아')">아</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('자')">자</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('차')">차</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('카')">카</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('타')">타</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('파')">파</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('하')">하</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!--end::Form-->
+						
+						<!--begin::List-->
+						<div class="k-scroll" data-scroll="true" style="height: 600px; overflow-y: auto; margin-top:10px;">
+							<div id="k_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+								<div class="row">
+									<div class="col-sm-12">
+										<!--begin: Datatable -->
+										<table class="table table-striped- table-bordered table-hover table-checkable">
+											<thead>
+												<tr>
+													<th>웹하드</th>
+													<th>URL</th>
+												</tr>
+											</thead>
+											<tbody id="webhard_table">
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">										
+										<button type="reset" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+									</div>
+								</div>
+							</div>	
+							<!--end::List-->				
+							
+						</div>					
+					</div>								
+				</div>
+			</div>
+		</div>
+	</div><div class="modal fade" id="modal-alert" tabindex="-1" role="dialog" aria-labelledby="modal-alert-label">
+		<div class="content" role="document" style="max-width:800px; max-height:500px; margin:30px auto">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal-alert-label">경고</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>
+						</p><div class="alert alert-danger" role="alert">
+							<div class="alert-icon"><i class="flaticon-questions-circular-button"></i></div>
+							<div class="alert-text" id="msg_alert"></div>
+						</div>
+					<p></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div></body></html>

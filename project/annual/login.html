@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="shortcut icon" type="image/x-icon" href="img/main/footer_logo_cut2.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<title>연차 관리 시스템</title>
+<link rel="stylesheet" type="text/css" href="css/general.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<title> Report.itbob.co.kr</title>
+<link rel="stylesheet" type="text/css" href="css/general.css">
+<link rel="stylesheet" type="text/css" href="css/iosbadge.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/Nestable-master/jquery.nestable.js"></script>
+<script src="js/common.js"></script>
+
+<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/demo/demo.css">
+<link rel="stylesheet" type="text/css" href="css/sub.css">
+<script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.4.1/iosbadge.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script><!-- <script src="/mlbmanage/js/mInfo/login.js"></script> -->
+<script>
+
+
+$(document).ready(function()
+{ 
+	if(getCookie("itbob_id") != "")
+	{
+		document.getElementById("f_id").value = getCookie("itbob_id");
+		document.getElementById("f_id").focus();
+		document.getElementById("f_pass").focus();
+		document.getElementById("save_id").checked = true;
+	} else {
+		document.getElementById("f_id").value = getId();
+		document.getElementById("f_pass").value = "123456";
+	}
+});
+
+function getId() {
+
+    var params = location.search.substr(location.search.indexOf("?") + 1);
+
+    return params;
+}
+
+function login()
+{
+
+	var expdate = new Date();
+	if(document.getElementById("save_id").checked == true)
+	{
+		expdate.setTime(expdate.getTime() + 1000 * 3600 * 24 * 30);
+		setCookie("itbob_id", $("#f_id").val(), expdate);
+	}
+	else
+	{
+		setCookie("itbob_id", "", expdate);	
+	}
+	
+
+	if(!$('#f_id').val()){
+		alert('아이디를 입력하세요');
+		$('#f_id').focus();
+		return false;
+	}
+
+	if(!$('#f_pass').val()){
+		alert('패스워드를 입력하세요');
+		$('#f_pass').focus();
+		return false;
+	}
+
+	if($('#f_id').val() == "employees" && $('#f_pass').val() == "123456"){
+		alert('연차 등록 페이지로 이동합니다.');
+		location.href="annual_employees.html";		
+	} else if($('#f_id').val() == "administrator" && $('#f_pass').val() == "123456"){
+		alert('관리자 페이지로 이동합니다.');
+		location.href="annual_administrator.html";  
+	}else{
+		alert('등록된 회원이 아니거나 계정이 잘못되었습니다');
+		return false;		
+	} 
+	
+}
+
+function getCookie(Name) 
+{
+	var search = Name + "="
+	if (document.cookie.length > 0) 
+	{ 
+		// 쿠키가 설정되어 있다면
+		offset = document.cookie.indexOf(search)
+		if (offset != -1) 
+		{	 
+			// 쿠키가 존재하면
+			offset += search.length
+			// set index of beginning of value
+			end = document.cookie.indexOf(";", offset)
+			// 쿠키 값의 마지막 위치 인덱스 번호 설정
+			if (end == -1)
+				end = document.cookie.length
+			return unescape(document.cookie.substring(offset, end))
+		}
+	}
+	return "";
+}
+
+
+function setCookie (name, value, expires) 
+{
+	document.cookie = name + "=" + escape (value) +"; path=/; expires=" + expires.toGMTString();
+}
+
+	
+
+
+function frmSubmit()
+{
+	
+
+	var expdate = new Date();
+	if(document.getElementById("save_id").checked == true)
+	{
+		expdate.setTime(expdate.getTime() + 1000 * 3600 * 24 * 30);
+		setCookie("itbob_id", $("#f_id").val(), expdate);
+	}
+	else
+	{
+		setCookie("itbob_id", "", expdate);	
+	}
+	
+
+	if(!$('#f_id').val()){
+		alert('아이디를 입력하세요');
+		$('#f_id').focus();
+		return false;
+	}
+
+	if(!$('#f_pass').val()){
+		alert('패스워드를 입력하세요');
+		$('#f_pass').focus();
+		return false;
+	}
+	
+	sendAjax("./php/login.php", $('#frmLogin').serialize(), "post", false);
+	
+
+	if(commonAjaxResultVal.result == "success"){
+		if(commonAjaxResultVal.level == 1){
+			alert(commonAjaxResultVal.msg);
+			location.href='/html/anuual_administrator.php';		
+		}else{
+			alert(commonAjaxResultVal.msg);
+			location.href='/html/anuual_employees.php';
+		}			
+	}else{
+		alert(commonAjaxResultVal.msg);
+		
+	}
+	
+	//console.log(commonAjaxResultVal);
+	//return;
+	//console.log("result = " + result);	
+	
+	/*
+	if(!result)
+	{
+		alert("실패");
+		self.location.reload();
+		//$('#f_userid').val("");
+		$('#f_pass').val("");
+		$('#f_pass').focus();
+	} 
+	else 
+	{
+		//alert("성공");
+		alert("로그인 되었습니다.");
+		location.href="/mlbmanage/html/anuual_employees.php";
+	}
+	*/
+
+//	$('#frmLogin').submit();
+}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+<!--            <img src="img/main/footer_logo.png" style="margin-top: 5px; margin-left: 5px;" width="190">-->
+				</div>
+		
+		<div id="container">
+			<div class="containerIn">
+				<!-- //왼쪽 네비게이션 영역 -->
+				<!-- //왼쪽 네비게이션 영역 -->				
+
+				<!--  컨텐츠영역 -->
+				<!--  컨텐츠영역 -->
+				<div id="content" style="float:none;margin:auto;width:400px;margin-top:10%;">
+					<div class="contTop">
+						<!--<div class="lnb"><strong>MLB</strong></div>-->
+						<!--<p class="topTxt">mlbyuncha.itbob.co.kr</p>-->
+						<div class="lnb"></div>
+						<p class="topTxt"></p>
+						<h3 class="contTit" align="center" style="font-size: 26px;">연차 관리 시스템</h3>
+					</div>
+					<div class="">
+						<div class="tblBorder" style="border-bottom:">
+							<form id="frmLogin" name="frmLogin" method="post" action="/mlbmanage/php/login.php">
+							<!--<input type="hidden" name="maxJuchaCode" id="maxJuchaCode" value="">-->
+							<table class="viewTbl write" summary="제목과 첨부파일을 알 수 있는 표입니다.">
+								<caption>제목,첨부파일, </caption>
+								<tbody>
+									<tr>
+										<td colspan="3" class="viewTblTit border_non_top" style="text-align:center;">
+											<input type="text" class="inputTxt" id="f_id" name="f_id" value="" style="width:90%;height:40px" placeholder="아이디">
+										</td>
+									</tr>
+									<tr>
+										<td colspan="3" class="viewTblTit border_non_top" style="text-align:center;">
+											<input type="password" class="inputTxt" id="f_pass" name="f_pass" value="" onkeyup="if(event.keyCode == 13){ frmSubmit(); }" style="width:90%;height:40px" placeholder="패스워드">
+										</td>	
+									</tr>
+								</tbody>
+							</table>
+							</form>
+						</div>
+						<div class="btnBoxR" style="text-align:left;margin-left:3%;margin: 15px;">
+							&nbsp;&nbsp;&nbsp;<input type="checkbox" name="save_id" id="save_id" value=""> ID 저장
+					    </div>
+						<div class="btnBoxR" style="text-align:center;">
+							<a href="javascript:void(0)" class="btn02" onclick="login();" style="width:82%;height:35px;font-size:18px;vertical-align: middle;">로그인</a>
+						</div>
+				</div>
+				<!-- // 컨텐츠영역 -->
+			</div>
+		</div>
+	</div>
+
+
+</div></body></html>

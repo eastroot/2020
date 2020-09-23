@@ -1,0 +1,321 @@
+<!-- begin:: top -->
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<!-- begin::Head -->
+	<head>
+		<meta charset="utf-8" />
+		<title>FKMP Total Management System</title>
+		<meta name="description" content="Latest updates and statistic charts">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<!--begin::Web font -->
+		<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+	
+
+			
+		<!--end::Web font -->
+
+		<!--begin::Page Vendors Styles -->
+		<link href="assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+
+		<!--end::Page Vendors Styles -->
+
+		<!--begin:: Global Mandatory Vendors -->
+		<link href="assets/vendors/general/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
+
+		<!--end:: Global Mandatory Vendors -->
+
+		<!--begin:: Global Optional Vendors -->
+		<link href="assets/vendors/general/tether/dist/css/tether.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/nouislider/distribute/nouislider.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/owl.carousel/distassets/owl.carousel.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/owl.carousel/distassets/owl.theme.default.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/summernote/dist/summernote.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/animate.css/animate.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/toastr/build/toastr.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/morris.js/morris.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/sweetalert2/dist/sweetalert2.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/general/socicon/css/socicon.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/custom/vendors/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/custom/vendors/flaticon/flaticon.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/custom/vendors/flaticon2/flaticon.css" rel="stylesheet" type="text/css" />
+		<link href="assets/vendors/custom/vendors/fontawesome5/css/all.min.css" rel="stylesheet" type="text/css" />
+
+		<!--end:: Global Optional Vendors -->
+
+		<!--begin::Global Theme Styles -->
+		<link href="assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
+
+		<!--end::Global Theme Styles -->
+
+		<!--begin::Layout Skins -->
+		<link href="assets/demo/default/skins/header/base/light.css" rel="stylesheet" type="text/css" />
+		<link href="assets/demo/default/skins/header/menu/light.css" rel="stylesheet" type="text/css" />
+		<link href="assets/demo/default/skins/brand/navy.css" rel="stylesheet" type="text/css" />
+		<link href="assets/demo/default/skins/aside/navy.css" rel="stylesheet" type="text/css" />
+
+		<!--end::Layout Skins -->
+		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		
+		<!-- $not defined 오류때문에 bottom 스크립트 탑으로 이동-->
+		<script src="assets/vendors/general/jquery/dist/jquery.js" type="text/javascript"></script>
+		<script src="assets/vendors/general/popper.js/dist/umd/popper.js" type="text/javascript"></script>
+		<script src="assets/vendors/general/bootstrap/distjs/bootstrap.min.js" type="text/javascript"></script>
+		<script src="assets/vendors/generaljs-cookie/srcjs.cookie.js" type="text/javascript"></script>
+		<script src="assets/vendors/general/moment/min/moment.min.js" type="text/javascript"></script>
+		<script src="assets/vendors/general/tooltip.js/dist/umd/tooltip.min.js" type="text/javascript"></script>
+		<script src="assets/vendors/general/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
+		<script src="assets/vendors/general/sticky-js/dist/sticky.min.js" type="text/javascript"></script>
+		<script src="assets/vendors/general/wnumb/wNumb.js" type="text/javascript"></script>
+		<!-- bottom 스크립트 탑으로 이동-->		
+		
+		<script type='text/javascript' src="js/popupcontroller.js?a=1"></script>
+		
+		
+		<!--기존 음실연 스크립트 따로추가-->
+		<script src="js/util/string_util.js" type="text/javascript"></script>
+		<script src="js/fkmp.comm.js" type="text/javascript"></script>
+		<script type='text/javascript' src="js/jquery.validate.min.js"></script>
+		<script type='text/javascript' src="js/jquery.form.min.js"></script>
+
+		<script type='text/javascript' src="js/ajax.comm.js"></script>		
+<style>
+	i
+	{
+		font-size:large;
+	}
+</style>
+
+	</head>
+	
+	
+	<script>
+
+	</script>
+	<!-- end::Head -->
+
+	<!-- begin::Body -->
+	<body class="">
+		
+<!-- end:: top -->		
+		
+<!--begin:: Global Mandatory Vendors -->
+	
+
+		
+		<!-- begin:: Page -->
+
+		<!-- begin:: Header Mobile -->
+		<div id="k_header_mobile" class="k-header-mobile  k-header-mobile--fixed ">
+			<div class="k-header-mobile__logo">
+				<a href="/main">
+					<!--<img alt="Logo" src="assets/media/logos/logo-6.png" />-->
+					<h1>FKMP CMS</h1>
+				</a>
+			</div>
+			<div class="k-header-mobile__toolbar">
+				<button class="k-header-mobile__toolbar-toggler k-header-mobile__toolbar-toggler--left" id="k_aside_mobile_toggler"><span></span></button>
+				<button class="k-header-mobile__toolbar-toggler" id="k_header_mobile_toggler"><span></span></button>
+				<button class="k-header-mobile__toolbar-topbar-toggler" id="k_header_mobile_topbar_toggler"><i class="flaticon-more"></i></button>
+			</div>
+		</div>
+
+		<!-- end:: Header Mobile -->
+		<div class="k-grid k-grid--hor k-grid--root">
+			<div class="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page">
+
+				<!-- begin:: Aside -->
+				<button class="k-aside-close " id="k_aside_close_btn"><i class="la la-close"></i></button>
+				<div class="k-aside  k-aside--fixed 	k-grid__item k-grid k-grid--desktop k-grid--hor-desktop" id="k_aside">
+
+					<!-- begin:: Aside -->
+					<div class="k-aside__brand	k-grid__item " id="k_aside_brand">
+						<div class="k-aside__brand-logo">
+							<a href="/main">
+								<!--<img alt="Logo" src="assets/media/logos/logo-6.png" />-->
+								<h1>FKMP CMS</h1>
+							</a>
+						</div>
+						<div class="k-aside__brand-tools">
+							<!-- <button class="k-aside__brand-aside-toggler k-aside__brand-aside-toggler--left" id="k_aside_toggler"><span></span></button> -->
+						</div>
+					</div>
+
+					<!-- end:: Aside -->
+
+
+
+					<!-- begin:: Aside Menu -->
+<div class="k-aside-menu-wrapper	k-grid__item k-grid__item--fluid" id="k_aside_menu_wrapper">
+						<div id="k_aside_menu" class="k-aside-menu k-scroll ps ps--active-y" data-kmenu-vertical="1" data-kmenu-scroll="1" data-kmenu-dropdown-timeout="500" style="height: 864px; overflow: hidden;">
+							<ul class="k-menu__nav ">
+
+<li class="k-menu__item k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-user-friends"></i>
+											<span class="k-menu__link-text">회원관리</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">회원관리</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/member/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">회원리스트</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/member_ovs/get_list_corp" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">단체및외국실연자</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/group/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">그룹리스트</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/crm/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">민원접수처리현황</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/sms/sms_birth_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">회원 생일자목록</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/transfer/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">양도/양수관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/succession/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">승계관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/seize/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">압류관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/group/group_merge_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">그룹통합</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/member/member_switch_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">회원전환</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/member/regular_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">회원분배금통계</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/stat/member_stat" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">통계관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/member/member_agree_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">조회동의서관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/person_contract/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">회원계약체결관리</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-cogs"></i>
+											<span class="k-menu__link-text">실연정보관리</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">실연정보관리</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/album/get_list?page_mode=FULL" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">앨범정보</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/album_ovs/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">해외앨범정보</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/instrument/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">악기리스트</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/realfile/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">사실확인서관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/perform/perform_history_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">실연정보 이력관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/union/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">통합/삭제 월별내역</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/album/album_union" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">앨범통합</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/information/ratio_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">관리비율조회</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/perform/establish_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">등록실연정보확인신청</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/perform_app/establish_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">등록실연정보확인신청(APP)</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/perform/request_album" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">미등록앨범실연정보신청</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/ronmusic/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">론뮤직업로드</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/ronmusic_ucix/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">론뮤직업로드-UCI없음</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/massive/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">대량등록</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/expire_album/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">만료앨범(70년)</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/perform/get_ju_err_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">주실연오류목록</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/union/log_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">통합이력관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/music_upload/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">뮤직업로드</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/music_upload_ucix/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">뮤직업로드-UCI없음</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/kmca/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">음콘협앨범관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/recording_member/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">녹음실회원관리</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-dollar-sign"></i>
+											<span class="k-menu__link-text">사용료</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">사용료</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/fee/osp/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">업체관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/fee/service/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">서비스관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/fee/contractors/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">계약업체관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/fee/fee/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">징수관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/fee/fee/log_ready" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">분배이관</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/fee/fee/copy_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">복제징수현황</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/fee/ratio/get_ratio" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">상시지분율</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/fee/brokerage/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">해외대리중개 공지</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-sitemap"></i>
+											<span class="k-menu__link-text">보상금</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">보상금</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/bosang_company/get_comp_bosang_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">업체관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/Bosang_company_contract/get_list_contract?f_bosang_type=BS" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">방송 계약관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/Bosang_company_collect/get_list?f_bosang_type=BS" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">방송 징수현황</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/Bosang_company_collect/prepare_bosang_share_price?f_bosang_type=BS" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">방송 분배이관</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/Bosang_company_contract/get_list_contract?f_bosang_type=PF" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">공연 계약관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/Bosang_company_collect/get_list?f_bosang_type=PF" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">공연 징수현황</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/Bosang_company_collect/prepare_bosang_share_price?f_bosang_type=PF" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">공연 분배이관</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/Bosang_company_contract/get_list_contract?f_bosang_type=DMS" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">디음송 계약관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/Bosang_company_collect/get_list?f_bosang_type=DMS" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">디음송 징수현황</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/reward/Bosang_company_collect/prepare_bosang_share_price?f_bosang_type=DMS" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">디음송 분배이관</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu k-menu__item--open" aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-funnel-dollar"></i>
+											<span class="k-menu__link-text">분배관리</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">분배관리</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">전송 - 분배진행</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share/get_view" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">전송 - 분배내역</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share/share_result" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">전송 - 최종결과</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_bs/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">방송 - 분배진행</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_bs/get_view" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">방송 - 분배내역</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_bs/share_result" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">방송 - 최종결과</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_pf/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">공연 - 분배진행</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_pf/get_view" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">공연 - 분배내역</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_pf/share_result" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">공연 - 최종결과</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_dms/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">디음송 - 분배진행</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_dms/get_view" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">디음송 - 분배내역</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_dms/share_result" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">디음송 - 최종결과</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share/copy_view" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">복제 - 분배내역</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/spc/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">특별분배진행</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/spc/share_result" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">특별분배결과</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_private/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">개인별분배내역</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/member/share_member_payinfo/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">회원분배금 지급관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_mibunbe_song/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">미 분배곡 관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_sogub/get_share_sogub_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">분배-과거소급(보상금)</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_personal/get_share_personal_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">개인별 통합분배내역</span></a></li><li class="k-menu__item k-menu__item--active" aria-haspopup="true"><a href="/share/share_sogub/get_share_sogub_month_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">분배-월별정기소급</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/share/share_sintak_result/get_share_sintak_result" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">분배-정산결과검색</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu " aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-comment-dollar"></i>
+											<span class="k-menu__link-text">회계</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">회계</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/accounting/wonchun/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">원천징수관리</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu " aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-cog"></i>
+											<span class="k-menu__link-text">관리</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">관리</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/manager/admin/manager_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">계정관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/manager/file_download_hist/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">파일다운로드 내역</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu " aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-chalkboard-teacher"></i>
+											<span class="k-menu__link-text">기획법무</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">기획법무</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/law/examine/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">계약검토관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/law/incident/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">나의사건관리</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu " aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-laptop"></i>
+											<span class="k-menu__link-text">SITE</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">SITE</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/bbs/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">게시판관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/bbs/faq_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">질문관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/popup/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">팝업관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/news/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">소식지관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/history/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">연혁</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/history/member_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">역대임원</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/information/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">회원개인정보변경신청</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/information/consent_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">개인정보 수집관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/memship/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">입회신청NEW</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/reference/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">자료실관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/biztalk/biztalk/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">비즈톡</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/site/information/organization_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">관련기관관리</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu " aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-handshake"></i>
+											<span class="k-menu__link-text">제작사 관리</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">제작사 관리</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/api_company/api_bbs/get_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">제작사 공지사항</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/api_company/api_member/company_info" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">제작사 리스트</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/album/api_album_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">승인 리스트</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/album/request_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">앨범 수정요청 리스트</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/api_company/api_perform/get_bunbae_price" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">분배금 조회 신청</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu " aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-sitemap"></i>
+											<span class="k-menu__link-text">DNA등록관리</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">DNA등록관리</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/dna/reg_present" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">DNA 등록현황</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/dna/reg_massive" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">DNA 대량등록</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/dna2/reg_massive2" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">DNA 대량등록(기등록곡)</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/dna/reg_history" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">대량등록 이력보기</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/perform/dna/reg_verify" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">권리정보검증</span></a></li></ul></div></li><li class="k-menu__item k-menu__item--submenu " aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+										<a href="javascript:;" class="k-menu__link k-menu__toggle">
+											<i class="k-menu__link-icon fa fa-sliders-h"></i>
+											<span class="k-menu__link-text">UCI 매칭관리</span>
+											<i class="k-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+											<ul class="k-menu__subnav">
+												<li class="k-menu__item k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">UCI 매칭관리</span></span></li><li class="k-menu__item " aria-haspopup="true"><a href="/uci/uci/get_uci_sendrecv_status" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">송수신현황</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/uci/uci/get_uci_match_status" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">매칭현황</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/uci/uci/get_uci_match_modify" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">매칭수정관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/uci/uci/get_uci_match_history" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">매칭이력관리</span></a></li><li class="k-menu__item " aria-haspopup="true"><a href="/uci/uci/get_uci_mematch_song_list" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">UCI미매칭 곡</span></a></li></ul></div></li>					
+							
+								
+							</ul>
+						<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 864px; right: 2px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 300px;"></div></div></div>
+					</div>
+
+					<!-- end:: Aside Menu -->
+
+					<!-- begin:: Aside -->
+
+					<!-- end:: Aside -->
+				</div>
+
+				<!-- end:: Aside -->
+				<div class="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper" id="k_wrapper">
+
+					<!-- begin:: Header -->
+
+
+					<!-- end:: Header -->
+
+
+
+
+					<!-- begin:: Content -->
+					<div class="k-content	k-grid__item k-grid__item--fluid k-grid k-grid--hor" id="k_content">
+
+						<!-- begin:: Content Head -->
+						<div class="k-content__head	k-grid__item">
+							<div class="k-content__head-main">
+								<h3 class="k-content__head-title"></h3>
+								<div class="k-content__head-breadcrumbs">
+									<a href="#" class="k-content__head-breadcrumb-home"><i class="flaticon2-shelter"></i></a>
+									<span class="k-content__head-breadcrumb-separator"></span>
+									<a href="" class="k-content__head-breadcrumb-link"></a>
+									<span class="k-content__head-breadcrumb-separator"></span>
+									<a href="" class="k-content__head-breadcrumb-link"></a>
+
+									<!-- <span class="k-content__head-breadcrumb-link k-content__head-breadcrumb-link--active">Active link</span> -->
+								</div>
+							</div>
+							<div class="k-content__head-toolbar">
+								<div class="k-content__head-wrapper">
+									<div class="dropdown dropdown-inline k-hide" data-toggle="k-tooltip" title="Quick actions" data-placement="left">
+										<button type="button" class="btn btn-sm btn-elevate btn-danger btn-bold btn-upper dropdown-toggle-" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											New
+										</button>
+										<div class="dropdown-menu dropdown-menu-right">
+											<a class="dropdown-item" href="#"><i class="la la-plus"></i> New Report</a>
+											<a class="dropdown-item" href="#"><i class="la la-user"></i> Add Customer</a>
+											<a class="dropdown-item" href="#"><i class="la la-cloud-download"></i> New Download</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="#"><i class="la la-cog"></i> Settings</a>
+										</div>
+									</div>
+									<a href="/login/auth/logout" class="btn btn-sm btn-elevate btn-brand" data-placement="left">이동근 님 로그아웃</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- end:: Content Head -->

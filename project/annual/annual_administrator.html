@@ -1,0 +1,1097 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<link rel="shortcut icon" type="image/x-icon" href="img/main/footer_logo_cut2.ico">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="stylesheet" type="text/css" href="css/general.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<title>연차 관리 시스템</title>
+
+<style type="text/css">
+	
+	#applyLayerPop{width:380px; height:475px; position:absolute; padding:10px; border:4px solid #eee; background:#fff; display:none; z-index:100;}
+	#applyLayerPop .close{position:absolute; bottom:5px;right:5px;}
+	
+	#passwordLayerPop{width:300px; height:213px; position:absolute; padding:10px; border:4px solid #eee; background:#fff; display:none; z-index:100;}
+	#passwordLayerPop .close{position:absolute; bottom:5px;right:5px;}
+	
+	#deemed{width:100%; height:100%; position:absolute; top:0; left:0; filter:Alpha(opacity=50);opacity:0.5; background:#000; z-index:1;}
+	#deemed1{width:100%; height:100%; position:absolute; top:0; left:0; filter:Alpha(opacity=50);opacity:0; background:#ffffff; z-index:1;}
+	
+</style>
+	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<title> Report.itbob.co.kr</title>
+<link rel="stylesheet" type="text/css" href="css/general.css">
+<link rel="stylesheet" type="text/css" href="css/iosbadge.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/Nestable-master/jquery.nestable.js"></script>
+<script src="js/common.js"></script>
+
+<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/demo/demo.css">
+<link rel="stylesheet" type="text/css" href="http://al.itbob.co.kr//css/sub.css">
+<script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.4.1/iosbadge.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>	
+	<!--<script src="/js/mInfo/login.js"></script>-->
+	
+	<script type="text/javascript">
+<!--
+//Element ID 불러쓰기
+
+/*
+$(document).ready(function(){
+	
+	openLayer('layerPop',200,500);	
+	
+	$('#button').prop("disabled", true);
+	
+    $("#checkBoxId").change(function(){
+        if($("#checkBoxId").is(":checked")){
+			$('#button').prop("disabled", false);
+            alert("동의합니다.");
+        }else{
+			$('#button').prop("disabled", true);
+            alert("동의하지 않습니다.");
+			
+        }
+    });
+	
+});
+*/
+	$(document).ready(function(){
+		
+
+        $("#example-table-1 tr").click(function(){   	
+		
+			//alert(111);
+			
+			var str = ""
+            var tdArr = new Array();    // 배열 선언
+            
+            // 현재 클릭된 Row(<tr>)
+            var tr = $(this);
+            var td = tr.children();
+            
+            // tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
+            //console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+			
+            // 반복문을 이용해서 배열에 값을 담아 사용할 수 도 있다.
+            td.each(function(i){
+                tdArr.push(td.eq(i).text());
+            });
+            
+            f_seq = td.eq(0).text();
+			//getAnnual(process_gubun);
+			openApplyLayer('applyLayerPop',100,400,'select');
+			//getAnnual(process_gubun);
+		
+        });
+
+
+		
+	});
+	
+	
+		//엑셀다운로드
+	function makeExcel(){
+
+
+		if(!$('#txtSqlExcelDown').val()){
+			alert("파일생성을 위한 필수 값이 없습니다. 확인 후 다시 시도해 주세요."); return;
+		} else {
+			var sendData	= "&txtSqlExcelDown="+$('#txtSqlExcelDown').val();
+		}
+			var confirmMsg	= "검색결과를 엑셀파일로 다운로드 하시겠습니까?";
+			
+		if(!confirm(confirmMsg)) return;			
+		
+		sendAjax("../php/make_excel.php",sendData, "post", false);
+			if(commonAjaxResultVal.result	==	"success"){
+			for(i=0; i < commonAjaxResultVal.data.length; i++){
+		// 다운로드용 iframe 생성
+		    var iframe = $('<iframe src="../php/download_file.php?filePath='+commonAjaxResultVal.data[i]+'" name="download_file" style="display:none;"></iframe>');
+		    $('body').append(iframe);
+	    
+			iframe.load(function(){
+			var doc = this.contentWindow ? this.contentWindow.document : (this.contentDocument ? this.contentDocument : this.document);
+	        var root = doc.documentElement ? doc.documentElement : doc.body;
+	        var result = root.textContent ? root.textContent : root.innerText;
+	        callback(result);
+		// 전송처리 완료 후 생성했던 iframe 제거
+	        iframe.remove();
+	    });
+		}			
+		} else {
+			alert(commonAjaxResultVal.msg); return;
+		}
+	}
+	
+	
+	
+
+	function dEI(elementID){
+		return document.getElementById(elementID);
+	}
+
+
+//연차승인레이어 팝업 열기
+function openApplyLayer(IdName, tpos, lpos, process_gubun){
+	
+	getAnnual('select');
+	
+	var pop = dEI(IdName);
+	pop.style.top = tpos + "px";
+	pop.style.left = lpos + "px";
+	pop.style.display = "block";
+
+	var wrap = dEI("wrapper");
+	var reservation = document.createElement("div");
+	reservation.setAttribute("id", "deemed1");
+	wrap.appendChild(reservation);
+	
+	
+	
+}
+
+//연차승인레이어 팝엽 닫기
+function closeApplyLayer( IdName ){
+	window.location.reload();
+	
+	/*
+	var pop = dEI(IdName);
+	pop.style.display = "none";
+	var clearEl=parent.dEI("deemed1");
+	var momEl = parent.dEI("wrapper");
+	momEl.removeChild(clearEl);
+	*/
+	
+}
+
+function searchAnnual(){
+	
+	$('#searchForm').submit();
+
+}
+
+	//연차 신청 조회
+function getAnnual(process_gubun){
+	
+	
+	//alert(f_seq);
+
+		
+	$("#process_gubun").val(process_gubun);
+		
+
+	var sendData = $('#applyform').serialize();
+		
+	
+	sendData += '&f_seq='+f_seq;
+		
+
+	//if(!confirm("해당 연차 신청 정보를 조회 합니다.")) return;
+	//commonAjaxResultVal에 리턴값 셋팅됨.
+		
+	sendAjax("../php/applyAnnual.php", sendData, "post", false);
+	
+
+		
+	if(commonAjaxResultVal.test.F_VC_GUBUN == 'H'){
+		
+		//alert("반차"+commonAjaxResultVal.test.F_VC_GUBUN);	
+		$("input:radio[name ='f_vc_gubun']:input[value='H']").attr({ checked: "true", disabled: "true"});
+		$("input:radio[name ='f_vc_gubun']:input[value='F']").attr("disabled", true);
+		
+	}else if(commonAjaxResultVal.test.F_VC_GUBUN == 'F'){
+		
+		//alert("연차"+commonAjaxResultVal.test.F_VC_GUBUN);
+		$("input:radio[name ='f_vc_gubun']:input[value='F']").attr({ checked: "true", disabled: "true"});
+		$("input:radio[name ='f_vc_gubun']:input[value='H']").attr("disabled", true);
+		
+	}
+		
+		
+	//console.log(commonAjaxResultVal.test.F_VC_GUBUN);
+	//document.getElementById("f_vc_gubun")($N).checked;
+	$("#f_vc_stadate").val(commonAjaxResultVal.test.F_VC_STADATE).attr("disabled", true);
+		
+	$("#f_vc_enddate").val(commonAjaxResultVal.test.F_VC_ENDDATE).attr("disabled", true);
+	
+	var f_vc_days = commonAjaxResultVal.test.F_VC_DAYS;
+	
+	var f_vc_days_float = parseFloat(f_vc_days);
+	
+	$("#f_vc_days").val(f_vc_days_float).attr("disabled", true);	
+		
+	$("#f_sayu").val(commonAjaxResultVal.test.F_VC_SAYU).attr("disabled", true);
+		
+	$("#f_id_support").val(commonAjaxResultVal.test.F_ID_SUPPORT).attr("disabled", true);
+	
+	if(commonAjaxResultVal.test.F_STATUS == 'R' || commonAjaxResultVal.test.F_STATUS == 'Y'){
+		
+		$("#f_vc_reject_sayu").val(commonAjaxResultVal.test.F_VC_REJECT_SAYU).attr("disabled", true);
+	}else{
+		
+		$("#f_vc_reject_sayu").val(commonAjaxResultVal.test.F_VC_REJECT_SAYU);
+	}
+	
+	
+	
+	//var f_name_check = commonAjaxResultVal.test.F_NAME);
+	
+	//연차 승인 후 해당 직원에게 메일 보내기 위한 필수 값 세팅
+	$("#f_id_req_check").val(commonAjaxResultVal.test.F_ID_REQ); //직원아이디
+	
+	$("#f_name_check").val(commonAjaxResultVal.test.F_NAME); //직원이름
+	
+	$("#f_reqdate_check").val(commonAjaxResultVal.test.F_REQDATE); //연차신청일
+	
+	$("#f_vc_stadate_check").val(commonAjaxResultVal.test.F_VC_STADATE); //연차시작일
+	
+	$("#f_vc_enddate_check").val(commonAjaxResultVal.test.F_VC_ENDDATE); //연차종료일
+	
+	$("#f_vc_days_check").val(commonAjaxResultVal.test.F_VC_DAYS); //연차시작일-연차종료일=사용일수
+	
+	$("#f_remain_days_check").val(commonAjaxResultVal.test.F_VC_REMAIN_DAYS); //남은일수
+	
+	$("#f_vc_gubun_check").val(commonAjaxResultVal.test.F_VC_GUBUN); //연차 반차 구분
+	
+	
+	console.log(commonAjaxResultVal.test);
+		
+	if(commonAjaxResultVal.test.F_STATUS != 'S'){
+			
+		$('#edit, #delete').toggle(false);
+			
+	}
+	
+
+	
+	if(commonAjaxResultVal.test.F_STATUS == 'R' || commonAjaxResultVal.test.F_STATUS == 'Y'){
+		
+		//$('#applyAcknowledgment, #applyAcknowledgmentDecline').toggle(false);
+		$('#applyAcknowledgmentTr, #applyAcknowledgmentDeclineTr').css("display","none");
+	}
+	//alert(1111111);
+		
+		//$("#f_vc_reject_sayu").val(commonAjaxResultVal.test.F_VC_REJECT_SAYU);
+		
+		/*
+		if(commonAjaxResultVal.result == "success"){	
+		
+			console.log(commonAjaxResultVal.test);
+			window.location.reload();
+		
+		} else {
+		
+			alert(commonAjaxResultVal.msg);
+			return;
+		}
+		*/
+	if(commonAjaxResultVal.test.F_STATUS == 'S'){
+		
+		//applyAcknowledgment2('C');
+				$('#process_gubun').val('C');
+		
+
+	
+		var sendData = $('#applyform').serialize();
+		
+		var msg = "";
+		
+		sendData += '&f_seq='+f_seq;
+		
+		
+
+		//commonAjaxResultVal에 리턴값 셋팅됨.
+		
+		sendAjax("../php/applyAcknowledgment.php", sendData, "post", true);
+	}
+
+
+}
+
+//승인하기
+function applyAcknowledgmentFunc(process_gubun){
+	
+		//alert(111);
+	
+		$('#process_gubun').val(process_gubun);
+		
+
+	
+		var sendData = $('#applyform').serialize();
+		
+		var msg = "";
+		
+		sendData += '&f_seq='+f_seq;
+		
+		if(process_gubun == 'Y'){
+			
+			msg="승인하시겠습니까?";
+			
+		if(!confirm(msg)) return;
+		//commonAjaxResultVal에 리턴값 셋팅됨.
+
+		sendAjax("../php/applyAcknowledgment.php", sendData, "post", false);
+
+		if(commonAjaxResultVal.result == "success"){
+
+			alert(commonAjaxResultVal.msg);
+			
+			sendmail_acknowledgment();
+			
+			window.location.reload();
+
+		} else {
+
+			alert(commonAjaxResultVal.msg);
+			return;
+		}
+
+		}else{
+			
+			msg="승인 거절 하시겠습니까?";
+			
+		if(!confirm(msg)) return;
+		//commonAjaxResultVal에 리턴값 셋팅됨.
+
+		sendAjax("../php/applyAcknowledgment.php", sendData, "post", false);
+
+		if(commonAjaxResultVal.result == "success"){
+
+			alert(commonAjaxResultVal.msg);
+			
+			sendmail_refuse();
+			
+			window.location.reload();
+
+		} else {
+
+			alert(commonAjaxResultVal.msg);
+			return;
+		}
+
+		}
+		
+
+	
+}
+
+//연차 승인 후 해당 직원에게 메일 발송
+function sendmail_acknowledgment(){
+
+
+    //var thisform = document.applyform;
+
+    var sendData = $('#applyform').serialize();
+
+    sendAjax("../php/sendmail_acknowledgment.php", sendData, "post", false);
+
+
+
+}
+
+
+//연차 거절 후 해당 직원에게 메일 발송
+function sendmail_refuse(){
+
+
+    //var thisform = document.applyform;
+
+    var sendData = $('#applyform').serialize();
+
+    sendAjax("../php/sendmail_refuse.php", sendData, "post", false);
+
+
+
+
+}
+
+//비밀번호 변경 팝업 열기
+function openPasswordLayer(IdName, tpos, lpos, process_gubun){
+	
+	
+	//alert( IdName + ":" + tpos + ":" + lpos + ":" + process_gubun ); //passwordLayerPop:100:500:pass
+	
+	var pop = dEI(IdName);
+	
+	//alert(pop);
+	pop.style.top = tpos + "px";
+	pop.style.left = lpos + "px";
+	pop.style.display = "block";
+
+	var wrap = dEI("wrapper"); //null
+	//alert(wrap);
+	var reservation = document.createElement("div");
+	//alert(reservation);
+	reservation.setAttribute("id", "deemed1");
+	wrap.appendChild(reservation);
+	
+}
+
+	function isNull(elm){ 
+        //Null 체크 함수
+        var elm;
+        return (elm == null || elm == "" || elm == "undefined" || elm == " ") ? true : false
+	}
+
+function editPassword(process_gubun){
+		
+		
+		
+		var thisform = document.passwordform;
+		
+		if(isNull(thisform.f_pass.value)){
+			
+			alert("현재 비밀번호를 입력해주세요.");
+            thisform.f_pass.value ="";
+            thisform.f_pass.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_pass_new.value)){
+			
+			alert("새 비밀번호를 입력해주세요.");
+            thisform.f_pass_new.value ="";
+            thisform.f_pass_new.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_pass_new_final.value)){
+			
+			alert("새 비밀번호 확인을 입력해주세요");
+            thisform.f_pass_new_final.value ="";
+            thisform.f_pass_new_final.focus();
+            return false;
+		
+		}
+		
+		
+	
+		var f_pass = $("#f_pass").val();
+		
+        var pw = $("#f_pass_new").val();
+        var pwck = $("#f_pass_new_final").val();
+ 
+		//새 비밀번호와 새 비밀번호 확인의 값이 같은지 확인
+        if (pw != pwck) {
+			
+			alert("새 비밀번호가 서로 일치 하지 않습니다.");
+            return;
+        }
+		
+		//현재 비밀번호 및 새 비밀번호 입력 여부 체크
+		if(typeof f_pass == "undefined" || f_pass == null || f_pass == ""){
+			
+			alert("현재 비밀번호를 입력해주세요.");
+			return;
+		}
+		
+
+		if(!confirm("비밀번호 변경하시겠습니까?")) return;
+		
+		//commonAjaxResultVal에 리턴값 셋팅됨.
+		
+		$("#process_gubun").val(process_gubun);
+		
+		
+		var sendData = $('#passwordform').serialize();
+		
+		sendData += '&f_id='+"manager";
+		
+		sendAjax("/php/password.php", sendData, "post", false);
+		
+		//console.log(commonAjaxResultVal.result);
+		if(commonAjaxResultVal.result == "success"){
+			alert(commonAjaxResultVal.msg);
+			location.href="../php/logout.php";
+			//location.href='/php/logout.php';
+		} else {
+			
+			alert(commonAjaxResultVal.msg);
+			return;
+			
+		}
+
+	}
+
+ 
+
+</script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script> 
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+</head>
+<body>
+
+<div>
+	<!-- deemed 직원 연차 조회 팝업 레이어 -->
+	<div id="applyLayerPop">
+	<form name="applyform" id="applyform" method="post" action="/mlbmanage/php/applyAcknowledgment.php">
+	<input type="text" name="process_gubun" id="process_gubun" value="" hidden="">
+	<input type="text" name="f_id_req_check" id="f_id_req_check" value="" size="3" hidden=""><input type="text" name="f_name_check" id="f_name_check" value="" size="3" hidden=""><input type="text" name="f_reqdate_check" id="f_reqdate_check" value="" size="3" hidden=""><input type="text" name="f_vc_stadate_check" id="f_vc_stadate_check" value="" size="3" hidden=""><input type="text" name="f_vc_enddate_check" id="f_vc_enddate_check" value="" size="3" hidden=""><input type="text" name="f_vc_days_check" id="f_vc_days_check" value="" size="3" hidden=""><input type="text" name="f_remain_days_check" id="f_remain_days_check" value="" size="3" hidden=""><input type="text" name="f_vc_gubun_check" id="f_vc_gubun_check" value="" size="3" hidden=""><table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다." height="220px">
+			<caption></caption>
+			
+			
+			
+			
+			
+			
+			
+						
+			<thead>
+				<tr>
+					<th style="text-align:center;">연차 신청서</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="listTblTit" style="text-align:left; padding:13px;">구분 : 
+						연차<input type="radio" name="f_vc_gubun" id="f_vc_gubun" value="F">
+						반차<input type="radio" name="f_vc_gubun" id="f_vc_gubun" value="H">
+					</td>
+				</tr>
+				<tr>
+					<td class="listTblTit" style="text-align:left; padding:13px;">
+						<label for="startdate">시작일자 : </label>
+						<input type="text" id="f_vc_stadate" name="f_vc_stadate" value="2017-01-08" size="9" style="">
+						<label for="lastdate" style="padding-left:35px;">종료일자 : </label>
+						<input type="text" id="f_vc_enddate" name="f_vc_enddate" value="2015-01-10" size="9">
+					</td>
+				</tr>
+				<tr>
+					<td class="listTblTit" style="text-align:left; padding:13px;">사용일수 : 
+						<input type="text" title="공지사항검색영역" style="margin: 0px 2px 2px 0px; width: 18px; height:18px; text-align:center;" class="inputTxt" name="f_vc_days" id="f_vc_days">일
+					</td>
+				</tr>
+				<tr>
+					<td class="listTblTit" style="text-align:left; padding:13px;">사유<br><br>
+					<textarea rows="4" cols="40" name="f_sayu" id="f_sayu" value="f_sayu">사유를 입력해주세요.</textarea>
+					</td>
+				</tr>
+				<!-- -->
+				<tr>
+					<td class="listTblTit" style="text-align:left; padding:13px;">업무 대체자 : 
+						<select name="f_id_support" id="f_id_support" style="width:92px; font-size:12px;" class="select mr5">
+							<option>선택하세요.</option>
+														<option value="dk.lee@ilv.co.kr">이동근</option>
+								
+														<option value="hr.lee@ilv.co.kr">김준성</option>
+								
+														<option value="hs.park@ilv.co.kr">선상기</option>
+								
+														<option value="hy.yeo@ilv.co.kr">김노윤</option>
+								
+														<option value="jh2.lee@ilv.co.kr">심규성</option>
+								
+														<option value="js.yu@ilv.co.kr">전명건</option>
+								
+														<option value="km.kwon@ilv.co.kr">박철훈</option>
+								
+														<option value="ww.jang@ilv.co.kr">이승진</option>
+								
+														<option value="yd.ryu@ilv.co.kr">고경우</option>
+								
+														<option value="ys.park@ilv.co.kr">이종민</option>
+								
+													</select>
+					</td>
+				</tr>	
+<!--							
+				<tr>
+					<td class="listTblTit" style="text-align:left; padding:13px;">승인 거절 사유<br><br>
+						<input type="text" name="f_vc_reject_sayu" id="f_vc_reject_sayu" title="승인거절사유" style="width:250px;" class="inputTxt"/>
+					</td>
+				</tr>
+-->
+			</tbody>
+		</table>
+		<!--
+		<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다.">
+			<thead>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="listTblTit" style="text-align:center;">
+						위 내용을 숙지하였고, 연차 관리 시스템 이용에 동의합니다.
+						<input type="checkbox" id="checkBoxId">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		-->
+		
+		<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다." height="50px">
+			<thead>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="listTblTit" style="text-align:center;" id="applyAcknowledgmentTr" name="applyAcknowledgmentTr">
+						<button type="button" name="applyAcknowledgment" id="applyAcknowledgment" class="btn01" onclick="applyAcknowledgmentFunc('Y')" style="cursor:pointer">승인하기</button>
+					</td>
+<!--
+					<td class="listTblTit" style="text-align:center;" id="applyAcknowledgmentDeclineTr" name="applyAcknowledgmentDeclineTr">
+						<button type="button" name="applyAcknowledgmentDecline" id="applyAcknowledgmentDecline" class="btn01" onclick="applyAcknowledgmentFunc('R')" style="cursor:pointer">승인거절</button>
+					</td>
+-->
+					<td class="listTblTit" style="text-align:center;">
+						<button type="button" id="close" class="btn01" onclick="closeApplyLayer('applyLayerPop')" style="cursor:pointer; width: 65.5px; ">닫기</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<!--
+	
+	<div class="popup">
+		<p class="popupTit">곡 상세정보</p>
+		<div class="popupArea">
+			<div class="popupImg">
+				<img src="/mlbmanage/img/temp/popup_img.jpg" width="110" height="110" alt="불멸의 사랑" />
+			</div>
+			<div class="popupTxt">
+				<strong class="songTit">불멸의 사랑</strong><img src="/mlbmanage/img/sub/title_ico_09.gif"  alt="title" class="titleImg"/>
+				<ul class="songExplain">
+					<li>가수 : <a href="#">조성모</a></li>
+					<li>앨범명 : 걸작5</li>
+					<li>실연시간 : 04:12</li>
+					<li>Disc정보 : CD1, 트랙1</li>
+					<li>작사 : 최은하</li>
+					<li>작곡 : 윤일상</li>
+					<li>편곡 : 윤일상</li>
+				</ul>
+			</div>
+			<a href="#" class="popupClose"><img src="/mlbmanage/img/sub/close_btn.png" width="15" height="15" alt="닫기" /></a>
+		</div>
+	</div>
+	
+	-->
+
+
+	<!--<a href="#" onclick="closeLayer('layerPop')" class="close">close</a>-->
+	
+	</div>
+
+	
+	<!-- deemed 비밀번호 변경 하기 팝업 레이어 -->
+	<div id="passwordLayerPop">
+	<form name="passwordform" id="passwordform" method="post" action="/php/password.php">
+	<input type="text" name="process_gubun" id="process_gubun" value="pass" hidden="">
+		<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다." height="180px">
+				<caption></caption>
+				<thead>
+					<tr>
+						<th style="text-align:center;">비밀번호 변경 </th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="listTblTit" style="text-align:left;">현재&nbsp;비밀번호&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="password" title="공지사항검색영역" style="width:100px;" class="inputTxt" name="f_pass" id="f_pass">
+						</td>
+					</tr>
+					<tr>
+						<td class="listTblTit" style="text-align:left;">새&nbsp;비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="password" title="공지사항검색영역" style="width:99.5px;" class="inputTxt" name="f_pass_new" id="f_pass_new">
+						</td>
+					</tr>
+					<tr>
+						<td class="listTblTit" style="text-align:left;">새&nbsp;비밀번호&nbsp;확인
+							<input type="password" title="공지사항검색영역" style="width:100px;" class="inputTxt" name="f_pass_new_final" id="f_pass_new_final">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다." height="45px">
+				<caption></caption>
+				<thead>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="listTblTit" style="text-align:center;">
+							<button type="button" id="edit" class="btn01" onclick="editPassword('pass')" style="cursor:pointer; width:100px;">변경하기</button>
+						</td>
+						<td class="listTblTit" style="text-align:center;">
+							<button type="button" id="close" class="btn01" onclick="closeApplyLayer('applyLayerPop')" style="cursor:pointer; width:100px;">닫기</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	</form>
+
+	<!--
+	
+	<div class="popup">
+		<p class="popupTit">곡 상세정보</p>
+		<div class="popupArea">
+			<div class="popupImg">
+				<img src="/mlbmanage/img/temp/popup_img.jpg" width="110" height="110" alt="불멸의 사랑" />
+			</div>
+			<div class="popupTxt">
+				<strong class="songTit">불멸의 사랑</strong><img src="/mlbmanage/img/sub/title_ico_09.gif"  alt="title" class="titleImg"/>
+				<ul class="songExplain">
+					<li>가수 : <a href="#">조성모</a></li>
+					<li>앨범명 : 걸작5</li>
+					<li>실연시간 : 04:12</li>
+					<li>Disc정보 : CD1, 트랙1</li>
+					<li>작사 : 최은하</li>
+					<li>작곡 : 윤일상</li>
+					<li>편곡 : 윤일상</li>
+				</ul>
+			</div>
+			<a href="#" class="popupClose"><img src="/mlbmanage/img/sub/close_btn.png" width="15" height="15" alt="닫기" /></a>
+		</div>
+	</div>
+	
+	-->
+
+
+	<!--<a href="#" onclick="closeLayer('layerPop')" class="close">close</a>-->
+	
+	</div>
+	
+	
+	
+	
+</div>
+
+
+	<div id="wrap">
+		<div id="header">
+				</div>
+	<div id="wrapper">
+		<div id="container">
+			<div class="containerIn">
+				<!-- //왼쪽 네비게이션 영역 -->
+				<!-- //왼쪽 네비게이션 영역 -->				
+
+				<!--  컨텐츠영역 -->
+				<!--  컨텐츠영역 -->
+
+
+<!--  컨텐츠영역 -->
+				<div id="content" style="  margin: auto;">
+					<div class="contTop">
+							<div class="lnb">
+								<a href="#">관리자님</a>
+								<button type="button" class="btn01" style="cursor:pointer" onclick="location.href='../php/logout.php'">로그아웃</button>
+								<button type="button" class="btn01" style="cursor:pointer" id="password_button" onclick="openPasswordLayer('passwordLayerPop',100,500,'pass')">비밀번호 변경</button>
+								<!--<a href="#" class="btn01">로그아웃</a>-->
+							</div>
+						<p class="topTxt"></p>
+						<h3 class="contTit">아이티밥 연차 신청 리스트</h3>
+					</div>
+					<div class="contArea">
+					
+					<ul class="tabType02">		
+
+							<li class="ml_non">
+								<a href="#" class="on" onclick="location.href='anuual_administrator.php'" style="line-height:25px">전체보기</a>
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('dk.lee@ilv.co.kr'); searchAnnual();">
+									이동근								</a>	
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('hr.lee@ilv.co.kr'); searchAnnual();">
+									김준성								</a>	
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('hs.park@ilv.co.kr'); searchAnnual();">
+									선상기								</a>	
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('hy.yeo@ilv.co.kr'); searchAnnual();">
+									김노윤								</a>	
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('jh2.lee@ilv.co.kr'); searchAnnual();">
+									심규성								</a>	
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('js.yu@ilv.co.kr'); searchAnnual();">
+									전명건								</a>	
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('km.kwon@ilv.co.kr'); searchAnnual();">
+									박철훈								</a>	
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('ww.jang@ilv.co.kr'); searchAnnual();">
+									이승진								</a>	
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('yd.ryu@ilv.co.kr'); searchAnnual();">
+									고경우								</a>	
+							</li>
+													<li class="ml_non">
+								<a href="#" id="" name="" class="" style="line-height:25px; " onclick="$('#f_id').val('ys.park@ilv.co.kr'); searchAnnual();">
+									이종민								</a>	
+							</li>
+													
+						</ul>
+			<!-- <td style="text-align:center; display:none;"></td> -->
+			<!--			
+				<ul class="tabType02">
+							<li class="ml_non">
+								<a href="hall2011.html" class="on">2011년 전시소개</a>
+							</li>
+							<li>
+								<a href="hall2012.html" class="borderL">2012년 전시소개</a>
+							</li>
+							<li>
+								<a href="hall2013.html">2013년 전시소개</a>
+							</li>
+							<li>
+								<a href="hall2014.html">2014년 전시소개</a>
+							</li>
+							
+							
+							
+						</ul>
+						
+					-->	
+						
+						
+
+	
+					<div class="contArea">
+					
+					<div class="boardSearch">
+							<form id="searchForm" name="searchForm" method="get" action="">
+							<input type="hidden" name="f_id" id="f_id" value="">
+							<select style="width:92px;" class="select mr5" id="year" name="year">
+								<option value="">년도</option>
+								<option value="2020">2020</option>
+								
+							</select>
+							<select style="width:92px;" class="select mr5" id="month" name="month">
+								<option value="">월</option>
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+							</select>
+							
+							<!--<input type="text" title="공지사항검색영역" style="width:235px;" class="inputTxt"/>-->
+							<!--<button type="button" class="btn01" style="cursor:pointer" id="apply_button" onclick="openApplyLayer('applyLayerPop',100,200)">연차 승인하기(test)</button>-->
+							<button type="button" class="btn01" style="cursor:pointer" onclick="searchAnnual()">검색</button>
+							<button type="button" class="btn01" style="cursor:pointer" onclick="makeExcel()">엑셀다운로드</button>
+							<!--<a href="#" class="btn01">검색</a>
+							<a href="#" class="btn01">엑셀다운로드</a>-->
+							</form>
+						</div>
+												<h3 class="contTit">신청내역</h3>
+						<form id="frmSearch" name="frmSearch" method="GET">
+							<input type="hidden" id="txtSqlExcelDown" name="txtSqlExcelDown" value="a%3A1%3A%7Bi%3A0%3Ba%3A8%3A%7Bs%3A5%3A%22query%22%3Bs%3A993%3A%22SELECT+%2A+FROM+%28%0A%09%09%09%09%09%09%09%09%09+SELECT+%0A%09%09%09%09%09%09%09%09%09+%09%09ROWNUM+AS+RN%2C%0A%09%09%09%09%09%09%09%09%09+%09%09TA.%2A+%0A%09%09%09%09%09%09%09%09%09+%09FROM+%28%0A++++++++++++++++++++++++++++++++++++++++++++++++select+T2.%2A%2CTO_CHAR%28T2.F_VC_STADATE%2C+%27YYYY-MM-DD%27%29%7C%7C%27%7E%27%7C%7CTO_CHAR%28T2.F_VC_ENDDATE%2C+%27YYYY-MM-DD%27%29+AS+F_VC_DATE%2C++T1.F_NAME%2C+T1.F_VC_DEFAULT_DAYS%2C+decode%28T3.F_NAME%2C%27%ED%85%8C%EC%8A%A4%ED%8A%B8%27%2C%27%EC%95%8C%EC%88%98%EC%97%86%EC%9D%8C%27%2CT3.F_NAME%29+AS+F_NAME_SUPPORT+from+T_MLB_MEMBER+T1%0A++++++++++++++++++++++++++++++++++++++++++++++++inner+join+T_MLB_VC_INFO+T2%0A++++++++++++++++++++++++++++++++++++++++++++++++on+T1.f_id+%3D+T2.f_id_req%0A++++++++++++++++++++++++++++++++++++++++++++++++inner+join+T_MLB_MEMBER+T3%0A++++++++++++++++++++++++++++++++++++++++++++++++on+T2.F_ID_SUPPORT+%3D+T3.F_ID%0A++++++++++++++++++++++++++++++++++++++++++++++++WHERE+T1.F_STATUS+%3D+%27Y%27+AND+T2.F_STATUS+%21%3D+%27D%27+%0A++++++++++++++++++++++++++++++++++++++++++++++++AND+F_VC_GUBUN+IS+NOT+NULL%0A++++++++++++++++++++++++++++++++++++++++++++++++ORDER+BY+T2.F_REQDATE+DESC+%0A%09%09%09%09%09%09%09%09%09+%29+TA+%0A%09%09%09%09%09%09%09%09+%29+WHERE+RN+BETWEEN+%3ASTA_RN+AND+%3AEND_RN%22%3Bs%3A5%3A%22binds%22%3Ba%3A2%3A%7Bs%3A6%3A%22STA_RN%22%3Bs%3A1%3A%220%22%3Bs%3A6%3A%22END_RN%22%3Bs%3A1%3A%229%22%3B%7Ds%3A10%3A%22rs_tot_cnt%22%3Bs%3A1%3A%229%22%3Bs%3A11%3A%22table_field%22%3Bs%3A129%3A%22F_NAME%2C+F_REQDATE%2C+F_VC_GUBUN%2C+F_VC_DATE%2C+F_VC_DAYS%2C+F_NAME_SUPPORT%2C+F_VC_DEFAULT_DAYS%2C+F_VC_REMAIN_DAYS%2C+F_STATUS%2C+F_STATUS_DATE%22%3Bs%3A18%3A%22excel_field_hangul%22%3Bs%3A159%3A%22%EC%8B%A0%EC%B2%AD%EC%9E%90%2C+%EC%8B%A0%EC%B2%AD%EC%9D%BC%2C+%EA%B5%AC%EB%B6%84%28%EC%97%B0%EC%B0%A8%2F%EB%B0%98%EC%B0%A8%29%2C+%EC%82%AC%EC%9A%A9%ED%95%A0+%EA%B8%B0%EA%B0%84%2C+%EC%82%AC%EC%9A%A9%ED%95%A0+%EC%9D%BC%EC%88%98%2C+%EC%97%85%EB%AC%B4+%EB%8C%80%EC%B2%B4%EC%9E%90%2C+%EC%B4%9D+%EC%97%B0%EC%B0%A8%EC%9D%BC%EC%88%98%2C+%EC%9E%94%EC%97%AC+%EC%97%B0%EC%B0%A8+%EC%9D%BC%EC%88%98%2C+%ED%99%95%EC%9D%B8%2C+%ED%99%95%EC%9D%B8%EC%9D%BC%EC%9E%90%22%3Bs%3A16%3A%22excel_field_type%22%3Bs%3A70%3A%22default%2Cdefault%2Cstring%2Cdefault%2Cdefault%2Cdefault%2Cdefault%2Cdefault%2Cdefault%22%3Bs%3A9%3A%22save_path%22%3Bs%3A28%3A%22%2Fair%2Fal.itbob.co.kr%2Fdownload%22%3Bs%3A13%3A%22save_filename%22%3Bs%3A18%3A%22annual_list_%25s.xls%22%3B%7D%7D">
+						</form>	
+						<table id="example-table-1" class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다.">
+								
+								<thead>
+									<tr>
+										<th style="text-align:center;">번호</th>
+										<th style="text-align:center;">신청자</th>
+										<th style="text-align:center;">신청일</th>
+										<th style="text-align:center;">구분<br>(연차/반차)</th>
+										<th style="text-align:center;">사용할 기간</th>
+										<th style="text-align:center;">사용할 일수</th>
+										<th style="text-align:center;">업무 대체자</th>
+										<th style="text-align:center;">총 연차일수</th>
+										<th style="text-align:center;">잔여 연차 일수</th>
+										<th style="text-align:center;">확인</th>
+										<th style="text-align:center;">확인일자</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!--<tr onclick="openApplyLayer('applyLayerPop',100,400)">-->
+																				<tr style="cursor:pointer">
+												<td style="text-align:center; display:none;">1161</td>
+												<td style="text-align:center; ">9</td>
+												<td style="text-align:center;">이동근</td>
+												<td style="text-align:center;">2020-08-27</td>
+												
+												<td style="text-align:center;">연차</td>
+												
+												<td style="text-align:center;">2020-08-27~2020-08-27</td>
+												<td style="text-align:center;">1</td>
+												
+												<td style="text-align:center;">선상기</td>
+												<td style="text-align:center;">14</td>
+												<td style="text-align:center;">8</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-08-27</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+												<td style="text-align:center; display:none;">1141</td>
+												<td style="text-align:center; ">8</td>
+												<td style="text-align:center;">이종민</td>
+												<td style="text-align:center;">2020-08-25</td>
+												
+												<td style="text-align:center;">연차</td>
+												
+												<td style="text-align:center;">2020-08-26~2020-08-26</td>
+												<td style="text-align:center;">1</td>
+												
+												<td style="text-align:center;">이동근</td>
+												<td style="text-align:center;">16</td>
+												<td style="text-align:center;">13.5</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-08-25</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+												<td style="text-align:center; display:none;">1123</td>
+												<td style="text-align:center; ">7</td>
+												<td style="text-align:center;">선상기</td>
+												<td style="text-align:center;">2020-08-13</td>
+												
+												<td style="text-align:center;">연차</td>
+												
+												<td style="text-align:center;">2020-08-18~2020-08-21</td>
+												<td style="text-align:center;">4</td>
+												
+												<td style="text-align:center;">이동근</td>
+												<td style="text-align:center;">14</td>
+												<td style="text-align:center;">8</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-08-16</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+												<td style="text-align:center; display:none;">1122</td>
+												<td style="text-align:center; ">6</td>
+												<td style="text-align:center;">고경우</td>
+												<td style="text-align:center;">2020-08-12</td>
+												
+												<td style="text-align:center;">연차</td>
+												
+												<td style="text-align:center;">2020-08-14~2020-08-14</td>
+												<td style="text-align:center;">1</td>
+												
+												<td style="text-align:center;">이승진</td>
+												<td style="text-align:center;">15</td>
+												<td style="text-align:center;">9</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-08-12</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+												<td style="text-align:center; display:none;">1121</td>
+												<td style="text-align:center; ">5</td>
+												<td style="text-align:center;">이승진</td>
+												<td style="text-align:center;">2020-08-11</td>
+												
+												<td style="text-align:center;">연차</td>
+												
+												<td style="text-align:center;">2020-08-18~2020-08-21</td>
+												<td style="text-align:center;">4</td>
+												
+												<td style="text-align:center;">고경우</td>
+												<td style="text-align:center;">15</td>
+												<td style="text-align:center;">8</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-08-12</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+												<td style="text-align:center; display:none;">1111</td>
+												<td style="text-align:center; ">4</td>
+												<td style="text-align:center;">이승진</td>
+												<td style="text-align:center;">2020-07-29</td>
+												
+												<td style="text-align:center;">반차</td>
+												
+												<td style="text-align:center;">2020-07-29~2020-07-29</td>
+												<td style="text-align:center;">0.5</td>
+												
+												<td style="text-align:center;">김노윤</td>
+												<td style="text-align:center;">15</td>
+												<td style="text-align:center;">12</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-07-29</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+												<td style="text-align:center; display:none;">1110</td>
+												<td style="text-align:center; ">3</td>
+												<td style="text-align:center;">이동근</td>
+												<td style="text-align:center;">2020-07-29</td>
+												
+												<td style="text-align:center;">연차</td>
+												
+												<td style="text-align:center;">2020-08-03~2020-08-05</td>
+												<td style="text-align:center;">3</td>
+												
+												<td style="text-align:center;">선상기</td>
+												<td style="text-align:center;">14</td>
+												<td style="text-align:center;">9</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-07-29</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+												<td style="text-align:center; display:none;">1109</td>
+												<td style="text-align:center; ">2</td>
+												<td style="text-align:center;">김준성</td>
+												<td style="text-align:center;">2020-07-28</td>
+												
+												<td style="text-align:center;">연차</td>
+												
+												<td style="text-align:center;">2020-07-31~2020-07-31</td>
+												<td style="text-align:center;">1</td>
+												
+												<td style="text-align:center;">박철훈</td>
+												<td style="text-align:center;">6</td>
+												<td style="text-align:center;">5</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-07-28</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+												<td style="text-align:center; display:none;">1108</td>
+												<td style="text-align:center; ">1</td>
+												<td style="text-align:center;">박철훈</td>
+												<td style="text-align:center;">2020-07-28</td>
+												
+												<td style="text-align:center;">연차</td>
+												
+												<td style="text-align:center;">2020-08-03~2020-08-07</td>
+												<td style="text-align:center;">5</td>
+												
+												<td style="text-align:center;">김준성</td>
+												<td style="text-align:center;">15</td>
+												<td style="text-align:center;">10</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-07-28</td>
+											</tr>
+												
+																		</tbody>
+							</table>
+							<div class="paging"><span class="nowPage">1</span></div>					</div>
+					</div>
+				</div>
+				<!-- // 컨텐츠영역 -->
+				
+			</div>
+			</div>
+		</div>
+	</div>
+</body></html>

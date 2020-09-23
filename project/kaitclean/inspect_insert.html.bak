@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en" class="perfect-scrollbar-on"><!-- begin::Head --><head>
+	<meta charset="utf-8">
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>점검 등록 - 0.33339800 1599662604</title>
+
+
+     <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!--  Paper Dashboard core CSS    -->
+    <link href="assets/css/paper-dashboard.css" rel="stylesheet">
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet">
+
+		<link href="assets/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css">
+    <!--  Fonts and icons     -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,300" rel="stylesheet" type="text/css">
+    <link href="assets/css/themify-icons.css" rel="stylesheet">
+
+		<link href="assets/css/perfect-scrollbar.css" rel="stylesheet" type="text/css">
+		<link href="assets/vendors/custom/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css">
+		<!--<link href="assets/css/line-awesome.css" rel="stylesheet" type="text/css" />-->
+
+
+
+	<!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
+	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	
+	
+	
+	<script src="assets/js/jquery.form.min.js" type="text/javascript"></script>
+	<script src="assets/js/lib.js" type="text/javascript"></script>
+	<script src="assets/js/jquery.input.js" type="text/javascript"></script>
+	<script src="assets/js/repeater.js" type="text/javascript"></script>
+
+	<!--  Forms Validations Plugin -->
+	<script src="assets/js/jquery.validate.min.js"></script>
+
+	<!-- Sliders Plugin -->
+	<script src="assets/js/nouislider.min.js"></script>
+
+	<!-- Promise Library for SweetAlert2 working on IE -->
+	<script src="assets/js/es6-promise-auto.min.js"></script>
+
+	<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+	<script src="assets/js/moment.min.js"></script>
+
+
+	<!-- Circle Percentage-chart -->
+	<script src="assets/js/jquery.easypiechart.min.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="assets/js/chartist.min.js"></script>
+
+	<!--  Notifications Plugin    -->
+	<script src="assets/js/bootstrap-notify.js"></script>
+
+	<!-- Sweet Alert 2 plugin -->
+	<script src="assets/js/sweetalert2.js"></script>
+
+	<!-- Vector Map plugin -->
+	<script src="assets/js/jquery-jvectormap.js"></script>
+
+	<!-- Wizard Plugin    -->
+	<script src="assets/js/jquery.bootstrap.wizard.min.js"></script>
+
+	<!--  Bootstrap Table Plugin    -->
+	<script src="assets/js/bootstrap-table.js"></script>
+
+	<!--  Plugin for DataTables.net  -->
+	<script src="assets/js/jquery.datatables.js"></script>
+
+	<!--  Full Calendar Plugin    -->
+	<script src="assets/js/fullcalendar.min.js"></script>
+
+	<!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
+	<script src="assets/js/paper-dashboard.js"></script>
+
+<!-- 191109 이동근 - 메인 화면 원형 그래프 표시를 위한 demo.js 추가 -->
+	<script src="assets/js/demo.js"></script>
+	
+	<!--  Date Time Picker Plugin is included in this js file -->
+	<script src="assets/js/bootstrap-datetimepicker.js"></script>
+
+	<!--  Select Picker Plugin -->
+	<script src="assets/js/bootstrap-selectpicker.js"></script>
+
+	<!--  Switch and Tags Input Plugins -->
+	<script src="assets/js/bootstrap-switch-tags.js"></script>
+	
+	<!--datepicker-->
+  <script src="assets/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+  
+  <script type="text/javascript" src="assets/js/global.js"></script>
+  <script src="assets/vendors/custom/bootstrap-multiselect/bootstrap-multiselect.js" type="text/javascript"></script>
+  <script src="assets/js/perfect-scrollbar.js" type="text/javascript"></script>
+  
+	<script src="assets/vendors/general/js-cookie/src/js.cookie.js" type="text/javascript"></script>
+
+    <script>
+      $(document).ready(function() {
+          //App.init();
+      });
+
+      function logout() {
+          $.ajax({
+              type:"POST"
+              ,async:false
+              ,dataType:"json"
+              ,data: $("#loginForm").serialize()
+              ,url:"http://kaitclean.itbob.co.kr/login/logOut/"
+              ,success:function(args) {
+                  if (args.status == "OK")
+                  {
+                      alert(args.msg);
+                      document.location.href = "/main";
+                  }
+                  else
+                  {
+                      alert(args.msg);
+                  }
+              }
+              ,beforeSend:null
+              ,error: function(e) {
+                  alert(e.responseText);
+              }
+          });
+      }
+
+      function top_show_info(f_seq)
+      {
+          window.open('/inspect/file_slide/?f_seq='+f_seq,'_blank','height='+screen.height+', width='+screen.width+', scrollbars=yes');
+      }
+
+      function top_show_info_auto(f_seq)
+      {
+          window.open('/evidence/file_auto_slide/?f_seq='+f_seq,'_blank','height='+screen.height+', width='+screen.width+', scrollbars=yes');
+      }
+
+			/*
+			* 카테고리 조회 및 셀렉트 박스 생성 관련
+		 	*/
+
+	    //리스트에 카테고리 출력
+	    function display_category_list(data, tablelist_id)
+	    {
+	        $('#'+tablelist_id+' tbody').empty();
+	        var list_html = "";
+	        for(i=0; i<data.length; i++){
+	            list_html += "<tr>";
+	            list_html +=     " <td>"+data[i].F_NAME+"</td>";
+	            list_html +=     "<td>"+data[i].F_ORDER+"</td>";
+	            list_html +=    "<td>";
+	            list_html +=     "<button type=\"button\" class=\"btn btn-warning btn-sm\" id=\"\"  onclick=\"set_category_data('"+data[i].F_SEQ+"|" +data[i].F_NAME+"|" + data[i].F_ORDER+"|" + data[i].F_PARENT_SEQ + "')\">수정</button>";
+	            list_html +=     "<button type=\"button\" class=\"btn btn-danger btn-sm\" id=\"\"  onclick=\"delete_data('"+data[i].F_SEQ+"|" +data[i].F_NAME+"|" + data[i].F_ORDER +"|" + data[i].F_PARENT_SEQ + "')\">삭제</button>";
+	            list_html +=     "</td>";
+	            list_html +=     "</tr>";
+	        }
+	        $('#'+tablelist_id+' tbody').append(list_html);
+	    } 
+
+	    //카테고리 데이터 가져오기
+	    function get_category(f_parent_seq, f_level, selectbox_id, tablelist_id)
+	    {
+				var data = new Array();
+				
+				if(f_level == 2){
+					if(f_parent_seq == 1){
+						
+						var category = Array();
+						category[0]='1.청소년보호 계획 수립 여부';
+						category[1]='2.청소년유해정보 접근 제한 여부';
+						category[2]='3.유료서비스 이용시 청소년보호 조치 적용 여부';
+						var cnt = category.length;
+						var order = 1;
+						var seq = 3;
+
+					} else if(f_parent_seq == 2){
+
+						var category = Array();
+						category[0]='1.결제한도 설정 및 대리결제 등 차단 여부';
+						category[1]='2.소멸·환불 기준 공지 여부';
+						category[2]='3.이용자 권리구제 수단 운영 여부';
+						var cnt = category.length;
+						var order = 1;
+						var seq = 6;					
+				
+					}
+					
+						
+				} 
+				else if(f_level==3){
+						
+						if(f_parent_seq == 3){
+								var category = Array();
+								category[0]='1.청소년보호 계획을 수립하고 웹사이트에 공지하였는가?(기본원칙, 기술적·관리적 장치, 신고방법 등)';
+								category[1]='2.청소년보호 책임자를 지정하고 공개하였는가? (성명, 전화번호, 이메일 등을 웹사이트에 공개)';
+								var cnt = category.length;
+								var order = 1;
+								var seq = 8;	
+						} else if(f_parent_seq == 4){
+								var category = Array();
+								category[0]='1. 청소년유해매체물이 청소년에게 노출되지 않도록 차단하고 있는가?';
+								category[1]='2.청소년유해정보에 대한 ⑲금 표시 기능을 적용하고 있는가?(섬네일, 영상 등)';
+								category[2]='3.청소년유해정보에 대한 성인인증 등 접근제한 절차를 마련하였는가?';
+								category[3]='4.영상 업로드 및 방송 개설 시 공개범위·스크랩 제한 기능을 설정하고 있는가?   ※ 공개범위는 전체공개 또는 19세이상(성인) 등으로 구분';							
+								category[4]='5.청소년유해정보가 노출되지 않도록 금칙어 혹은 청소년유해어를 적용하고 있는가?';
+								var cnt = category.length;
+								var order = 1;
+								var seq = 13;	                                    
+						} else if(f_parent_seq == 5){
+								var category = Array();
+								category[0]='1.회원가입 및 유료서비스 이용 시 법정대리인 동의 절차를 마련하고 있는가?(이메일, 전화, 팩스, I-PIN 등 인증수단 활용)';
+								category[1]='2.유료서비스 이용 시 법정대리인에게 내역을 고지하고 있는가?(이메일, 휴대폰 등)';
+								var cnt = category.length;
+								var order = 1;
+								var seq = 15;								
+						} else if(f_parent_seq == 6){
+								var category = Array();
+								category[0]='1.유료후원아이템 결제(충전 또는 선물) 한도*를 설정하고 있는가?    * 이용자당 1인 100만원 이하로 제한';
+								category[1]='2.해당 사업자로부터 충전한 유료후원아이템 이외의 선물 차단 및 유료후원아이템의 사적거래, 도용 차단하고 있는가?';
+								var cnt = category.length;
+								var order = 1;
+								var seq = 17;	                                    
+						} else if(f_parent_seq == 7){
+								var category = Array();
+								category[0]='1.충전 후 선물하지 않은 유료후원아이템의 경우 충전 시 7일 이내에는 별도 위약금 없이 철회 보장하고 있는가?';
+								category[1]='2.유료후원아이템의 소멸 여부 및 시기 등을 고지하고 있는가?';
+								category[2]='3.유료후원아이템에 대한 합리적인 환불기준*을 마련하고 결제완료 전 이용자에게 고지하고 있는가?    * 신용카드, 현금 등으로 충전한 유료후원아이템 소멸 전 환불요청 시 환불기준';
+								var cnt = category.length;
+								var order = 1;
+								var seq = 20;	                                      
+						} else if(f_parent_seq == 8){
+								var category = Array();
+								category[0]='1.이용자의 민원처리를 위한 고객센터를 운영하고 연락처를 고지하고 있는가?';
+								category[1]='2.이용자가 유료후원아이템의 결제와 관련하여 이의신청 시 2주 이내에 조사 또는 처리결과를 제공하고 있는가?';
+								category[2]='3.미성년자 결제 시 법정대리인 동의를 받고 결제완료 고지를 하고 있는가?(문자, 전자우편 등)';
+								category[3]='4.미성년자 결제 시 법정대리인 동의가 없는 경우 본인 또는 법정대리인이 결제 취소 가능하도록 하고 있는가?';
+								var cnt = category.length;
+								var order = 1;
+								var seq = 24;	                                    
+						}
+
+				}
+				
+				for(var i=0; i<cnt; i++){
+					data[i] = new Array();
+					data[i]['F_SEQ']=seq;
+					data[i]['F_NAME']=category[i];
+					data[i]['F_ORDER']=order;
+					data[i]['F_PARENT_SEQ']=f_parent_seq;	
+					
+					order++;
+					seq++;						
+				}				
+                              
+        if(tablelist_id) display_category_list(data, tablelist_id);//점검항목관리 > 분류등록 모달에서 사용
+        if(selectbox_id) display_select_option(data, selectbox_id);
+        if($('#category_path').length > 0) modal_category_path(); //점검항목관리 > 분류등록 모달에서 사용
+
+	    }
+
+	    //셀렉트박스에 카테고리 옵션 설정
+	    function display_select_option(data, selectbox_id)
+	    {
+	        $('#'+selectbox_id + ' option').remove();
+	        $('#'+selectbox_id ).append("<option value='' selected='true' >선택안함</option>");
+	        for(i=0; i<data.length; i++){
+	            $('#'+selectbox_id ).append("<option value='"+data[i].F_SEQ+"'>"+data[i].F_NAME+"</option>");
+	        }
+	    }
+  
+			function set_site_select() {
+				
+	        $.ajax({
+	            type: "POST"
+	            , async: false
+	            , dataType: "json"
+	            , data: {'csrf_kait_name':'066f33a5acd4076f0bd50ec0c81cc919'}
+	            , url: "/site/select_site"
+	            , success: function (args) {
+	                if (args['status'] == "OK") {
+	                    
+										var f_sitename = args.data;   
+										for(i=0; i<f_sitename.length;i++)
+											{ 
+											$("#f_sitename").append("<option value='"+f_sitename[i]['f_seq']+"'>"+f_sitename[i]['f_sitename']+"</option>") 
+						
+										}                    
+	                } else {
+	                    alert(args['msg']);
+	                }
+	            }
+	            , beforeSend: null
+	            , error: function (e) {
+	                alert(e.responseText);
+	            }
+	        });			
+			}
+
+      //임시 업로드 파일명에 밀리초 사용을 위한 func 2019.10.30
+      function top_addZero(x,n) {
+          while (x.toString().length < n) {
+              x = "0" + x;
+          }
+          return x;
+      }
+      function top_get_date_milisecond() {
+          var d = new Date();
+          var x = document.getElementById("demo");
+          var h = top_addZero(d.getHours(), 2);
+          var m = top_addZero(d.getMinutes(), 2);
+          var s = top_addZero(d.getSeconds(), 2);
+          var ms = top_addZero(d.getMilliseconds(), 3);
+          
+          var mm = ((d.getMonth() + 1) > 9 ? '' : '0')  + (d.getMonth() + 1);
+          var dd = ((d.getDate()) > 9 ? '' : '0')  + (d.getDate());
+          var yyyymmdd = d.getFullYear() + '' + mm + '' + dd;
+          return yyyymmdd + '' + h +''+ m +''+ s +''+ ms;
+      }
+    
+    </script>
+<style>
+	
+.sidebar .logo, .off-canvas-sidebar .logo {
+    padding: 10px 0px;
+    margin: 0;
+    box-shadow: inset -1px 0px 0px 0px #cfcfca;
+    height: 75px;
+    position: relative;
+    z-index: 4;
+    display: block;	
+  }
+	
+	.modal-dialog{
+		width: 1000px;
+	}
+	.modal-header{
+		display: flex;
+	}
+	.modal-header .close{
+		padding-right:1.25rem; padding-bottom:1.25rem; margin:-1.25rem -1.25rem -1.25rem auto;
+	}
+	.modal-content{
+		width:100%;
+	}
+	
+	/*
+	@media (min-width: 1200px) {
+	  .wrapper {
+	    min-width: 1170px;
+	    overflow: scrollbar;
+	  }
+	}
+	*/
+
+
+</style>	
+</head>
+
+<body class="k-header--fixed k-header-mobile--fixed k-aside--enabled k-aside--fixed k-aside--offcanvas-default">
+
+	<div class="wrapper">
+		
+		<div class="sidebar" data-background-color="brown" data-active-color="danger">
+	   
+			<div class="logo" style="text-align:center">
+				<a href="#" class="simple-text logo-normal">
+					<img alt="Logo" src="assets/media/logos/kaitclean_logo.png">
+				</a>
+			</div>
+	    <div class="sidebar-wrapper ps ps--active-x">
+				<div class="user">
+          <div class="info">
+	          <div class="photo">
+	              <img src="assets/img/faces/face-0.jpg">
+	          </div>	                	
+						<a data-toggle="collapse" href="#collapseExample" class="collapsed">
+	           	<span style="color:#ffffff;">&nbsp;아이티밥 님<b class="caret"></b></span>
+						</a>
+						<div class="clearfix"></div>
+            <div class="collapse" id="collapseExample">
+              <ul class="nav">
+                <li>
+									<a href="javascript:void(0)" onclick="logout()">
+										<span class="sidebar-mini">-</span>
+										<span class="sidebar-normal">로그아웃</span>
+									</a>
+								</li>
+
+              </ul>
+            </div>
+         	</div>
+	      </div>
+	      <ul class="nav">
+          
+          
+          
+                         
+						<li class="">
+	            <a data-toggle="collapse" href="#2">
+	              <i class="ti-pencil-alt"></i>
+	              <p>점검	                 <b class="caret"></b>
+	              </p>
+	            </a>
+	            <div class="collapse in 점검" id="2">
+								<ul class="nav">
+										<li class="active">
+												<a href="/inspect/insert">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">점검등록</span>
+												</a>
+											</li>	<li class="">
+												<a href="/inspect/list">
+													<span class="sidebar-mini">-</span>
+													<span class="sidebar-normal">등록현황</span>
+												</a>
+											</li>								</ul>
+							</div>
+	          </li>
+          
+          
+
+	        </ul>
+	    	<div class="ps__rail-x" style="width: 260px; left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 259px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+	    </div>
+<script type="text/javascript">
+	var open_gubun = "";	
+    $(function () {
+		//get_category(null,1,'f_seq_code1','f_seq_code1');
+		//set_site_select();
+		
+		$("#f_seq_code1 option:eq(28)").attr("selected", "selected");
+		$('#f_inspect_ymd').datepicker({
+			autoclose: true,
+			format : 'yyyymmdd',
+			language: "kr"
+		});
+
+		
+		$('#f_inspect_ymd').datepicker("setDate", "20200909");
+		$('#f_inspect_hms').val('1143');		
+		
+
+	  $('#k_content').css('visibility','visible');	  			
+	
+	
+  $( "#f_inspect_ymd" ).datepicker({
+    dateFormat: 'yy.mm.dd',
+    prevText: '이전 달',
+    nextText: '다음 달',
+    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    dayNames: ['일','월','화','수','목','금','토'],
+    dayNamesShort: ['일','월','화','수','목','금','토'],
+    dayNamesMin: ['일','월','화','수','목','금','토'],
+    showMonthAfterYear: true,
+    changeMonth: true,
+    changeYear: true,
+    yearSuffix: '년'
+
+  });
+
+	
+
+    });
+
+    /*
+    내용 추가
+     */
+    function add_content(btn_obj)
+    {
+       
+        var row = $('.content_row:eq('+($('.content_row').length - 1)+')').clone();
+        $( '.content_row:eq('+($('content_row').length - 1)+') button.btn_add_content').css('visibility','hidden');
+        $('#content_area').append(row);
+        $( '.content_row:eq('+($('content_row').length - 1)+')').find('.file_row:gt(0)').remove();
+        //현재 row의 입력값 초기화
+        $('.content_row:eq('+($('.content_row').length - 1)+') input').val('');
+        //미리보기 영역 초기화
+        $('.content_row:eq('+($('.content_row').length - 1)+') [class$=capture_pre_view_area]').css('display','none');
+        $('.content_row:eq('+($('.content_row').length - 1)+') [class$=capture_pre_view] img').remove();
+
+    }
+    /*
+    내용 삭제
+    */
+    function remove_content(btn_obj)
+    {
+        if($('.content_row').length > 1)
+        {	
+            $(btn_obj).closest('div.content_row').remove();
+            $('.content_row:eq('+($('.content_row').length - 1)+') button.btn_add_content').css('visibility','visible');
+        } else { 
+            //현재 row의 입력값 초기화
+            $('.content_row:eq('+($('.content_row').length - 1)+') input').val('');
+            //미리보기 영역 초기화
+            $('.content_row:eq('+($('.content_row').length - 1)+') [class$=capture_pre_view_area]').css('display','none');
+            $('.content_row:eq('+($('.content_row').length - 1)+') [class$=capture_pre_view] img').remove();
+        }
+    }
+
+    /*
+    파일 행 추가
+     */
+    function add_file(btn_obj)
+    {
+        var file_area = $(btn_obj).closest('div.file_area');
+        var file_row = $(file_area).find('.file_row:eq(0)').clone();
+				file_row.find("input:text").val("");	//	추가 파일 행 input 초기화
+				file_row.find("input:hidden").val("");	//	추가 파일 행 hidden 초기화
+        file_row.find("img").removeAttr('src').hide();	// 추가 파일 행 이미지 초기화 및 숨김
+        //추가버튼 숨기기
+        $(file_area).append(file_row);
+        
+    }
+
+    /*
+    파일 행 삭제
+     */
+    function remove_file(btn_obj)
+    {
+    		var filepath_obj = null;
+    		var filepath_thumb_obj = null;
+    		var filename_obj = null;
+    		
+        filepath_obj = $(btn_obj).closest('div.file_row').find("input[name='f_filepath[]']");
+        filepath_thumb_obj = $(btn_obj).closest('div.file_row').find("input[name='f_filepath_thumb[]']");
+        filename_obj = $(btn_obj).closest('div.file_row').find("input[name='f_filename[]']");
+    		
+    		
+      	if($(btn_obj).closest('.file_row').siblings('.file_row').length > 0) {   		
+	        $(btn_obj).closest('div.file_row').remove();
+	        $(btn_obj).closest('img').remove();
+      	} else return false;
+
+    }
+
+/*
+ 직접 업로드
+*/
+    function direct_upload(btn_obj)
+    {
+        var filename_time = top_get_date_milisecond();
+        var filename = filename_time;
+        $('#userfile_new_name').val(filename);
+        $('#frm_upload').append("<input type='file' id='userfile' name='userfile' style='visibility:hidden;'>");
+        $('#userfile').on('change', function(){
+				var filePath = $('#userfile').val(); 
+
+            var form = $('form')[1];
+            var formData = new FormData(form);
+            $('#userfile').remove();
+
+
+            check_upload(btn_obj,filePath);
+        });
+        $('#userfile').trigger('click');
+        
+    }
+
+    /*
+    임시폴더에 업로드 유무 확인
+    */
+    var capture_flag = true;
+    
+		function capture(no)
+		{ alert("캡쳐 프로그램이 설치되지 않았습니다."); return;
+				if (capture_flag == false)
+			{
+				alert_modal("캡처가 작동중입니다.");
+				return;
+			}
+				
+			capture_flag = false;
+			
+     	var filename_time = top_get_date_milisecond();
+      var filename = filename_time;
+		
+		
+			
+			self.location.href="web+itbobcap2:" + filename + ":full:7KCQ6rKAIOuTseuhnSAtIDAuMzMzMzk4MDAgMTU5OTY2MjYwNA==";
+			
+			check_upload(no, filename+".jpg");
+		
+		} 
+
+    
+    
+    function check_upload(btn_obj,filename)
+    {		
+        var img_div = null;
+        var filepath_obj = null;
+        var filepath_thumb_obj = null;
+        var filename_obj = null;
+        var img_area = null;
+        var seq_obj = null;
+        
+        img_area = $(btn_obj).closest('div.file_row' ).find('.capture_pre_view_area');
+        
+        img_div = $(btn_obj).closest('div.file_row' ).find('.capture_pre_view');
+        
+        filepath_obj = $(btn_obj).closest('div.file_row').find("input[name='f_filepath[]']");
+        filepath_thumb_obj = $(btn_obj).closest('div.file_row').find("input[name='f_filepath_thumb[]']");
+        filename_obj = $(btn_obj).closest('div.file_row').find("input[name='f_filename[]']");
+        
+        var mng_host = "";
+		
+                if(img_div) {
+                    $(img_div).html("<img src="+mng_host+ "assets/img/sample.jpg" + "?tm=" + $.now() + "' style='width:100%;height:100%'>");
+                    $(img_area).css('display','block');
+                }
+                if(filename_obj) $(filename_obj).val(filename);
+                if(filepath_obj) $(filepath_obj).val("assets/img/sample.jpg");
+                if(seq_obj) $(seq_obj).val(''); //신규등록처리를 위해 초기화.'
+  
+                capture_flag = true;
+
+        $(img_div).show();
+				
+				
+    }
+
+
+    function insert()
+    { 
+    	
+    	if($('#f_sitename option:selected').val() == "") {
+    		alert("점검업체를 선택해주세요");
+    		return false;
+    	}    	
+    	
+    	if($('.f_status option:selected').val() == "") {
+    		alert("이행 유무를 선택해주세요");
+    		return false;
+    	}
+    	
+    	if($('.f_status option:selected').val() == "") {
+    		alert("이행 유무를 선택해주세요");
+    		return false;
+    	}    	
+    	
+    	if($('input[name="f_filename[]"]').val() == "") {
+    		alert("스크린샷 파일을 등록해주세요.");
+    		return false;    		
+    	}
+    	var f_content = new Array();
+			var filelist = new Array();
+			
+			$('.content-group').each(function(i){
+				var content_group = $('.content-group').eq(i);
+				var filelist = $(content_group).find($('input[name="filelist[]"]'));
+				$(filelist).val('');
+				
+				$(content_group).find('.file_row').each(function(){
+					var filename = $(this).find($('input[name="f_filename[]"]')).val();
+					var filepath = $(this).find($('input[name="f_filepath[]"]')).val();
+					if(filepath) //업로드한 파일이 없으면 패스
+						$(filelist).val($(filelist).val() + '|' + filename + '@' + filepath);	
+				});
+				
+				$(filelist).val($(filelist).val().substring(1));				
+			});
+
+
+  		var confirm_msg = "등록하시겠습니까?";		
+
+				if(confirm(confirm_msg)) 
+				{
+					alert("점검 등록이 완료되었습니다.");
+					self.location.reload();
+					
+				}
+    }
+
+		function update() {
+    	var f_content = new Array();
+			var filelist = new Array();
+			
+			$('.content-group').each(function(i){
+				var content_group = $('.content-group').eq(i);
+				var filelist = $(content_group).find($('input[name="filelist[]"]'));
+				$(filelist).val('');
+				
+				$(content_group).find('.file_row').each(function(){
+					var filename = $(this).find($('input[name="f_filename[]"]')).val();
+					var filepath = $(this).find($('input[name="f_filepath[]"]')).val();
+					
+					if(filepath)  //업로드한 파일이 없으면 패스
+						$(filelist).val($(filelist).val() + '|' + filename + '@' + filepath);	
+				});
+				
+				$(filelist).val($(filelist).val().substring(1));				
+			});
+
+  		var confirm_msg = "수정하시겠습니까?";		
+
+				if(!confirm(confirm_msg)) return false;
+        $.ajax({
+            type:"POST"
+            ,async:false
+            ,dataType:"json"
+            ,data: $("#write_form").serialize()
+            ,url:"/inspect/update"
+            ,success:function(args) {
+                if (args.status == "OK")
+                {
+                	if(open_gubun=="pop"){
+										alert(args.msg);
+										opener.location.reload();
+										self.close();						
+									} else {
+										alert(args.msg);
+                    self.location.href="/inspect/list";			
+									}
+                    
+            	}
+            	else
+              {
+                 alert(args.msg);
+              }
+            }
+            ,beforeSend:null
+            ,error: function(e) {
+                alert(e.responseText);
+            }
+        });
+    }
+
+		function change_category(level) {
+			
+			if(level==2) {
+			var f_seq = $("#f_seq_code1 option:selected").val();
+			get_category(f_seq, 2, "f_seq_code2", "f_seq_code2");
+			
+			} else if (level==3) {
+			var f_seq = $("#f_seq_code2 option:selected").val();
+			get_category(f_seq, 3, "f_seq_code3", "f_seq_code3");				
+			}
+			
+		}
+
+    function disabled_evidence_ymd_and_time()
+    {
+        $('#f_evidence_ymd').prop("disabled",false);
+        $('#f_evidence_hms').prop("disabled",false);
+    }
+
+    var duplicate = false;				// 중복 체크 상태변수 false: 중복, true: 중복아님
+
+    function duplicate_check() {
+
+        var f_webhard_seq = $("#f_webhard_seq").val();
+        var f_webhard_no = $("#f_webhard_no").val();
+        var f_insert_type = $("#f_insert_type").val();
+        var f_type = $("#f_type").val();
+
+        if (!blankId("f_webhard_seq", "웹하드")) return;
+        if (!blankId("f_webhard_no", "게시물번호")) return;
+
+        $.ajax({
+            type:"POST"
+            ,async:false
+            ,dataType:"json"
+            ,data: { "f_webhard_seq" : f_webhard_seq,  "f_webhard_no" : f_webhard_no, "f_insert_type" : f_insert_type, "f_type": f_type, "csrf_kait_name" : "066f33a5acd4076f0bd50ec0c81cc919"}
+            ,url:"/evidence/duplicate_check/"
+            ,success:function(args) {
+                if (args.status == "OK")
+                {
+
+                    alert(args.msg);
+                    duplicate = true;
+                    $("#f_video_filename").val($("#f_siteid").val() + "_" + $("#f_webhard_no").val() + ".");
+                }
+                else
+                {
+                    alert_modal(args.msg);
+                }
+
+            }
+            ,beforeSend:null
+            ,error: function(e) {
+                alert(e.responseText);
+            }
+        });
+    }
+
+    function put_opener_data(f_seq, f_sitename, f_siteid) {
+
+        $("#f_webhard_seq").val(f_seq);
+        $("#f_webhard_name").val(f_sitename);
+        $("#f_siteid").val(f_siteid);
+
+        $(".modal").modal("hide");
+    }
+
+    function webhard_search(f_search_key) {
+
+        var f_sitename = $("#f_sitename").val();
+        $("#webhard_table").children().remove();
+        $.ajax({
+            type:"POST"
+            ,async:false
+            ,dataType:"html"
+            ,data: { "f_search_key" : f_search_key, "f_sitename" : f_sitename, "csrf_kait_name" : "066f33a5acd4076f0bd50ec0c81cc919"}
+            ,url:"/webhard/webhard_search/"
+            ,success:function(args) {
+                //alert(args);
+                $("#webhard_table").append(args);
+            }
+            ,beforeSend:null
+            ,error: function(e) {
+                alert(e.responseText);
+            }
+        });
+    }
+
+    function date()
+    {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = new String(date.getMonth()+1);
+        var day = new String(date.getDate());
+        var hour = new String(date.getHours());
+        var minute = new String(date.getMinutes());
+        var second = date.getSeconds();
+
+        if (month.length == 1)
+        {
+            month = "0" + month;
+        }
+        if (day.length == 1)
+        {
+            day = "0" + day;
+        }
+        if (hour.length == 1)
+        {
+            hour = "0" + hour;
+        }
+        if (minute.length == 1)
+        {
+            minute = "0" + minute;
+        }
+
+        return year +  month +  day + hour + minute + second;
+    }
+
+
+
+
+
+
+
+</script>
+<style>
+    .table th, td{text-align:center;}
+    .col-form-label{padding-top: 6.4px;}
+    .popup_pannel{float:none;width:100%;}
+</style>
+<!-- begin:: Content -->
+<div class="main-panel ps">
+    
+    <nav class="navbar navbar-default">
+        <div>
+            <div class="navbar-minimize">
+                <button id="minimizeSidebar" class="btn btn-fill btn-icon"><i class="ti-more-alt"></i></button>
+            </div>
+            <div class="navbar-header" style="margin-left:0px;">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar bar1"></span>
+                    <span class="icon-bar bar2"></span>
+                    <span class="icon-bar bar3"></span>
+                </button>
+                <a class="navbar-brand"> &nbsp; 점검 등록</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-form navbar-left" style="margin-top:25px;">
+                    <a href="#" class="k-content__head-breadcrumb-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="k-content__head-breadcrumb-separator">점검</span>
+                    <a href="#" class="k-content__head-breadcrumb-link k-content__head-breadcrumb-link--active">등록 </a>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="content" style="padding:1px;">
+        <!--begin::Form-->
+                <form action="http://kaitclean.itbob.co.kr/inspect/insert" class="k-form k-form--fit k-form--label-right" id="write_form" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                                                                                                                     <input type="hidden" name="csrf_kait_name" value="066f33a5acd4076f0bd50ec0c81cc919">
+        <input type="hidden" id="f_insert_type" name="f_insert_type">
+        <input type="hidden" id="f_type" name="f_type">
+        <input type="hidden" id="f_post" name="f_post">
+        <input type="hidden" id="f_siteid" name="f_siteid">
+        <input type="hidden" id="f_seq" name="f_seq">
+        <div class="k-portlet__body" style="margin-left:0px; padding:15px">
+            <div class="card">
+                <div class="card-content">
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label">분류선택</label>
+                        <div class="col-lg-8">
+                            <div class="input-group" style="display: flex;">
+                                <select class="form-control" name="f_seq_code1" id="f_seq_code1" onchange="change_category(2)">
+	                                <option value="" selected="true">선택안함</option>
+	                                <option value="1">청소년보호</option>
+	                                <option value="2">유료후원아이템 결제피해 방지</option>
+                                </select> &nbsp;
+                                <select class="form-control" name="f_seq_code2" id="f_seq_code2" onchange="change_category(3)">
+                                    <option value="">중분류</option>
+                                </select>&nbsp;
+                                <select class="form-control" name="f_seq_code3" id="f_seq_code3">
+                                    <option value="">소분류</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label">점검업체</label>
+                        <div class="col-lg-8">
+                            <div class="input-group" style="display: flex;">
+                                <select class="form-control" name="f_seq_site" id="f_sitename">
+                                    <option value="" selected="true" disabled="disabled">점검업체선택</option>
+                                <option value="11">아프리카TV</option><option value="12">유튜브</option><option value="13">트위치TV</option><option value="14">카카오TV</option><option value="15">팝콘TV</option><option value="16">뽕TV</option><option value="17">캔TV</option><option value="18">풀TV</option><option value="19">네이버TV</option><option value="20">페이스북</option><option value="21">판도라TV</option><option value="22">팬더TV</option><option value="28">티빙</option><option value="29">웨이브</option><option value="30">넷플릭스</option><option value="31">곰TV</option><option value="32">엠군</option><option value="33">디시인사이드</option><option value="34">일간베스트</option><option value="35">오늘의유머</option><option value="36">SLR클럽</option><option value="37">뽐뿌</option><option value="38">골드라이브</option><option value="39">유플릭스</option><option value="40">틱톡</option></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label">점검일</label>
+												<div class="col-lg-3">
+													<div class="input-daterange input-group" style="display: flex;" id="k_datepicker_5" data-date-format="yyyymmdd">
+														<input type="text" class="form-control" id="f_inspect_ymd" name="f_inspect_ymd" value="" placeholder="등록시작일">
+													</div>                
+												</div>       
+                       
+                       <!--
+                        <div class="col-lg-3">
+                            <div class="input-group date" style="display:flex; pointer-events:none;">
+                                <input type="text" class="form-control datepicker" id='f_inspect_ymd' name='f_inspect_ymd' placeholder="">
+                                <div class="input-group-append">
+													<span class="input-group-text">
+														<i class="la la-calendar-check-o" style="margin-top:12px;"></i>
+													</span>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+                        
+                        <label class="col-lg-2 col-form-label">점검시간</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="f_inspect_hms" name="f_inspect_hms" placeholder="" style="IME-MODE:disabled;" onkeypress="if ((event.keyCode<48) || (event.keyCode>57)) return false;" maxlength="4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="content_area">
+
+                <div class="card content-form content_row" id="">
+                    <div class="card-content content-group">
+                        <div class="form-group row" id="">
+                            <label class="col-lg-2 col-form-label">내용</label>
+                            <div class="col-lg-6">
+                                <div class="input-group" style="display: flex;">
+                                    <input type="text" class="form-control" id="" name="f_content[]" value="">
+                                </div>
+                            </div>
+                            <div class="col-lg-2" style="">
+                                <select class="form-control f_status" name="f_status[]" id="">
+                                    <option value="" selected="true" disabled="disabled">이행 유무</option>
+                                    <option value="Y">이행</option>
+                                    <option value="N">미이행</option>
+                                </select>
+                            </div>                            
+                            <div class="col-lg-2">
+                                <button type="button" class="btn btn-success btn_add_content" onclick="add_content(this)">추가</button>
+                                <button type="button" class="btn btn-danger btn_remove_content" onclick="remove_content(this)">삭제</button>
+                            </div>
+                        </div>
+                        <div id="" class="file_area">
+														<input type="hidden" class="filelist" name="filelist[]" style="width:500px">
+														<input type="hidden" class="f_seq" name="f_seq" value="">
+  
+                            <div class="file_row">
+                                <div class="form-group row">
+                                    <label class="col-lg-2 col-form-label">스크린샷 :</label>
+                                    <div class="col-lg-8">
+                                        <div class="input-group" style="display: flex;">
+                                            <input type="hidden" id="" name="f_filepath[]" value="">
+                                            <input type="hidden" id="" name="f_filepath_thumb[]">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-success" type="button" onclick="capture(this)">캡쳐</button>
+                                            </div>
+                                            &nbsp;<input type="text" class="form-control" id="" name="f_filename[]" readonly="">&nbsp;
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-warning" type="button" onclick="direct_upload(this)">직접등록</button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                            <button type="button" class="btn btn-success btn_add_file" onclick="add_file(this)">+</button>
+                                            <button type="button" class="btn btn-danger btn_remove_file" onclick="remove_file(this)">-</button>
+                                    </div>
+                                </div>
+                                <div class="form-group row capture_pre_view_area" style="display:none;">
+                                    <label class="col-lg-2 col-form-label">보기 :</label>
+                                    <div class="col-lg-8 capture_pre_view">
+                                    </div>
+                                </div>
+                            </div>
+                   
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+           
+        </div>
+                <div class="k-portlet__foot" style="text-align:center;">
+        	
+            <div class="k-form__actions">
+                <button type="button" class="btn btn-primary btn-lg" onclick="insert()">&nbsp;&nbsp;등&nbsp;&nbsp;&nbsp;록&nbsp;&nbsp;</button>
+            		<button type="button" class="btn btn-danger btn-lg" onclick="location.href='/inspect/list'">&nbsp;&nbsp;취&nbsp;&nbsp;&nbsp;소&nbsp;&nbsp;</button>
+
+            </div>
+        </div>
+        </form>
+
+        <!--end::Form-->
+    </div>
+<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+<!-- End:: Content -->
+
+<!-- 직접 업로드 폼 -->
+<form id="frm_upload" name="frm_upload" enctype="multipart/form-data" method="post" action="/Upload/direct_upload_image" style="visibility:visible;">
+    <input type="hidden" id="csrf_kait_name" name="csrf_kait_name" value="066f33a5acd4076f0bd50ec0c81cc919">
+    <input type="hidden" id="userfile_new_name" name="userfile_new_name">
+</form>
+
+
+
+
+
+					<!-- begin:: Footer -->
+				
+				<footer class="footer" style="background-color:#f4f3ef;">
+          <div class="container-fluid">
+						<div class="copyright pull-left" style="margin-top:0px; margin-left:250px; padding-top:0px;">
+               2019 &nbsp;©&nbsp;<a href="/main" class="k-link"> © 클린인터넷방송 기술적조치 관리시스템</a>
+            </div>
+            <div class="copyright pull-right" style="margin-top:0px; padding-top:0px;">
+               								사용가능용량 / 전체용량 : 63T / 66T            </div>
+          </div>
+	      </footer>
+					<!-- end:: Footer -->
+				<!--</div>-->
+		</div>
+		
+	
+		<!-- end:: Page -->
+
+		
+	<!-- end::웹하드검색 Modal -->						
+	
+	<!-- begin :: alert Modal -->
+	
+	<!-- end :: alert Modal -->
+	
+	<script type="text/javascript">
+    	$(document).ready(function(){
+				//demo.initOverviewDashboard(); 2019.
+				//demo.initCirclePercentage();
+
+    	});
+	</script>	
+<div class="modal fade" id="modal-webhard" tabindex="-1" role="dialog" aria-labelledby="modal-webhard-title" aria-hidden="true">
+		 <div class="content" role="document" style="max-width:900px; max-height:600px; margin:30px auto">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal-webhard-title">웹하드 검색</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="k-portlet">
+						<!--begin::Form-->
+						<form class="k-form k-form--label-right">
+							<div class="k-portlet__body">
+								<div class="k-portlet__foot" style="border-top:none;text-align:center;">
+									<div class="k-form__actions">													
+										<button type="button" class="btn btn-info" onclick="webhard_search('가')">가</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('나')">나</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('다')">다</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('라')">라</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('마')">마</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('바')">바</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('사')">사</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('아')">아</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('자')">자</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('차')">차</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('카')">카</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('타')">타</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('파')">파</button>
+										<button type="button" class="btn btn-info" onclick="webhard_search('하')">하</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!--end::Form-->
+						
+						<!--begin::List-->
+						<div class="k-scroll" data-scroll="true" style="height: 600px; overflow-y: auto; margin-top:10px;">
+							<div id="k_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+								<div class="row">
+									<div class="col-sm-12">
+										<!--begin: Datatable -->
+										<table class="table table-striped- table-bordered table-hover table-checkable">
+											<thead>
+												<tr>
+													<th>웹하드</th>
+													<th>URL</th>
+												</tr>
+											</thead>
+											<tbody id="webhard_table">
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">										
+										<button type="reset" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+									</div>
+								</div>
+							</div>	
+							<!--end::List-->				
+							
+						</div>					
+					</div>								
+				</div>
+			</div>
+		</div>
+	</div><div class="modal fade" id="modal-alert" tabindex="-1" role="dialog" aria-labelledby="modal-alert-label">
+		<div class="content" role="document" style="max-width:800px; max-height:500px; margin:30px auto">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal-alert-label">경고</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>
+						</p><div class="alert alert-danger" role="alert">
+							<div class="alert-icon"><i class="flaticon-questions-circular-button"></i></div>
+							<div class="alert-text" id="msg_alert"></div>
+						</div>
+					<p></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div></body></html>

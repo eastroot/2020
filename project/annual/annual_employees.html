@@ -1,0 +1,1353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+<link rel="shortcut icon" type="image/x-icon" href="img/main/footer_logo_cut2.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="stylesheet" type="text/css" href="css/general.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+
+
+<title>연차 관리 시스템</title>
+
+
+<style type="text/css">
+	#layerPop{width:500px; height:320px; position:absolute; padding:10px; border:4px solid #eee; background:#fff; display:none; z-index:100;}
+	#layerPop .close{position:absolute; bottom:5px;right:5px;}
+	
+	#applyLayerPop{width:360px; height:393px; position:absolute; padding:10px; border:4px solid #eee; background:#fff; display:none; z-index:100; }
+	#applyLayerPop .close{position:absolute; bottom:5px;right:5px;}
+	
+	#passwordLayerPop{width:300px; height:213px; position:absolute; padding:10px; border:4px solid #eee; background:#fff; display:none; z-index:100;}
+	#passwordLayerPop .close{position:absolute; bottom:5px;right:5px;}
+
+	#deemed{width:100%; height:100%; position:absolute; top:0; left:0; filter:Alpha(opacity=50);opacity:0.5; background:#000; z-index:1;}
+	
+	#deemed1{width:100%; height:100%; position:absolute; top:0; left:0; filter:Alpha(opacity=50);opacity:0; background:#ffffff; z-index:1;}
+	
+</style>
+	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<title> Report.itbob.co.kr</title>
+<link rel="stylesheet" type="text/css" href="css/general.css">
+<link rel="stylesheet" type="text/css" href="css/iosbadge.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/Nestable-master/jquery.nestable.js"></script>
+<script src="js/common.js"></script>
+
+<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/demo/demo.css">
+<link rel="stylesheet" type="text/css" href="css/sub.css">
+<script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.4.1/iosbadge.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>	
+	<!--<script src="/js/mInfo/login.js"></script>-->
+	
+<script type="text/javascript">
+	<!--
+	//Element ID 불러쓰기
+	var f_vc_agree = "Y";
+	console.log(f_vc_agree);
+	
+	
+
+	$(document).ready(function () {
+
+		
+		if(f_vc_agree !== 'Y'){
+		
+			openLayer('layerPop',100,250);	
+		
+		}
+		
+
+
+        $("#example-table-1 tr").click(function(){   	
+		
+			var str = ""
+            var tdArr = new Array();    // 배열 선언
+            
+            // 현재 클릭된 Row(<tr>)
+            var tr = $(this);
+            var td = tr.children();
+            
+            // tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
+            console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+			
+            // 반복문을 이용해서 배열에 값을 담아 사용할 수 도 있다.
+            td.each(function(i){
+                tdArr.push(td.eq(i).text());
+            });
+            
+            //console.log("배열에 담긴 값 : "+tdArr);
+            
+            // td.eq(index)를 통해 값을 가져올 수도 있다.
+            f_seq = td.eq(0).text();
+            //var userid = td.eq(1).text();
+            //var name = td.eq(2).text();
+            //var email = td.eq(3).text();
+			
+			
+			
+			//alert(userid);
+            
+			/*
+            str +=    " * 클릭된 Row의 td값 = No. : <font color='red'>" + no + "</font>" +
+                    ", 아이디 : <font color='red'>" + userid + "</font>" +
+                    ", 이름 : <font color='red'>" + name + "</font>" +
+                    ", 이메일 : <font color='red'>" + email + "</font>";        
+            
+            $("#ex1_Result1").html(" * 클릭한 Row의 모든 데이터 = " + tr.text());        
+            $("#ex1_Result2").html(str);
+			
+			*/
+			//alert(111);
+			openApplyLayer('applyLayerPop',100,400,'select');
+		
+        });
+		
+		/*
+					<tr>
+						<td class="listTblTit" style="text-align:left;">
+							<label for="startdate">시작일자</label>
+							<input type="date" id="f_vc_stadate" name="f_vc_stadate" >
+							<label for="lastdate">종료일자</label>
+							<input type="date" id="f_vc_enddate" name="f_vc_enddate" >
+						</td>
+					</tr>
+					<tr>
+						<td class="listTblTit" style="text-align:left;">사용일수
+							<input type="text"  title="공지사항검색영역"  style="width:20px;" class="inputTxt" name='f_vc_days' id="f_vc_days">
+							
+							
+							
+							
+							
+							일
+						</td>
+					</tr>
+		*/
+					
+				  $("#f_vc_stadate").datepicker(
+				  
+						{
+							dateFormat: 'yy-mm-dd',
+							prevText: '이전 달',
+							nextText: '다음 달',
+							monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+							monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+							dayNames: ['일','월','화','수','목','금','토'],
+							dayNamesShort: ['일','월','화','수','목','금','토'],
+							dayNamesMin: ['일','월','화','수','목','금','토'],
+							showMonthAfterYear: true,
+							changeMonth: true,
+							changeYear: true,
+							yearSuffix: '년',
+							
+						  }
+
+
+
+
+				  );
+				  
+				  $("#f_vc_enddate").datepicker(
+				  
+						{
+							dateFormat: 'yy-mm-dd',
+							prevText: '이전 달',
+							nextText: '다음 달',
+							monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+							monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+							dayNames: ['일','월','화','수','목','금','토'],
+							dayNamesShort: ['일','월','화','수','목','금','토'],
+							dayNamesMin: ['일','월','화','수','목','금','토'],
+							showMonthAfterYear: true,
+							changeMonth: true,
+							changeYear: true,
+							yearSuffix: '년',
+							
+						  }
+
+
+
+
+				  );
+
+				//radio change할 경우 시작일자 및 종료일자 초기화
+				$('input[type=radio][name=f_vc_gubun]').change(function() {
+					if (this.value == 'H') {
+						$("#f_vc_stadate").removeAttr('value');
+						
+						$("#f_vc_enddate").removeAttr('value');
+						
+						$("#f_vc_days").removeAttr('value');
+					}
+					else if (this.value == 'F') {
+						$("#f_vc_stadate").removeAttr('value');
+						
+						$("#f_vc_enddate").removeAttr('value');
+						
+						$("#f_vc_days").removeAttr('value');
+					}
+				});
+				
+				//달력 change할 경우 사용일수 초기화
+				$('input[type=text][name=f_vc_stadate]').change(function() {
+						
+						$("#f_vc_days").removeAttr('value');
+						calDayButton();
+
+				});
+				
+				$('input[type=text][name=f_vc_enddate]').change(function() {
+
+						$("#f_vc_days").removeAttr('value');
+						calDayButton();
+				
+				});
+				
+				
+				
+				
+				/*
+					<tr>
+						<td class="listTblTit" style="text-align:left;">
+							<label for="startdate">시작일자 : </label>
+							<!--<input type="date" id="f_vc_stadate" name="f_vc_stadate" >-->
+							<input type="text" id="f_vc_stadate" name="f_vc_stadate" size="10" placeholder="클릭하세요">
+							<label for="lastdate">종료일자 : </label>
+							<!--<input type="date" id="f_vc_enddate" name="f_vc_enddate" > -->
+							<input type="text" id="f_vc_enddate" name="f_vc_enddate" size="10" placeholder="클릭하세요">						
+						</td>
+					</tr>
+					<tr>
+						<td class="listTblTit" style="text-align:left;">사용일수
+							<input type="text"  title="공지사항검색영역"  style="width:20px;" class="inputTxt" name='f_vc_days' id="f_vc_days">일
+							<button type="button" id="calDay" name="calDay" class="btn01" onclick="calDayButton()" style="cursor:pointer">자동계산</button>
+						</td>
+					</tr>	
+				*/
+				
+				
+				
+
+
+	});
+	
+	
+
+	
+
+	function dEI(elementID){
+		return document.getElementById(elementID);
+	}
+
+	//레이어 팝업 열기
+	function openLayer(IdName, tpos, lpos){
+	
+		var pop = dEI(IdName);
+		
+		//pop.style.top = tpos + "px";
+		//pop.style.left = lpos + "px";
+		
+		pop.style.top =  (jQuery(window).height()/2) - (305/2) + jQuery(document).scrollTop() + "px";
+		pop.style.left =  (jQuery('body').width()/2) - (390/2) + "px";
+		pop.style.display = "block";
+
+		var wrap = dEI("wrapper");
+		var reservation = document.createElement("div");
+		reservation.setAttribute("id", "deemed");
+		wrap.appendChild(reservation);
+	}
+
+	//레이어 팝엽 닫기
+	function closeLayer( IdName ){
+		var pop = dEI(IdName);
+		pop.style.display = "none";
+		var clearEl=parent.dEI("deemed");
+		var momEl = parent.dEI("wrapper");
+		momEl.removeChild(clearEl);
+	}
+
+	//연차신청레이어 팝업 열기
+	function openApplyLayer(IdName, tpos, lpos, process_gubun){
+		//alert( IdName + ":" + tpos + ":" + lpos + ":" + process_gubun );
+		//alert(typeof (document.body.scrollTop + (document.body.clientHeight - $(".applyform").height()) / 2));
+		//버튼 숨기기
+		if(process_gubun == "new"){
+		
+			$('#editTr, #deletTr').css("display","none");
+
+		}else if(process_gubun == "edit"){
+			
+			//$('#apply').toggle(false);
+			editAnnual(process_gubun);
+			
+		}else if(process_gubun == "select"){
+			
+			$('#applyTr').css("display","none");
+			getAnnual(process_gubun);
+			
+		}else if(process_gubun == "pass"){
+			
+		}else{
+			
+			alert("문제가 발생했습니다.");
+			return;
+		}
+		//프로세스구분 텍스트값 변경하기
+		
+		var pop = dEI(IdName);
+		//alert(pop);
+		//var t = document.body.scrollTop + (document.body.clientHeight - $(".applyform").height()) / 2
+		
+		//var t = (document.body.clientHeight / 2) - obj.height() / 2 + document.body.scrollTop
+
+		var l = document.body.scrollTop + (document.body.clientHeight - $(".applyform").height()) / 2
+		
+		//alert( jQuery(window).height()/2);
+		//alert( 305/2 );
+		//alert( jQuery(document).scrollTop());
+		//jQuery(".팝업").css("top", (jQuery(window).height()/2) - (팝업의 height/2) + jQuery(document).scrollTop());
+
+		//(jQuery('body').width()/2) - (390/2)
+		
+		//alert(l);
+		
+		pop.style.top =  (jQuery(window).height()/2) - (305/2) + jQuery(document).scrollTop() + "px";
+		pop.style.left =  (jQuery('body').width()/2) - (390/2) + "px";
+		pop.style.display = "block";
+
+		var wrap = dEI("wrapper");
+		//alert(wrap);
+		var reservation = document.createElement("div");
+		//alert(reservation);
+		reservation.setAttribute("id", "deemed1");
+		wrap.appendChild(reservation);
+	}
+
+	//연차신청레이어 팝엽 닫기
+	function closeApplyLayer( IdName ){
+		window.location.reload();
+		
+		/*
+		var pop = dEI(IdName);
+		pop.style.display = "none";
+		//var clearEl=parent.dEI("deemed");
+		var momEl = parent.dEI("wrapper");
+		momEl.removeChild(clearEl);
+		*/
+		
+	}
+		
+	//-->
+	
+	//연차 신청 조회
+	function getAnnual(process_gubun){
+		
+		//alert(f_seq);
+		
+		$("#process_gubun").val(process_gubun);
+		
+		//alert(222);
+		
+		var sendData = $('#applyform').serialize();
+		
+		//alert(333);
+		
+		sendData += '&f_seq='+f_seq;
+		
+		//alert(444);
+		
+		//if(!confirm("해당 연차 신청 정보를 조회 합니다.")) return;
+		//commonAjaxResultVal에 리턴값 셋팅됨.
+		
+		sendAjax("../php/applyAnnual.php", sendData, "post", false);
+		
+		//alert(commonAjaxResultVal.test.F_STATUS);
+		//window.location.reload();
+		
+		//console.log(commonAjaxResultVal.test);
+
+		
+		//window.location.reload();
+		
+		
+		if(commonAjaxResultVal.test.F_STATUS == 'Y' || commonAjaxResultVal.test.F_STATUS == 'R'){
+			
+				if(commonAjaxResultVal.test.F_VC_GUBUN == 'H'){
+					
+					$("input:radio[name ='f_vc_gubun']:input[value='H']").attr({ checked: "true", disabled: "true"});
+					
+				}else if(commonAjaxResultVal.test.F_VC_GUBUN == 'F'){
+					
+					$("input:radio[name ='f_vc_gubun']:input[value='F']").attr({ checked: "true", disabled: "true"});
+				}
+				
+				
+				//console.log(commonAjaxResultVal.test.F_VC_GUBUN);
+				//document.getElementById("f_vc_gubun")($N).checked;
+				$("#f_vc_stadate").val(commonAjaxResultVal.test.F_VC_STADATE).attr("disabled", true);
+				
+				$("#f_vc_enddate").val(commonAjaxResultVal.test.F_VC_ENDDATE).attr("disabled", true);
+				
+				//$("#f_vc_days").val(commonAjaxResultVal.test.F_VC_DAYS).attr("disabled", true);
+				
+				var f_vc_days = commonAjaxResultVal.test.F_VC_DAYS;
+				
+				var f_vc_days_float = parseFloat(f_vc_days);
+				
+				$("#f_vc_days").val(f_vc_days_float).attr("disabled", true);	
+				
+				$("#f_sayu").val(commonAjaxResultVal.test.F_VC_SAYU).attr("disabled", true);
+				
+				
+				
+
+				$("#f_id_support").val(commonAjaxResultVal.test.F_ID_SUPPORT).attr("disabled", true);
+
+				
+				
+				
+				$('#editTr, #deletTr').css("display","none");
+
+			
+		}else if(commonAjaxResultVal.test.F_STATUS == 'C' || commonAjaxResultVal.test.F_STATUS == 'S'){
+			
+				if(commonAjaxResultVal.test.F_VC_GUBUN == 'H'){
+					
+					$("input:radio[name ='f_vc_gubun']:input[value='H']").attr("checked", true);
+					
+				}else if(commonAjaxResultVal.test.F_VC_GUBUN == 'F'){
+					
+					$("input:radio[name ='f_vc_gubun']:input[value='F']").attr("checked", true);
+				}
+				
+				
+				//console.log(commonAjaxResultVal.test.F_VC_GUBUN);
+				//document.getElementById("f_vc_gubun")($N).checked;
+				$("#f_vc_stadate").val(commonAjaxResultVal.test.F_VC_STADATE);
+				
+				$("#f_vc_enddate").val(commonAjaxResultVal.test.F_VC_ENDDATE);
+				
+				//$("#f_vc_days").val(commonAjaxResultVal.test.F_VC_DAYS);
+				
+				var f_vc_days = commonAjaxResultVal.test.F_VC_DAYS;
+				
+				var f_vc_days_float = parseFloat(f_vc_days);
+				
+				$("#f_vc_days").val(f_vc_days_float);	
+				
+				$("#f_sayu").val(commonAjaxResultVal.test.F_VC_SAYU);
+				
+				$("#f_id_support").val(commonAjaxResultVal.test.F_ID_SUPPORT);
+				
+
+		}
+		/*
+				if(commonAjaxResultVal.test.F_STATUS != 'S'){
+					
+					$('#edit, #delete').toggle(false);
+					
+				}
+				*/
+		
+		//$("#f_vc_reject_sayu").val(commonAjaxResultVal.test.F_VC_REJECT_SAYU);
+		
+		/*
+		if(commonAjaxResultVal.result == "success"){	
+		
+			console.log(commonAjaxResultVal.test);
+			window.location.reload();
+		
+		} else {
+		
+			alert(commonAjaxResultVal.msg);
+			return;
+		}
+		*/
+		
+				
+		
+	}
+	
+	
+	function isNull(elm){ 
+        //Null 체크 함수
+        var elm;
+        return (elm == null || elm == "" || elm == "undefined" || elm == " ") ? true : false
+	}
+	
+	//연차 신청
+	function applyAnnual(){
+		
+		var thisform = document.applyform;
+		
+		if(isNull(thisform.f_vc_stadate.value)){
+			
+			alert("시작날짜를 입력해주세요.");
+            thisform.f_vc_stadate.value ="";
+            thisform.f_vc_stadate.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_vc_enddate.value)){
+			
+			alert("종료날짜를 입력해주세요.");
+            thisform.f_vc_enddate.value ="";
+            thisform.f_vc_enddate.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_vc_days.value)){
+			
+			alert("사용일수 자동계산해주세요.");
+            thisform.f_vc_days.value ="";
+            thisform.f_vc_days.focus();
+            return false;
+		
+		}else if(isNull(thisform.f_sayu.value)){
+			
+			alert("연차사유를 입력해주세요.");
+            thisform.f_sayu.value ="";
+            thisform.f_sayu.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_id_support.value)){
+			
+			alert("업무 대체자를 선택해 주세요.");
+            thisform.f_id_support.value ="";
+            thisform.f_id_support.focus();
+            return false;	
+			
+		}
+				
+		var sendData = $('#applyform').serialize();
+		
+		if(!confirm("연차를 신청하시겠습니까?")) return;
+		//commonAjaxResultVal에 리턴값 셋팅됨.
+		
+		sendAjax("../php/applyAnnual.php", sendData, "post", false);
+			
+		if(commonAjaxResultVal.result == "success"){
+			
+			alert(commonAjaxResultVal.msg);
+			
+			sendmail_apply();	
+			
+			window.location.reload();
+			
+					
+		
+		} else {
+		
+			alert(commonAjaxResultVal.msg);
+			return;
+		}
+		
+	}
+	
+	//연차 신청 후 메일 발송
+	function sendmail_apply(){
+		
+
+		//var thisform = document.applyform;
+		
+		var sendData = $('#applyform').serialize();
+		
+		sendAjax("../php/sendmail_apply.php", sendData, "post", false);
+		
+
+			
+	}
+	
+	
+	//연차 수정 후 메일 발송
+	function sendmail_edit(){
+		
+
+		//var thisform = document.applyform;
+		
+		var sendData = $('#applyform').serialize();
+		
+		sendAjax("../php/sendmail_edit.php", sendData, "post", false);
+		
+
+			
+	}
+	
+	//연차 삭제 후 메일 발송
+	function sendmail_delete(){
+		
+
+		//var thisform = document.applyform;
+		
+		var sendData = $('#applyform').serialize();
+		
+		sendAjax("../php/sendmail_delete.php", sendData, "post", false);
+		
+
+			
+	}
+	
+	
+	//연차 수정
+	function editAnnual(process_gubun){
+		
+		//alert(f_seq);
+		
+		var thisform = document.applyform;
+		
+		if(isNull(thisform.f_vc_stadate.value)){
+			
+			alert("시작날짜를 입력해주세요.");
+            thisform.f_vc_stadate.value ="";
+            thisform.f_vc_stadate.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_vc_enddate.value)){
+			
+			alert("종료날짜를 입력해주세요.");
+            thisform.f_vc_enddate.value ="";
+            thisform.f_vc_enddate.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_vc_days.value)){
+			
+			alert("사용일수 자동계산해주세요.");
+            thisform.f_vc_days.value ="";
+            thisform.f_vc_days.focus();
+            return false;
+		
+		}else if(isNull(thisform.f_sayu.value)){
+			
+			alert("연차사유를 입력해주세요.");
+            thisform.f_sayu.value ="";
+            thisform.f_sayu.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_id_support.value)){
+			
+			alert("업무 대체자를 선택해 주세요.");
+            thisform.f_id_support.value ="";
+            thisform.f_id_support.focus();
+            return false;	
+			
+		}
+		
+		if(!confirm("신청하신 연차를 수정하시겠습니까?")) return;
+		//commonAjaxResultVal에 리턴값 셋팅됨.
+		$("#process_gubun").val(process_gubun);
+		
+		
+		var sendData = $('#applyform').serialize();
+		
+		//alert(f_seq);
+		
+		sendData += '&f_seq='+f_seq;
+		
+		sendAjax("../php/applyAnnual.php", sendData, "post", false);
+		
+		if(commonAjaxResultVal.result == "success"){
+			
+			alert(commonAjaxResultVal.msg);
+			//sendmail_edit();	
+			window.location.reload();
+			
+		} else {
+			
+			alert(commonAjaxResultVal.msg);
+			return;
+			
+		}
+
+	}
+	//연차 삭제
+	function deleteAnnual(process_gubun){
+			
+		//alert(process_gubun);
+		
+		$("#process_gubun").val(process_gubun);
+		
+		if(!confirm("신청하신 연차를 삭제하시겠습니까?")) return;
+		//commonAjaxResultVal에 리턴값 셋팅됨.
+		
+		
+		
+		
+		var sendData = $('#applyform').serialize();
+		
+		sendData += '&f_seq='+f_seq;
+		
+		sendAjax("../php/applyAnnual.php", sendData, "post", false);
+		
+		
+		
+		if(commonAjaxResultVal.result == "success"){
+			
+			alert(commonAjaxResultVal.msg);
+			//sendmail_delete();	
+			window.location.reload();
+			
+		} else {
+			
+			alert(commonAjaxResultVal.msg);
+			return;
+		}
+		
+	}
+	
+	function agree(){
+			//alert(111);
+		
+				if($("#checkBoxId").is(":checked")){
+					
+					sendAjax("../php/agreement.php", $('#checkBoxId').serialize(), "post", false);
+					
+					window.location.reload();
+					
+					//$('#button').prop("disabled", false);
+					
+					//alert("동의합니다.");
+					
+				}else{
+					
+					alert("연차 관리 시스템 이용에 동의해주세요.");
+					return;
+					
+				}
+
+		
+	}
+	
+				/*
+			$("#checkBoxId").change(function(){
+				if($("#checkBoxId").is(":checked")){
+					
+					sendAjax("../php/agreement.php", $('#checkBoxId').serialize(), "post", false);
+					
+					$('#button').prop("disabled", false);
+					
+					alert("동의합니다.");
+				}else{
+					$('#button').prop("disabled", true);
+					alert("동의하지 않습니다.");
+					
+				}
+			});
+			*/
+
+
+			
+	//비밀번호 수정
+
+	
+
+	
+	function editPassword(process_gubun){
+		
+		
+		
+		var thisform = document.passwordform;
+		
+		if(isNull(thisform.f_pass.value)){
+			
+			alert("현재 비밀번호를 입력해주세요.");
+            thisform.f_pass.value ="";
+            thisform.f_pass.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_pass_new.value)){
+			
+			alert("새 비밀번호를 입력해주세요.");
+            thisform.f_pass_new.value ="";
+            thisform.f_pass_new.focus();
+            return false;
+			
+		}else if(isNull(thisform.f_pass_new_final.value)){
+			
+			alert("새 비밀번호 확인을 입력해주세요");
+            thisform.f_pass_new_final.value ="";
+            thisform.f_pass_new_final.focus();
+            return false;
+		
+		}
+		
+		
+	
+		var f_pass = $("#f_pass").val();
+		
+        var pw = $("#f_pass_new").val();
+        var pwck = $("#f_pass_new_final").val();
+ 
+		//새 비밀번호와 새 비밀번호 확인의 값이 같은지 확인
+        if (pw != pwck) {
+			
+			alert("새 비밀번호가 서로 일치 하지 않습니다.");
+            return;
+        }
+		
+		//현재 비밀번호 및 새 비밀번호 입력 여부 체크
+		if(typeof f_pass == "undefined" || f_pass == null || f_pass == ""){
+			
+			alert("현재 비밀번호를 입력해주세요.");
+			return;
+		}
+		
+
+		if(!confirm("비밀번호 변경하시겠습니까?")) return;
+		
+		//commonAjaxResultVal에 리턴값 셋팅됨.
+		
+		$("#process_gubun").val(process_gubun);
+		
+		
+		var sendData = $('#passwordform').serialize();
+		
+		sendData += '&f_id='+"dk.lee@ilv.co.kr";
+		
+		sendAjax("../php/password.php", sendData, "post", false);
+		
+		//console.log(commonAjaxResultVal.result);
+		if(commonAjaxResultVal.result == "success"){
+			
+			alert(commonAjaxResultVal.msg);
+			location.href="../php/logout.php";
+			
+		} else {
+			
+			alert(commonAjaxResultVal.msg);
+			return;
+			
+		}
+
+	}
+
+
+function calDayButton(){
+	
+	//$("#f_vc_stadate").val().split("-");
+	//$("#f_vc_enddate").val().split("-");
+	
+	//$("#f_vc_days").val($("#f_vc_stadate").val()-$("#f_vc_enddate").val());
+	
+	var date1 = new Date($("#f_vc_stadate").val());
+	var date2 = new Date($("#f_vc_enddate").val());
+	
+	
+//	var diffDays = date2.getDate() - date1.getDate();
+	var diffDays = Math.ceil((date2.getTime()-date1.getTime())/(1000*3600*24));
+	
+	if(diffDays < 0){
+		
+
+		alert("종료날짜보다 시작날짜가 작아야합니다.");
+		
+			$("#f_vc_stadate").removeAttr('value');
+						
+			$("#f_vc_enddate").removeAttr('value');
+		
+	}else if($("input:radio[name ='f_vc_gubun']:input[value='H']").is(':checked')){
+
+		
+		if(diffDays >= 1){
+			
+			alert("시작일자와 종료일자를 확인해주세요.");
+			
+			$("#f_vc_stadate").removeAttr('value');
+						
+			$("#f_vc_enddate").removeAttr('value');
+			
+			
+			
+			
+		}else{
+				//alert("반차일 경우 사용일수는 0.5로 입력 됩니다.");
+				//alert(diffDays);
+				$("#f_vc_days").val(0.5);
+				$("#f_vc_days").attr("readonly", true);
+				
+				
+		}
+		
+
+		
+
+		
+		//$("input:radio[name ='f_vc_gubun']:input[value='H']").attr("checked", true);
+		//$('input:radio[name=이름]').is(':checked');
+
+	}else if($("input:radio[name ='f_vc_gubun']:input[value='F']").is(':checked')){
+		
+		if(isNaN(diffDays)){
+		
+			$("#f_vc_days").removeAttr('value');
+			$("#f_vc_days").attr("readonly", true);	
+		}else{
+			
+				
+		$("#f_vc_days").val(diffDays+1);
+		$("#f_vc_days").attr("readonly", true);	
+			
+		}
+
+
+	}
+	
+	
+}
+
+
+	
+
+</script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+						<!--
+							<label for="startdate">시작일자 : </label>
+							<input type="date" id="f_vc_stadate" name="f_vc_stadate" >
+							<input type="text" id="f_vc_stadate" name="f_vc_stadate">
+							<label for="lastdate">종료일자 : </label>
+							<input type="date" id="f_vc_enddate" name="f_vc_enddate" >
+							<input type="text" id="f_vc_stadate" name="f_vc_stadate">	
+						-->
+</head>
+<body>
+
+
+
+<div>
+	<!--<a href="#" onclick="openLayer('layerPop',100,200)">Open</a>-->
+	<!-- deemed 연차 관리 시스템 이용 동의 처리 팝업 레이어 -->
+	<div id="layerPop">
+		<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다." height="280px">
+			<caption></caption>
+			<thead>
+				<tr>
+					<th style="text-align:center;">연차 관리 시스템 이용 동의</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				<tr>
+					<td class="listTblTit" style="text-align:left;">
+						연차 관리 시스템은 서울사무소 운영에 있어 연차신청서 제출의 편의를 도모하고자 개발된 것으로, 구성원은 본 시스템을 통해 연차를 신청하고 사용할 수 있다.<br>
+						연차 관리 시스템을 통해 신청하고, 승인된 개인별 연차에 대해서는 개인의 서명 및 부서장의 서명을 통해 승인된 연차신청서와 동일한 효력을 가진다.<br>
+						연차 관리 시스템의 운영을 위해 본인이 ㈜아이티밥에 제출한 개인정보 중 성명, <br> 생년월일, 전자우편, 휴대폰번호, 경력 등이 이용된다.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다.">
+			<thead>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="listTblTit" style="text-align:center;">
+						위 내용을 숙지하였고, 연차 관리 시스템 이용에 동의합니다.
+						<input type="checkbox" id="checkBoxId" name="checkBoxId" value="Y">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다.">
+			<thead>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="listTblTit" style="text-align:center;">
+						<button type="button" id="button" class="btn01" onclick="agree()" style="cursor:pointer">동의합니다</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	<!--
+	
+	<div class="popup">
+		<p class="popupTit">곡 상세정보</p>
+		<div class="popupArea">
+			<div class="popupImg">
+				<img src="/mlbmanage/img/temp/popup_img.jpg" width="110" height="110" alt="불멸의 사랑" />
+			</div>
+			<div class="popupTxt">
+				<strong class="songTit">불멸의 사랑</strong><img src="/mlbmanage/img/sub/title_ico_09.gif"  alt="title" class="titleImg"/>
+				<ul class="songExplain">
+					<li>가수 : <a href="#">조성모</a></li>
+					<li>앨범명 : 걸작5</li>
+					<li>실연시간 : 04:12</li>
+					<li>Disc정보 : CD1, 트랙1</li>
+					<li>작사 : 최은하</li>
+					<li>작곡 : 윤일상</li>
+					<li>편곡 : 윤일상</li>
+				</ul>
+			</div>
+			<a href="#" class="popupClose"><img src="/mlbmanage/img/sub/close_btn.png" width="15" height="15" alt="닫기" /></a>
+		</div>
+	</div>
+	
+	-->
+
+
+	<!--<a href="#" onclick="closeLayer('layerPop')" class="close">close</a>-->
+	
+	</div>
+	<!-- deemed 연차 신청하기 팝업 레이어 -->
+	<div id="applyLayerPop">
+	<form name="applyform" id="applyform" method="post" action="">
+	<input type="text" name="process_gubun" id="process_gubun" value="new" hidden="">
+		<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다." height="220px">
+				<caption></caption>
+				<thead>
+					<tr>
+						<th style="text-align:center;">연차 신청서</th>
+						
+					</tr>
+
+				</thead>
+				<tbody>
+					<tr>
+						<td class="listTblTit" style="text-align:left; padding:13px;">구분 : 
+							연차<input type="radio" name="f_vc_gubun" id="f_vc_gubun" value="F" checked="">
+							반차<input type="radio" name="f_vc_gubun" id="f_vc_gubun" value="H">
+						</td>
+					</tr>
+					<tr>
+						<td class="listTblTit" style="text-align:left; padding:13px;">
+							<label for="startdate">시작일자 : </label>
+							<!--<input type="date" id="f_vc_stadate" name="f_vc_stadate" >-->
+							<input type="text" id="f_vc_stadate" name="f_vc_stadate" size="10" placeholder="클릭하세요." class="hasDatepicker">
+							<label for="lastdate" style="padding-left:20px;">종료일자 : </label>
+							<!--<input type="date" id="f_vc_enddate" name="f_vc_enddate" > -->
+							<input type="text" id="f_vc_enddate" name="f_vc_enddate" size="10" placeholder="클릭하세요." class="hasDatepicker">						
+						</td>
+					</tr>
+					<tr>
+						<td class="listTblTit" style="text-align:left; padding:13px;">사용일수
+							<input type="text" title="공지사항검색영역" style="margin: 0px 2px 2px 0px; width: 20px; height: 15px text-align:center;" class="inputTxt" name="f_vc_days" id="f_vc_days" readonly="">일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 반차는 0.5로 자동입력 됩니다.
+							<button type="button" id="calDay" name="calDay" class="btn01" onclick="calDayButton()" style="cursor:pointer; display:none;">자동계산</button>
+						</td>
+					</tr>
+					<tr>
+						<td class="listTblTit" style="text-align:left; padding:13px;">연차사유<br><br>
+						<textarea rows="4" cols="40" name="f_sayu" id="f_sayu" value="f_sayu" placeholder="연차 사유를 입력해주세요."></textarea>
+						</td>
+					</tr>
+
+					<tr>
+						<td class="listTblTit" style="text-align:left; padding:13px;">업무 대체자
+							<select name="f_id_support" id="f_id_support" style="width:92px; font-size:12px;" class="select mr5">
+								<option value="" disabled="" selected="">선택하세요.</option>
+								
+								
+																
+									<option style="" value="yd.ryu@ilv.co.kr">류영동</option>									
+																
+									<option style="" value="js.yu@ilv.co.kr">류정수</option>									
+																
+									<option style="" value="ys.park@ilv.co.kr">박윤순</option>									
+																
+									<option style="" value="km.kwon@ilv.co.kr">권광민</option>									
+																
+									<option style="" value="jh2.lee@ilv.co.kr">이지혜</option>									
+																
+									<option style="" value="hy.yeo@ilv.co.kr">여현엽</option>									
+																
+									<option style="" value="hs.park@ilv.co.kr">선상기</option>									
+																
+									<option style="" value="hr.lee@ilv.co.kr">이혜리</option>									
+																
+									<option style="" value="ww.jang@ilv.co.kr">장원우</option>									
+															</select>
+						</td>
+					</tr>
+					<!--<tr>
+						<td class="listTblTit" style="text-align:left;">승인 거절 사유
+							<input type="text" title="승인거절사유" style="width:235px;" class="inputTxt" name="f_vc_reject_sayu" id="f_vc_reject_sayu"/>
+						</td>
+					</tr>-->
+				</tbody>
+			</table>		
+		<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다." height="50px">
+			<thead>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="listTblTit" style="text-align:center;" id="applyTr" name="applyTr">
+						<button type="button" id="apply" class="btn01" onclick="applyAnnual()" style="cursor:pointer;">신청하기</button>
+					</td>
+					<td class="listTblTit" style="text-align:center;" id="editTr" name="editTr">
+						<button type="button" id="edit" class="btn01" onclick="editAnnual('edit')" style="cursor:pointer;">수정하기</button>
+					</td>
+					<td class="listTblTit" style="text-align:center;" id="deletTr" name="deletTr">
+						<button type="button" id="delete" class="btn01" onclick="deleteAnnual('delete')" style="cursor:pointer;">삭제하기</button>
+					</td>
+					<td class="listTblTit" style="text-align:center;" id="closeTr" name="closeTr">
+						<button type="button" id="close" class="btn01" onclick="closeApplyLayer('applyLayerPop')" style="cursor:pointer; width: 70px;">닫기</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+	<!--
+	
+	<div class="popup">
+		<p class="popupTit">곡 상세정보</p>
+		<div class="popupArea">
+			<div class="popupImg">
+				<img src="/mlbmanage/img/temp/popup_img.jpg" width="110" height="110" alt="불멸의 사랑" />
+			</div>
+			<div class="popupTxt">
+				<strong class="songTit">불멸의 사랑</strong><img src="/mlbmanage/img/sub/title_ico_09.gif"  alt="title" class="titleImg"/>
+				<ul class="songExplain">
+					<li>가수 : <a href="#">조성모</a></li>
+					<li>앨범명 : 걸작5</li>
+					<li>실연시간 : 04:12</li>
+					<li>Disc정보 : CD1, 트랙1</li>
+					<li>작사 : 최은하</li>
+					<li>작곡 : 윤일상</li>
+					<li>편곡 : 윤일상</li>
+				</ul>
+			</div>
+			<a href="#" class="popupClose"><img src="/mlbmanage/img/sub/close_btn.png" width="15" height="15" alt="닫기" /></a>
+		</div>
+	</div>
+	
+	-->
+
+
+	<!--<a href="#" onclick="closeLayer('layerPop')" class="close">close</a>-->
+	
+	</div>
+	
+	
+	<!-- deemed 비밀번호 변경 하기 팝업 레이어 -->
+	<div id="passwordLayerPop">
+	<form name="passwordform" id="passwordform" method="post" action="/php/password.php">
+	<input type="text" name="process_gubun" id="process_gubun" value="pass" hidden="">
+		<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다." height="180px">
+				<caption></caption>
+				<thead>
+					<tr>
+						<th style="text-align:center;">비밀번호 변경 </th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="listTblTit" style="text-align:left;">현재&nbsp;비밀번호&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="password" title="공지사항검색영역" style="width:100px;" class="inputTxt" name="f_pass" id="f_pass">
+						</td>
+					</tr>
+					<tr>
+						<td class="listTblTit" style="text-align:left;">새&nbsp;비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="password" title="공지사항검색영역" style="width:99.5px;" class="inputTxt" name="f_pass_new" id="f_pass_new">
+						</td>
+					</tr>
+					<tr>
+						<td class="listTblTit" style="text-align:left;">새&nbsp;비밀번호&nbsp;확인
+							<input type="password" title="공지사항검색영역" style="width:100px;" class="inputTxt" name="f_pass_new_final" id="f_pass_new_final">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다." height="45px">
+				<caption></caption>
+				<thead>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="listTblTit" style="text-align:center;">
+							<button type="button" id="edit" class="btn01" onclick="editPassword('pass')" style="cursor:pointer; width:100px;">변경하기</button>
+						</td>
+						<td class="listTblTit" style="text-align:center;">
+							<button type="button" id="close" class="btn01" onclick="closeApplyLayer('applyLayerPop')" style="cursor:pointer; width:100px;">닫기</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	</form>
+
+	<!--
+	
+	<div class="popup">
+		<p class="popupTit">곡 상세정보</p>
+		<div class="popupArea">
+			<div class="popupImg">
+				<img src="/mlbmanage/img/temp/popup_img.jpg" width="110" height="110" alt="불멸의 사랑" />
+			</div>
+			<div class="popupTxt">
+				<strong class="songTit">불멸의 사랑</strong><img src="/mlbmanage/img/sub/title_ico_09.gif"  alt="title" class="titleImg"/>
+				<ul class="songExplain">
+					<li>가수 : <a href="#">조성모</a></li>
+					<li>앨범명 : 걸작5</li>
+					<li>실연시간 : 04:12</li>
+					<li>Disc정보 : CD1, 트랙1</li>
+					<li>작사 : 최은하</li>
+					<li>작곡 : 윤일상</li>
+					<li>편곡 : 윤일상</li>
+				</ul>
+			</div>
+			<a href="#" class="popupClose"><img src="/mlbmanage/img/sub/close_btn.png" width="15" height="15" alt="닫기" /></a>
+		</div>
+	</div>
+	
+	-->
+
+
+	<!--<a href="#" onclick="closeLayer('layerPop')" class="close">close</a>-->
+	
+	</div>
+	
+	
+	
+	
+	
+</div>
+
+
+<!-- 본문 영역 -->
+	<div id="wrap">
+		<div id="header">
+				</div>
+
+		<div id="wrapper">
+			<div id="container">
+				<div class="containerIn">
+					<!-- //왼쪽 네비게이션 영역 -->
+					<!-- //왼쪽 네비게이션 영역 -->				
+
+					<!--  컨텐츠영역 -->
+					<!--  컨텐츠영역 -->
+
+
+	<!--  컨텐츠영역 -->
+					<div id="content" style="  margin: auto;">
+						<div class="contTop">
+							<div class="lnb">
+								<a href="#">이동근님</a>
+								<button type="button" class="btn01" style="cursor:pointer" onclick="location.href='../php/logout.php'">로그아웃</button>
+								<button type="button" class="btn01" style="cursor:pointer" id="password_button" onclick="openApplyLayer('passwordLayerPop',100,500,'pass')">비밀번호 변경</button>
+								
+								<!--<a href="#" class="btn01">로그아웃</a>-->
+							</div>
+							<p class="topTxt"></p>
+							<h3 class="contTit">이동근님 연차 신청 리스트</h3>
+						</div>
+
+						
+					<div class="contArea">
+						<div class="contArea">
+							<h3 class="contTit">통계</h3>
+							<table class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다.">
+								<caption></caption>
+								<thead>
+									<tr>
+										<th style="text-align:center;">총 일수</th>
+										<th style="text-align:center;">사용한 일수</th>
+										<th style="text-align:center;">남은 일수</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr height="40">
+										<td class="listTblTit" style="text-align:center;">14</td>
+										<td class="listTblTit" style="text-align:center;">6</td>
+										<td class="listTblTit" style="text-align:center;">8</td>
+									</tr>
+								</tbody>
+							</table>					
+						</div>
+						<div class="contArea">
+							<div class="boardSearch">
+								<button type="button" class="btn01" style="cursor:pointer" id="apply_button" onclick="openApplyLayer('applyLayerPop',100,700,'new');">연차 신청하기</button>
+								
+							</div>
+							<h3 class="contTit">신청내역</h3>
+							<table id="example-table-1" class="ListTbl" summary="표의 번호와 분류, 제목, 날짜 조회수를 알 수 있습니다.">
+								<caption></caption>
+								<thead>
+									<tr>
+										<th style="text-align:center;">번호</th>
+										<th style="text-align:center;">신청일</th>
+										<th style="text-align:center;">구분<br>(연차/반차)</th>
+										<th style="text-align:center;">사용할 기간</th>
+										<th style="text-align:center;">사용할 일수</th>
+										<th style="text-align:center;">업무 대체자</th>
+										<th style="text-align:center;">총 연차일수</th>
+										<th style="text-align:center;">잔여 연차 일수</th>
+										<th style="text-align:center;">상태</th>
+										<th style="text-align:center;">상태<br>변경일자</th>
+									</tr>
+								</thead>
+								<tbody>
+																					<tr style="cursor:pointer">
+											
+												<td style="text-align:center; display:none;">1161</td>
+												<td style="text-align:center; display:none;">3</td>
+												<td style="text-align:center;">4</td>
+												<td style="text-align:center;">2020-08-27</td>
+												<td style="text-align:center;">연차</td>
+												<td style="text-align:center;">2020-08-27~2020-08-27</td>
+												<td style="text-align:center;">1</td>
+												<td style="text-align:center;">선상기</td>
+												<td style="text-align:center;">14</td>
+												<td style="text-align:center;">8</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-08-27</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+											
+												<td style="text-align:center; display:none;">1110</td>
+												<td style="text-align:center; display:none;">2</td>
+												<td style="text-align:center;">3</td>
+												<td style="text-align:center;">2020-07-29</td>
+												<td style="text-align:center;">연차</td>
+												<td style="text-align:center;">2020-08-03~2020-08-05</td>
+												<td style="text-align:center;">3</td>
+												<td style="text-align:center;">선상기</td>
+												<td style="text-align:center;">14</td>
+												<td style="text-align:center;">9</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;">2020-07-29</td>
+											</tr>
+												
+																					<tr style="cursor:pointer">
+											
+												<td style="text-align:center; display:none;">1</td>
+												<td style="text-align:center; display:none;">1</td>
+												<td style="text-align:center;">2</td>
+												<td style="text-align:center;"></td>
+												<td style="text-align:center;"></td>
+												<td style="text-align:center;">~2020-08-01</td>
+												<td style="text-align:center;">2</td>
+												<td style="text-align:center;">이동근</td>
+												<td style="text-align:center;">14</td>
+												<td style="text-align:center;">12</td>
+												<td style="text-align:center;">확인완료</td>
+												<td style="text-align:center;"></td>
+											</tr>
+												
+																		</tbody>
+							</table>
+							<div class="paging"><span class="nowPage">1</span></div>							
+						</div>
+					</div>
+					<div>
+					<!-- // 컨텐츠영역 -->
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body></html>
