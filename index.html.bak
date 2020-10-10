@@ -641,12 +641,12 @@ if val:
 		tname='T_SHARELIST_'+f_year+'_'+f_quarter+'_'+f_type
 		
 		sql2=("select count(1) as row_cnt_115, sum(f_account) as hap_account_115 from "+tname
-												+" where f_year='"+f_year 
-												+"' and f_quarter='"+f_quarter 
-												+"' and f_ckjubu='"+f_ckjubu
-												+"' and f_personcd_first='"+f_personcode 
-												+"' and f_personcd='"+f_personcode_last 
-												+"' and f_procnum="+f_procnum)
+					+" where f_year='"+f_year 
+					+"' and f_quarter='"+f_quarter 
+					+"' and f_ckjubu='"+f_ckjubu
+					+"' and f_personcd_first='"+f_personcode 
+					+"' and f_personcd='"+f_personcode_last 
+					+"' and f_procnum="+f_procnum)
 		
 		dbcurs2 = dbconn2.cursor()
 		dbcurs2.execute(sql2)
