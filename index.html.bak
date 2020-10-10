@@ -611,7 +611,7 @@ exit
                                 <hr>
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h5><p>SAMPLE 1</p></h5>
+                                    <h5><p>SAMPLE</p></h5>
 																	<div class="row">
 																		
 																		
@@ -687,7 +687,8 @@ exit
                                 <hr>
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h5><p>SAMPLE 1</p></h5>
+<<<<<<< HEAD
+                                    <h5><p>SAMPLE</p></h5>
 																		<div class="row">
 <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -724,9 +725,16 @@ exit
     <span class="sr-only">Next</span>
   </a>
 </div>		
+=======
+                                    <h5><p>SAMPLE 1</p></h5>
+					<div class="row">
+					<div class="portfolio-item">
+					<img class="img-fluid thumbnail" src="assets/img/thumbnail/kaitclean_inspect.png" alt="">
+					</div>
+>>>>>>> 5406e4eda0999184edede5384322c3fd3a1c92f7
 	
-								                        </div>									                    
-																			</div>
+					</div>									                    
+					</div>
                                 </div>                                
                             </div>
                         </div>
@@ -820,7 +828,7 @@ exit
                                 <hr>
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h5><p>SAMPLE 1</p></h5>
+                                    <h5><p>SAMPLE</p></h5>
 																		<div class="row">
 <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -890,7 +898,7 @@ exit
                                 <hr>
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h5><p>SAMPLE 1</p></h5>
+                                    <h5><p>SAMPLE</p></h5>
 																		<div class="row">
 										                    <div class="col-lg-6 col-sm-6 mb-6">
 										                        <div class="portfolio-item">
