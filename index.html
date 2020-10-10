@@ -221,10 +221,11 @@
       <div class="list-group" id="list-tab" role="tablist">
         <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="tab" href="#list-home" role="tab" aria-controls="list-home">사내 연차 관리 페이지</a>
 
-        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="tab" href="#list-profile" role="tab" aria-controls="list-profile">파이썬을 활용한 PDF 파일 다운로드 기능 구현</a>
+        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="tab" href="#list-profile" role="tab" aria-controls="list-profile">PDF 파일 다운로드 기능 구현</a>
 
         <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="tab" href="#list-messages" role="tab" aria-controls="list-messages">NDAP → ORACLE DATA LOAD</a>
 
+        <a class="list-group-item list-group-item-action" id="list-send_mail-list" data-toggle="tab" href="#list-send_mail" role="tab" aria-controls="list-send_mail">엑셀 파일 생성 후 메일 전송 기능 구현</a>
       </div>
     </div>
     <div class="col-8">
@@ -311,15 +312,13 @@ import os
 import sys
 from PyPDF2 import PdfFileMerger, PdfFileReader
 
-# C:\Users\cab25\PycharmProjects\python3_exam\venv\Scripts\python.exe C:/Users/cab25/PycharmProjects/python3_exam/htmltopdf.py pdf파일생성한단계(단계숫자이고 전체는 0) 신청번호
-# C:\Python27\python.exe C:/Users/cab25/PycharmProjects/python3_exam/htmltopdf.py pdf파일생성한단계(단계숫자이고 전체는 0) 신청번호
 step = sys.argv[1]
 req_no = sys.argv[2]
 group_info_cnt = int(sys.argv[3])
 
 # print(str(step) + '|' + str(req_no))
 tmp_save_dir = '/fkmp/web/cms/pdf/htmltopdf_tmp_files'  # 임시저장 디렉토리
-# tmp_url = 'http://fkmpweb.itbob.co.kr/entrust/memship/get_memship_step' + str(step) + '?umode=cms&rno=' + str(req_no)
+# tmp_url = '/entrust/memship/get_memship_step' + str(step) + '?umode=cms&rno=' + str(req_no)
 # pdfkit.from_url(tmp_url, '/fkmp/web/cms/pdf/htmltopdf_tmp_files/out.pdf')
 # sys.exit()
 
@@ -342,7 +341,7 @@ if step == '0':
     # 병합을위한 개별 pdf 생성
     for i in [1, 2, 3, 4, 5, 6]:
         tmp_save_path = os.path.join(tmp_save_dir, str(req_no) + '_' + str(i) + '.pdf')
-        tmp_url = 'https://www.fkmp.kr/entrust/memship/get_memship_step' + str(i) + '?umode=cms&umode_add=pdf&rno=' + str(
+        tmp_url = '/entrust/memship/get_memship_step' + str(i) + '?umode=cms&umode_add=pdf&rno=' + str(
             req_no)
         pdfkit.from_url(tmp_url, tmp_save_path, configuration=config, options=options)
         if not os.path.exists(tmp_save_path):
@@ -354,7 +353,7 @@ if step == '0':
         if i == 1 and group_info_cnt > 0:
             tmp_save_path = os.path.join(tmp_save_dir, str(req_no) + '_' + str(i) + '_group.pdf')
             pdfkit.from_url(
-                'https://www.fkmp.kr/entrust/memship/open_group_info?umode=cms&umode_add=pdf&rno=' + str(
+                '/entrust/memship/open_group_info?umode=cms&umode_add=pdf&rno=' + str(
                     req_no),
                 tmp_save_path, configuration=config, options=options)
             if not os.path.exists(tmp_save_path):
@@ -380,7 +379,7 @@ if step == '0':
 else:
     if step == '1' and group_info_cnt > 0:
         tmp_save_path = os.path.join(tmp_save_dir, str(req_no) + '_' + str(step) + '_tmp.pdf')
-        tmp_url = 'https://www.fkmp.kr/entrust/memship/get_memship_step' + str(step) + '?umode=cms&umode_add=pdf&rno=' + str(
+        tmp_url = '/entrust/memship/get_memship_step' + str(step) + '?umode=cms&umode_add=pdf&rno=' + str(
             req_no)
         pdfkit.from_url(tmp_url, tmp_save_path, configuration=config, options=options)
         if not os.path.exists(tmp_save_path):
@@ -388,7 +387,7 @@ else:
             sys.exit()
         list_savedpdf.append(tmp_save_path)
         tmp_save_path = os.path.join(tmp_save_dir, str(req_no) + '_' + str(step) + '_group.pdf')
-        tml_url2 = 'https://www.fkmp.kr/entrust/memship/open_group_info?umode=cms&umode_add=pdf&rno=' + str(req_no)
+        tml_url2 = '/entrust/memship/open_group_info?umode=cms&umode_add=pdf&rno=' + str(req_no)
         pdfkit.from_url(tml_url2, tmp_save_path, configuration=config, options=options)
         if not os.path.exists(tmp_save_path):
             print("Error")
@@ -412,7 +411,7 @@ else:
             sys.exit()
     else:
         tmp_save_path = os.path.join(tmp_save_dir, str(req_no) + '_' + str(step) + '.pdf')
-        tmp_url = 'https://www.fkmp.kr/entrust/memship/get_memship_step' + str(step) + '?umode=cms&umode_add=pdf&rno=' + str(
+        tmp_url = '/entrust/memship/get_memship_step' + str(step) + '?umode=cms&umode_add=pdf&rno=' + str(
             req_no)
         pdfkit.from_url(tmp_url, tmp_save_path, configuration=config, options=options)
         if not os.path.exists(tmp_save_path):
@@ -456,7 +455,7 @@ ndap_file_path=/data/riakshare/riak_data/ndapresult/${f_bosang_cd}/always_memat_
 riakshare_file_path=/data/riakshare/riak_data/ndapresult/${f_bosang_cd}/always_memat_meta/
 
 #디렉토리 생성
-ssh ndap@222.122.131.175 mkdir -p $ndap_file_path
+ssh ndap@000.000.000.175 mkdir -p $ndap_file_path
 mkdir -p $riakshare_file_path
 
 #조회결과파일 패스 설정
@@ -464,12 +463,12 @@ ndap_file_path=/data/riakshare/riak_data/ndapresult/${f_bosang_cd}/always_memat_
 
 #메타코드 테이블 현재 max 값 구하기
 max_meta_cd=$(
-ssh ndap@222.122.131.175 << :QUERY
+ssh ndap@000.000.000.175 << :QUERY
 hive -e "select nvl(max(f_meta_cd),0) as max_meta_cd from kapp.cm_metacode_always where p_bosang_cd='"$f_bosang_cd"'" 
 :QUERY)
 
 #메타코드 테이블에 등록되지 않은 로그 테이블의 신규 데이터 insert
-ssh ndap@222.122.131.175 << :QUERY
+ssh ndap@000.000.000.175 << :QUERY
 hive -e \
 "insert into kapp.cm_metacode_always partition(p_bosang_cd='"$f_bosang_cd"')
 select t1.f_album_sch_1, t1.f_song_sch_1, t1.f_artist_sch_1, concat(upper('"$f_bosang_cd"AM_') ,"$max_meta_cd"+row_number() over()) as f_meta_cd
@@ -486,8 +485,8 @@ and t2.f_artist_sch_1 is null"
 :QUERY
 
 #ndap 서버에 쿼리 실행결과 파일 생성.
-ssh ndap@222.122.131.175 'rm -rf '${ndap_file_path}
-ssh ndap@222.122.131.175 << :QUERY
+ssh ndap@000.000.000.175 'rm -rf '${ndap_file_path}
+ssh ndap@000.000.000.175 << :QUERY
 hive -e \
 "select * from (
 select taa.f_bosang_cd, taa.f_album_nm, taa.f_song_nm, taa.f_artist_nm, taa.f_album_sch_1, taa.f_song_sch_1, taa.f_artist_sch_1, taa.f_count, taa.f_price, tb.f_meta_cd from 
@@ -518,7 +517,7 @@ select taa.f_bosang_cd, taa.f_album_nm, taa.f_song_nm, taa.f_artist_nm, taa.f_al
 :QUERY
 
 #ndap 파일을 웹서버로 복사
-scp ndap@222.122.131.175:$ndap_file_path $riakshare_file_path
+scp ndap@000.000.000.175:$ndap_file_path $riakshare_file_path
 
 
 #오라클로 임포트
@@ -571,6 +570,201 @@ exit
 	          			</code>
 	          		</pre>
 	          	</li>	
+          </ul>  
+        </div>
+
+        <div class="tab-pane fade" id="list-send_mail" role="tabpanel" aria-labelledby="list-send_mail-list">
+						고객사 직원이 업무를 수행할 때마다 결과 분석을 위해 처리 결과를 엑셀 파일로 생성하여 내 메일로 전송 받을 수 있도록 기능을 구현하였습니다.  
+          <br><b>※해당 기능을 팀장님께 보고 후 crontab 등록 예정 (2020-10-10)</b><br><br>
+          <ul class="list-inline">
+          		<li><h5><b>처리 과정</b></h5></li>
+							<li>1. 특정 테이블(업무 처리 테이블)에 오늘 날짜로 등록된 데이터가 있는지 확인</li>
+							<li>2. 처리 결과 데이터를 엑셀 파일로 생성</li>
+							<li>3. 생성한 엑셀 파일을 내 계정으로 메일 전송</li>
+							
+          </ul>
+          		<img class="img-fluid" src="assets/img/thumbnail/send_mail.png" alt=""><br><br>
+          <hr>
+          <ul class="list-inline">
+          		<li><h5><b>SAMPLE</b></h5></li>
+							<li>
+	              	<b>엑셀 파일 생성 code</b>
+	          		<pre>
+	          			<code class="python hljs" style="height:500px;">
+import os
+import sys
+import xlsxwriter
+import cx_Oracle
+from datetime import datetime, timedelta
+from pprint    import pprint
+import ldk_send_mail
+
+#오늘 날짜 구하기
+now = datetime.now()
+today = now.strftime("%Y%m%d")
+
+ORACLE_CONNECT = "(119번 db접속정보)"
+dbconn = cx_Oracle.connect(ORACLE_CONNECT)
+print("Connected to Oracle: " + dbconn.version)
+
+# 오늘 날짜에 등록 된 정기소급 데이터가 존재하는지 확인
+sql = ("""select t1.f_year, f_quarter, t1.f_type, t1.f_personcode, t1.f_personname, t1.f_person_type, t1.f_ckjubu, sum(t1.f_account_first) as hap_account_first, t1.f_personcode_last, t2.f_realname as f_personame_last, t1.f_person_type_last, sum(t1.f_account_send) as hap_account_send, t1.f_procdate, t1.f_procnum
+				from t_share_member_history t1
+				join t_person t2 on t1.f_personcode_last=t2.f_personcode
+				group by t1.f_year, f_quarter, t1.f_type, t1.f_personcode, t1.f_personname, t1.f_person_type, t1.f_ckjubu, t1.f_personcode_last, t2.f_realname, t1.f_person_type_last, t1.f_procdate, t1.f_procnum
+				having to_char(t1.f_procdate, 'YYYYMMDD') = '%s'""" % (today))
+dbcurs = dbconn.cursor()
+dbcurs.execute(sql)
+val = dbcurs.fetchone()
+if val:
+	list=[]
+	for row in dbcurs:
+# 등록된 정기소급 데이터에 해당하는 로그 개수 및 합산 금액을 115번 db(Log data)에서 조회
+		ORACLE_CONNECT2 = "(115번 db접속정보)"
+		dbconn2 = cx_Oracle.connect(ORACLE_CONNECT2)
+
+		f_year=row[0]
+		f_quarter=row[1]
+		f_type=row[2]
+		f_personcode=row[3]
+		f_personname=row[4]
+		f_person_type=row[5]
+		f_ckjubu=row[6]
+		hap_account_first=row[7]
+		f_personcode_last=row[8]
+		f_personname_last=row[9]
+		f_person_type_last=row[10]
+		hap_account_send=row[11]
+		f_procdate=row[12]
+		f_procnum=str(row[13])
+		
+		tname='T_SHARELIST_'+f_year+'_'+f_quarter+'_'+f_type
+		
+		sql2=("select count(1) as row_cnt_115, sum(f_account) as hap_account_115 from "+tname
+												+" where f_year='"+f_year 
+												+"' and f_quarter='"+f_quarter 
+												+"' and f_ckjubu='"+f_ckjubu
+												+"' and f_personcd_first='"+f_personcode 
+												+"' and f_personcd='"+f_personcode_last 
+												+"' and f_procnum="+f_procnum)
+		
+		dbcurs2 = dbconn2.cursor()
+		dbcurs2.execute(sql2)
+		
+		for row2 in dbcurs2:
+			row_cnt_115=row2[0]
+			hap_account_115=row2[1]
+		
+# 리스트 재정의		
+		list.append([f_year, f_quarter, f_type, f_personcode, f_personname, f_person_type, f_ckjubu, hap_account_first, f_personcode_last, f_personname_last, f_person_type_last, hap_account_send, str(f_procdate), f_procnum, row_cnt_115, hap_account_115])
+# 엑셀 파일 생성		
+	filename = today+'_cms.xlsx'
+	workbook = xlsxwriter.Workbook(filename)		
+	worksheet = workbook.add_worksheet()
+	
+	worksheet.write(0, 0, '연도')
+	worksheet.write(0, 1, '분기')
+	worksheet.write(0, 2, '보상타입')
+	worksheet.write(0, 3, '회원코드')
+	worksheet.write(0, 4, '회원명')
+	worksheet.write(0, 5, '회원타입')
+	worksheet.write(0, 6, '주/부/지')
+	worksheet.write(0, 7, '최초금엑')
+	worksheet.write(0, 8, '최종회원코드')
+	worksheet.write(0, 9, '최종회원명')
+	worksheet.write(0, 10, '최종회원타입')
+	worksheet.write(0, 11, '보낸금액')
+	worksheet.write(0, 12, '처리날짜')
+	worksheet.write(0, 13, '처리번호')
+	worksheet.write(0, 14, '로우수')
+	worksheet.write(0, 15, '최종금액')
+	row = 1
+	col = 0
+	for val in list:
+		worksheet.write(row, col, val[0])			
+		worksheet.write(row, col+1, val[1])
+		worksheet.write(row, col+2, val[2])
+		worksheet.write(row, col+3, val[3])
+		worksheet.write(row, col+4, val[4])
+		worksheet.write(row, col+5, val[5])
+		worksheet.write(row, col+6, val[6])
+		worksheet.write(row, col+7, val[7])
+		worksheet.write(row, col+8, val[8])
+		worksheet.write(row, col+9, val[9])
+		worksheet.write(row, col+10, val[10])
+		worksheet.write(row, col+11, val[11])
+		worksheet.write(row, col+12, val[12])
+		worksheet.write(row, col+13, val[13])
+		worksheet.write(row, col+14, val[14])
+		worksheet.write(row, col+15, val[15])
+		row+=1
+	workbook.close()			
+
+#메일 전송 함수 호출	
+	ldk_send_mail.send_mail(filename)
+#메일 전송 후 파일 삭제
+	os.remove(filename)
+	sys.exit()				
+else:
+	print("no rows selected.")
+	sys.exit()
+
+dbcurs.close()
+dbconn.close()
+	          			</code>
+	          		</pre>
+	          	</li>	
+							<li>
+	              	<b>첨부 메일 전송 code</b>
+	          		<pre>
+	          			<code class="python hljs" style="height:500px;">
+#!/usr/bin/env python  
+# -*- coding: utf-8 -*-
+import os
+import sys 
+import email
+import smtplib
+import argparse
+
+from email.mime.text      import MIMEText
+from email.header         import Header
+from email.mime.multipart import MIMEMultipart
+from email.header         import Header
+from email.mime.base 			import MIMEBase
+from email 								import encoders
+from pprint   import  pprint 
+
+def send_mail(filename):
+	From    =  '(사내 시스템 메일 계정)'
+	To  = ['(나의 메일 계정)']
+	Subject = '[음실연 CMS 월별정기소급] 새로 등록된 데이터입니다.'
+
+	msg = MIMEMultipart("alternative")
+	msg["From"] = "ITBOB SYSTEM SERVER<{fr}>".format(fr=From)
+	msg["To"  ] = ", ".join(To)
+	msg["Date"] = email.utils.formatdate(localtime = 1)
+	msg["Subject"] = Header(s=Subject, charset="utf-8")
+
+	# 첨부파일 경로/이름 지정하기
+	
+	attachment  =open(filename,'rb')
+
+	part = MIMEBase('application','octet-stream')
+	part.set_payload((attachment).read())
+	encoders.encode_base64(part)
+	part.add_header('Content-Disposition',"attachment", filename= os.path.basename(filename))
+	msg.attach(part)
+
+	smtp = smtplib.SMTP_SSL('smtp.gmail.com', 465)         
+	smtp.login(From, '(사내 시스템 메일 비밀번호)')  
+
+	smtp.sendmail(From, To,  msg.as_string())
+	print("ok")
+	smtp.quit()
+	sys.exit()
+	          			</code>
+	          		</pre>
+	          	</li>		          	
           </ul>  
         </div>
 
