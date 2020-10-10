@@ -573,18 +573,6 @@ exit
           </ul>  
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="tab-pane fade" id="list-send_mail" role="tabpanel" aria-labelledby="list-send_mail-list">
 						고객사 직원이 업무를 수행할 때마다 결과 분석을 위해 처리 결과를 엑셀 파일로 생성하여 내 메일로 전송 받을 수 있도록 기능을 구현하였습니다.  
           <br><b>※해당 기능을 팀장님께 보고 후 crontab 등록 예정 (2020-10-10)</b><br><br>
