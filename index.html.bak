@@ -37,6 +37,10 @@
   max-width: 60vw;
   margin-left:20vw;
 }
+
+.carousel-indicators li {border: 2px solid gray; width:50px; height:10px;}
+
+.carousel-indicators .active {background-color:gray;}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/vs2015.min.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> <script>hljs.initHighlightingOnLoad();</script>
 
@@ -807,10 +811,12 @@ def send_mail(filename):
                                     <h5><p>SAMPLE</p></h5>
 																	<div class="row">
 																		<div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
-																		  <ol class="carousel-indicators">
-																		    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-																		    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-																		    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+																		  <br><br><ol class="carousel-indicators">
+																		    <li data-target="#carouselExampleIndicators1" data-slide-to="0" class="active"></li>
+																		    <li data-target="#carouselExampleIndicators1" data-slide-to="1"></li>
+																		    <li data-target="#carouselExampleIndicators1" data-slide-to="2"></li>
+																		    <li data-target="#carouselExampleIndicators1" data-slide-to="3"></li>
+																		    <li data-target="#carouselExampleIndicators1" data-slide-to="4"></li>
 																		  </ol>
 																		  <div class="carousel-inner">
 																		    <div class="carousel-item active">
@@ -880,9 +886,12 @@ def send_mail(filename):
 																		<div class="row">
 																			<div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
 																			  <ol class="carousel-indicators">
-																			    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-																			    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-																			    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+																			    <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
+																			    <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
+																			    <li data-target="#carouselExampleIndicators2" data-slide-to="2"></li>
+																			    <li data-target="#carouselExampleIndicators2" data-slide-to="3"></li>
+																			    <li data-target="#carouselExampleIndicators2" data-slide-to="4"></li>
+																			    <li data-target="#carouselExampleIndicators2" data-slide-to="5"></li>
 																			  </ol>
 																			  <div class="carousel-inner">
 																			    <div class="carousel-item active">
@@ -1011,9 +1020,10 @@ def send_mail(filename):
 																		<div class="row">
 																			<div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
 																			  <ol class="carousel-indicators">
-																			    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-																			    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-																			    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+																			    <li data-target="#carouselExampleIndicators3" data-slide-to="0" class="active"></li>
+																			    <li data-target="#carouselExampleIndicators3" data-slide-to="1"></li>
+																			    <li data-target="#carouselExampleIndicators3" data-slide-to="2"></li>
+																			    <li data-target="#carouselExampleIndicators3" data-slide-to="3"></li>
 																			  </ol>
 																			  <div class="carousel-inner">
 																			    <div class="carousel-item active">
