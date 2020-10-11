@@ -560,7 +560,6 @@ rm -rf ${riakshare_file_path}'/status.end'
 		F_META_CD \":F_META_CD\"		
 		)" > $riakshare_file_path'always_memat_meta.ctl'
 	
-exit	
 #2.LOADER 실행
 	sqlldr $sqlplus_account control=${riakshare_file_path}'always_memat_meta.ctl' \
 	data=${riakshare_file_path}${data_file_name} \

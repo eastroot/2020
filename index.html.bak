@@ -847,7 +847,6 @@ def send_mail(filename):
                     </div>
                 </div>
             </div>
-        </div>
         <!-- Modal 2-->
         <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
@@ -923,7 +922,7 @@ def send_mail(filename):
                     </div>
             </div>
         </div>
-
+				</div>
         <!-- Modal 4-->
         <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
@@ -983,7 +982,6 @@ def send_mail(filename):
                     </div>
             </div>
             </div>
-        </div>
         <!-- Modal 5-->
         <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
@@ -1047,6 +1045,7 @@ def send_mail(filename):
                         </div>
                 </div>
             </div>
+        </div>
         </div>
         <!-- Modal 6-->
         <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
