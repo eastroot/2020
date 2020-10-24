@@ -793,10 +793,10 @@ def send_mail(filename):
           		<img class="img-fluid thumbnail" src="assets/img/thumbnail/parsing.png" alt="">
 -->
        <hr>
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators4" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators4" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators4" data-slide-to="1"></li>
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
