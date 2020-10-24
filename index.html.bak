@@ -782,8 +782,8 @@ def send_mail(filename):
 							<li>1.검색어를 입력하여 전송 할 음원스트리밍사이트 검색 url을 생성</li>
 							<li>2. 생성한 url을 전송하여 사이트 검색 결과 데이터를 가져옴 (WebClient Library)</li>
 							<li>3. 검색 결과 데이터를 파싱(HtmlDomParser Library)(</li>
-							<li>4. 파싱한 데이터를 관리자 페이지 리스트에 출력</li>
-							          	
+							<li>4. 파싱한 검색 결과 데이터를 관리자 페이지 리스트에 출력</li>
+							<li>5. 검색 결과 중 특정 앨범 상세보기 클릭 시 해당 앨범의 수록곡 데이터로 현재 DB를 조회하여 수록곡 등록 유무 표시</li>          	
           </ul>     
           		<li><h5><b>SAMPLE</b></h5></li>
           		<img class="img-fluid thumbnail" src="assets/img/thumbnail/parsing.png" alt="">
