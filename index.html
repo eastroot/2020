@@ -16,16 +16,14 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
 <style>
-	.fade_div{
-		visibility:hidden;
-	}
+
 	.thumbnail{
 		height:300px;border:1px solid #eaeaea; padding: 0px; 
 
 	}
 	
 	.wrapper{
-		background: url('assets/img/bg2.jpg') no-repeat; 
+		background-color:#808080;
 		background-size:cover; 
 		max-height:100%; 
 		max-width:100%; 
@@ -54,7 +52,7 @@
 			$(".masthead").css({"background-image":"url("+bg_url+")"}); 
 			$(".masthead").css({"height":windowHeight/1.2}); 
 			$(".masthead").fadeIn();
-*/
+
   		var windowHeight = $( window ).height();
   		var num = Math.floor(Math.random()*12+1);
   		var bg_url = "assets/img/bg"+num+".jpg"
@@ -67,9 +65,9 @@
   		$(".fade_div").css('visibility','visible').hide().fadeIn();
   		}, 300);
   		
-  			
+*/
   		})
-		
+
 	
   </script>
   
@@ -117,7 +115,7 @@
         </header>
 
 
-<div class="wrapper" style="visibility:hidden">
+<div class="wrapper">
 <!--
         <section class="page-section fade_div" id="about">
             <div class="container bg-light">
